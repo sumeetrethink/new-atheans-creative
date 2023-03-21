@@ -44,7 +44,7 @@
         </div>
         <div class="col-lg-4 col-md-4  col-sm-4 col-xs-12 float-left">
             <div class="dashboard-Header-top-botton">
-                <a href="https://nacopedia.com/" class="form-control btn btn-register" target="_blank">Create</a>
+                <a href="{{url('/upload/video')}}" class="form-control btn btn-register" target="_blank">Create</a>
 
 
 
@@ -73,15 +73,14 @@
                     <li><a href="{{ url('user.settings') }}"><img class="header-image"
                                 src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Gears_Black-01.png') }}"
                                 width="20">Settings</a></li>
-                    <li> <a class="dropdown-item" href="{{ url('logout') }}"
-                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
+                    <li> <a class="dropdown-item" href="{{ url('/user/logout') }}"
+                           ><i
                                 class="fa fa-sign-out" style="font-size:17px"></i>
-                            {{ __('Logout') }}</a>
+                        LogOut</a>
                     </li>
-                    <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                    <a href="{{url('/user/logout') }}"  style="display: none;">
+                       
+                    </a>
 
                 </ul>
 
@@ -105,7 +104,7 @@
                     Home </a></li>
 
            
-            <li class="nav-item"><a href="{{url("nac-live")}}" id="Nac_live"><img class="ballot"
+            <li class="nav-item"><a href="{{url("live")}}" id="Nac_live"><img class="ballot"
                         src="{{ asset('/images/Group_520.jpeg') }}"> NAC Live</a></li>
 
             <li class="nav-item"><a href="{{ url('user.top100videos') }}" id="top100videos"><img class="ballot"
@@ -114,7 +113,7 @@
 
             <li class="nav-item"><a href="{{ url('user.likedvideos') }}" id="likedvideos"> <i style="font-size:17px"
                         class="fa fa-thumbs-o-up"></i> Liked Videos</a></li>
-            <li class="nav-item"><a href="{{ url('user.discover') }}" id="discover"> <i class="fa fa-search"></i>
+            <li class="nav-item"><a href="{{ url('discover') }}" id="discover"> <i class="fa fa-search"></i>
                     Discover</a></li>
             <li class="nav-item"><a href="{{ url('user.ballot') }}" id="ballot"><img class="ballot"
                         src="http://3.7.41.47/newathenscreative/public/images/Group_521.jpeg"> NAC Ballot </a>

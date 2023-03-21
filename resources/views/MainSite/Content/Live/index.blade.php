@@ -45,12 +45,16 @@
         <div class="row">
             <div class="col-8">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe style="height: 100%" height="200" src="https://www.youtube.com/embed/{video_id}"
-                        allowfullscreen></iframe>
+                    <video width="320" height="240" controls
+                        poster="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+                        <source src="{{ asset('videos/1679380290_VID_20200208_191523.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 <div class="row">
                     <div class="col-9">
-                        <h3 class="pt-2 m-0 video-title" style="">Masterful Developer: Kamran's unwavering dedication and unamtched slkillset are true asset</h3>
+                        <h3 class="pt-2 m-0 video-title" style="">Masterful Developer: Kamran's unwavering dedication
+                            and unamtched slkillset are true asset</h3>
 
                     </div>
                     <div class="col-3 d-flex pt-2 justify-content-end">

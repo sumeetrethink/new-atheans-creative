@@ -163,7 +163,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="col-md-6  col-sm-12 col-xs-12 index-page">
-                        <a href="{{ '/live' }}" data-toggle="tooltip" title="NAC Live">
+                        <a href="{{ '/discover' }}" data-toggle="tooltip" title="NAC Live">
                             <div class="index-image">
                                 <img src="{{ asset('/images/Group_520.png') }}">
                             </div>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="col-sm-4 d-flex justify-content-center">
                     <div class="col-md-6  col-sm-12 col-xs-12 index-page">
-                        <a href="{{url('/home')}}" data-toggle="tooltip" title="NAC Home">
+                        <a href="{{ url('/home') }}" data-toggle="tooltip" title="NAC Home">
                             <div class="index-image">
                                 <img src="{{ asset('/images/main_logo_center.png') }}">
                             </div>

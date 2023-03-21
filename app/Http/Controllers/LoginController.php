@@ -66,6 +66,11 @@ class LoginController extends Controller
         $user->save();
         return $user;
     }
+    public function logout()
+    {
+        session()->remove('user');
+        return redirect('/login');
+    }
     public function landingPage()
     {
         return view('MainSite.Content.LandingPage.index');
