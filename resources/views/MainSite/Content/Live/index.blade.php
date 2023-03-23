@@ -6,6 +6,10 @@
             /* set the height to match the height of the iframe */
         }
 
+        a {
+            text-decoration: none !important;
+        }
+
         i {
             font-size: 23px !important;
             cursor: pointer;
@@ -36,9 +40,19 @@
             word-wrap: break-word;
         }
 
+        .more-video {
+            cursor: pointer;
+        }
+
         .small-thumbnail {
-            max-width: 200px;
-            object-fit: contain
+            width: 160px !important;
+            object-fit: cover;
+            height: 90px;
+            cursor: pointer
+        }
+
+        .more-title {
+            color: black
         }
     </style>
     <section class="home-upper-section p-4">
@@ -46,21 +60,34 @@
             <div class="col-8">
                 <div class="embed-responsive embed-responsive-16by9">
                     <video width="320" height="240" controls
-                        poster="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
-                        <source src="{{ asset('videos/1679380290_VID_20200208_191523.mp4') }}" type="video/mp4">
-                        Your browser does not support the video tag.
+                        poster="{{ asset('Data/Thumbnail/' . $oneVideo->thumbnail) }}">
+                        <source src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
+
                     </video>
                 </div>
                 <div class="row">
                     <div class="col-9">
-                        <h3 class="pt-2 m-0 video-title" style="">Masterful Developer: Kamran's unwavering dedication
-                            and unamtched slkillset are true asset</h3>
+                        <h3 class="pt-2 m-0 video-title" style="">{{ $oneVideo->video_title }}</h3>
 
                     </div>
                     <div class="col-3 d-flex pt-2 justify-content-end">
 
-                        <div class="d-flex m-2 " data-toggle="tooltip" data-placement="bottom" title="Like this video">
-                            <p class="video-des m-0">1 <i style="font-size:18px" class="fa"></i> </p>
+                        <div class="d-flex m-2" data-toggle="tooltip" data-placement="bottom" title="Like this video">
+                            <p class="video-des m-0 d-flex flex-column text-center"
+                                onclick="managelike({{ $oneVideo->id }})">
+
+
+                                @if ($oneVideo['likes']->contains('user_id', $oneVideo->user_id))
+                                    <i class="like-icon fa fa-thumbs-up"></i>
+                                @else
+                                    <i class="like-icon fa fa-thumbs-o-up"></i>
+                                @endif
+                                <span class="likes-count">
+                                    {{ $oneVideo->likes->count() }}
+                                </span>
+
+
+                            </p>
                         </div>
                         <div class="m-2 mr-3" data-toggle="tooltip" data-placement="bottom" title="Vote for this video">
                             {{-- <i class="fa fa-star-o"></i> --}}
@@ -76,56 +103,28 @@
                 </div>
                 <div class="row m-0 description-section d-flex flex-column">
                     <h5 class="m-0">Description</h5>
-                    <h6>It seems that there is a vertical gap between the embed-responsive class and your heading because
-                        the iframe element inside it is taking up 80% of the height of its parent element, but the parent
-                        element itself is still taking up the full height of the row.
-
-                        One way to fix this is to set the height of the parent element to match the height of the iframe.
-                        You can do this by adding the following CSS to your stylesheet:</h6>
+                    <h6>{{ $oneVideo->description }}</h6>
                 </div>
 
             </div>
             <div class="col-4">
-                <h4 class="font-weight-bold">Coming Soon</h4>
+                <h4 class="font-weight-bold">More Videos</h4>
                 <div class="row">
-                    <div class="col-12 d-flex my-2">
-                        <div class="thumbnail">
-                            <img class="small-thumbnail"
-                                src="https://imgs.search.brave.com/v9Rv6ebmOZjjP8IPfMS8lgad0g23uOC0kZKsdF8EKq8/rs:fit:1200:720:1/g:ce/aHR0cDovL3d3dy51/cGxvYWQuZWUvaW1h/Z2UvMjk3NTY2OC9U/aHVtYm5haWwucG5n"
-                                alt="">
+                    @foreach ($moreVideos as $item)
+                        @php
+                            
+                            $encryptedUrl = Crypt::encryptString($item->id);
+                        @endphp
+                        <div class="col-12 d-flex my-2 more-video">
+                            <a class="d-flex" href="{{ url('live?watch=' . $encryptedUrl) }}">
+                                <div class="thumbnail">
+                                    <img class="small-thumbnail" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
+                                        alt="">
+                                </div>
+                                <h5 class="px-2 more-title">{{ $oneVideo->video_title }}</h5>
+                            </a>
                         </div>
-                        <h5 class="px-2">helo this is the upcomint video you are seeing here</h5>
-
-                    </div>
-                    <div class="col-12 d-flex my-2">
-                        <div class="thumbnail">
-                            <img class="small-thumbnail"
-                                src="https://imgs.search.brave.com/H2SzJD8YYpluZMSqn9F4bV5ixofEREtuHsMkzSavy9Y/rs:fit:1200:720:1/g:ce/aHR0cHM6Ly9pLnl0/aW1nLmNvbS92aS82/eVEtSkJ6ZVRiZy9t/YXhyZXNkZWZhdWx0/LmpwZw"
-                                alt="">
-                        </div>
-                        <h5 class="px-2">helo this is the upcomint video you are seeing here</h5>
-
-                    </div>
-
-                    <div class="col-12 d-flex my-2">
-                        <div class="thumbnail">
-                            <img class="small-thumbnail"
-                                src="https://imgs.search.brave.com/HkzKglohRguuMIPIS3DypIn_SOS0dD8raJDiqT1lumA/rs:fit:1000:584:1/g:ce/aHR0cHM6Ly9wYmJs/b2dhc3NldHMuczMu/YW1hem9uYXdzLmNv/bS91cGxvYWRzLzIw/MTkvMTIvMDIxNDA5/MjEvdGh1bWJuYWls/LWNvdmVyLmpwZw"
-                                alt="">
-                        </div>
-                        <h5 class="px-2">helo this is the upcomint video you are seeing here</h5>
-
-                    </div>
-
-                    <div class="col-12 d-flex my-2">
-                        <div class="thumbnail">
-                            <img class="small-thumbnail"
-                                src="https://imgs.search.brave.com/v9Rv6ebmOZjjP8IPfMS8lgad0g23uOC0kZKsdF8EKq8/rs:fit:1200:720:1/g:ce/aHR0cDovL3d3dy51/cGxvYWQuZWUvaW1h/Z2UvMjk3NTY2OC9U/aHVtYm5haWwucG5n"
-                                alt="">
-                        </div>
-                        <h5 class="px-2">helo this is the upcomint video you are seeing here</h5>
-
-                    </div>
+                    @endforeach
 
                 </div>
             </div>

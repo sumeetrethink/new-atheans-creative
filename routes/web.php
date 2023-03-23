@@ -49,3 +49,5 @@ Route::get('/getBusinessCoords', [BusinessController::class, 'getBusiness'])->na
 //                                  CREATE VIDEOS
 Route::get('/upload/video', [VideoController::class, 'uploadForm'])->name('uploadForm');
 Route::post('/upload/video', [VideoController::class, 'upload'])->name('upload');
+                        // manahe like dislikes
+Route::get('/manageLikes', [VideoController::class, 'manageLikes'])->name('manageLikes');

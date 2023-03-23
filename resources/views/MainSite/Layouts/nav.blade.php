@@ -32,7 +32,7 @@
             </a>
         </div>
         <div class="col-lg-5 col-md-5  col-sm-5 col-xs-12 float-left">
-            <div class="search-header">
+            {{-- <div class="search-header">
                 <form class="example" action=" {{ url('search') }}" method="post" style="margin:auto;">
                     @csrf
                     <input type="text" class="form-control" id="search" name="search" placeholder="Search.."
@@ -40,17 +40,24 @@
                     <button><i class="fa fa-search"></i></button>
 
                 </form>
+            </div> --}}
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search videos..." aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4  col-sm-4 col-xs-12 float-left">
             <div class="dashboard-Header-top-botton">
-                <a href="{{url('/upload/video')}}" class="form-control btn btn-register" target="_blank">Create</a>
+                <a href="{{ url('/upload/video') }}" class="form-control btn btn-register" target="_blank">Create</a>
 
 
 
                 @if (session()->has('user'))
 
-                    @if (session()->has('user'))
+                    @if (!session()->has('user'))
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
                                 class="dashboard-header" src="{{ env('APP_URL') }}/images/{{ session()->has('user') }}">
                         </button>
@@ -73,13 +80,12 @@
                     <li><a href="{{ url('user.settings') }}"><img class="header-image"
                                 src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Gears_Black-01.png') }}"
                                 width="20">Settings</a></li>
-                    <li> <a class="dropdown-item" href="{{ url('/user/logout') }}"
-                           ><i
-                                class="fa fa-sign-out" style="font-size:17px"></i>
-                        LogOut</a>
+                    <li> <a class="dropdown-item" href="{{ url('/user/logout') }}"><i class="fa fa-sign-out"
+                                style="font-size:17px"></i>
+                            LogOut</a>
                     </li>
-                    <a href="{{url('/user/logout') }}"  style="display: none;">
-                       
+                    <a href="{{ url('/user/logout') }}" style="display: none;">
+
                     </a>
 
                 </ul>
@@ -103,8 +109,8 @@
                         src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Home_Black-01.png') }}">
                     Home </a></li>
 
-           
-            <li class="nav-item"><a href="{{url("live")}}" id="Nac_live"><img class="ballot"
+
+            <li class="nav-item"><a href="{{ url('live') }}" id="Nac_live"><img class="ballot"
                         src="{{ asset('/images/Group_520.jpeg') }}"> NAC Live</a></li>
 
             <li class="nav-item"><a href="{{ url('user.top100videos') }}" id="top100videos"><img class="ballot"

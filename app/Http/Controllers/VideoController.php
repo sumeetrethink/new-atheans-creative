@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Genere;
+use App\Like;
 use App\User;
 use App\Video;
 use Illuminate\Http\Request;
@@ -34,12 +35,12 @@ class VideoController extends Controller
     $originalName = $file->getClientOriginalName();
     $timestamp = time();
     $filename = $timestamp . '_' . $originalName;
-    $uploaded= $file->storeAs('videos', $filename);
+    $file-> move(public_path('Data/Video'), $filename);
     if($request->thumbnail) {
       $thumnailRequest = $request->file('thumbnail');
       $originalThumnail = $thumnailRequest->getClientOriginalName();
       $Thumbnailfilename = $timestamp . '_' . $originalThumnail;
-      $thumnailRequest->storeAs('thumbnail', $Thumbnailfilename);
+      $uploaded=$thumnailRequest->move(public_path('Data/Thumbnail'), $Thumbnailfilename);
     }
     if($uploaded)
     {
@@ -57,5 +58,29 @@ class VideoController extends Controller
       $video->save();
     }
     return redirect()->back()->with('success', 'Video uploaded successfully.');
+  }
+  public function manageLikes(Request $req)
+  {
+    
+      $user=User::where('email', '=', session('user'))->first();
+      $alreadyLikes=Like::where('user_id','=',$user->id)->where('video_id','=',$req->videoId)->first();
+      
+      if($alreadyLikes)
+      {
+        $alreadyLikes->delete();
+        $totalLikes=Like::where('video_id','=',$req->videoId)->get();
+        return ["count"=>$totalLikes->count(),"status"=>"unlike"];
+      }
+      else
+      {
+        $like=new Like();
+        $like->user_id=$user->id;
+        $like->video_id=$req->videoId;
+        $like->save();
+        $totalLikes=Like::where('video_id','=',$req->videoId)->get();
+        return ["count"=>$totalLikes->count(),"status"=>"liked"];
+
+      }
+     
   }
 }
