@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\User;
+use App\Video;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -73,15 +77,39 @@ class LoginController extends Controller
     }
     public function landingPage()
     {
+       
+       
         return view('MainSite.Content.LandingPage.index');
     }
 
-    public function nacLive()
+    public function nacLive(Request $req)
     {
-        return view('MainSite.Content.Live.index');
+        $querry = $req->query('watch');
+        
+        if($querry)
+        {
+            $id= Crypt::decryptString($querry);
+            $oneVideo=Video::find($id);
+        }
+        else
+        {
+            $user = User::where('email', '=', session('user'))
+            ->first();
+            $oneVideo=$videos = Video::with('likes')->first();
+            
+            
+        }
+       
+        $moreVideos=Video::where('genere_id','=',$oneVideo->genere_id)->inRandomOrder()->limit(10)->get();
+        return view('MainSite.Content.Live.index',compact('oneVideo','moreVideos',));
     }
     public function home()
     {
-        return view('MainSite.Content.Home.index');
+        $topFour = DB::table('videos')->inRandomOrder()
+        ->join('generes', 'videos.genere_id', '=', 'generes.id')
+        ->select('videos.*', 'generes.title as genre_name')
+        ->limit(4)
+        ->get();
+        return view('MainSite.Content.Home.index',compact('topFour'));
     }
 }

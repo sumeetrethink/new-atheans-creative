@@ -107,91 +107,40 @@
 
 <section class="top-4-videos">
     <div class="container">
+        <h3>
+            TOP 4 Videos
+        </h3>
+
         <div class="row">
-            <div class="col-3">
-                <div class="upper-section">
-                    <img src="https://img.freepik.com/free-photo/beautiful-lonely-girl-dreaming-thinking_158595-4483.jpg?w=1060&t=st=1679400494~exp=1679401094~hmac=630690714240f550306cb56a2e59a5eb988355425df8ea906ac4ae85c65b41a8"
-                        alt="">
-                    <div class="play-button">
-                        <i class="fa fa-play"></i>
-                    </div>
-                    <div class="video-title">
-                        <h4>Title of the video wil be he...</h4>
-                        <h6>Titlese</h6>
+            @foreach ($topFour as $item)
+                @php
+                    $encryptedUrl = Crypt::encryptString($item->id);
+                @endphp
 
-                    </div>
-                    <div class="hover-text">
-                        <h4>
-                            <i style="font-size:18px" class="fa">1</i>
-                            1<i class="fa fa-star-o"></i>
-                        </h4>
 
-                    </div>
+                <div class="col-3">
+                    <a href="{{ url('live?watch=' . $encryptedUrl) }}">
+                        <div class="upper-section">
+                            <img src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" alt="">
+                            <div class="play-button">
+                                <i class="fa fa-play"></i>
+                            </div>
+                            <div class="video-title">
+                                <h4>{{ Str::limit($item->video_title, 30, '...') }}</h4>
+                                <h6>{{ $item->genre_name }}</h6>
+
+                            </div>
+                            <div class="hover-text">
+                                <h4>
+                                    <i style="font-size:18px" class="fa">1</i>
+                                    1<i class="fa fa-star-o"></i>
+                                </h4>
+
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="upper-section">
-                    <img src="https://imgs.search.brave.com/GdYtrB5d6S_40D-KHuNzOGlsZjS6jULlMo2bBAEYnvg/rs:fit:1200:1080:1/g:ce/aHR0cHM6Ly93d3cu/YndhbGxwYXBlcmhk/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAyMS8wMS9OYXNo/UG9pbnQuanBn"
-                        alt="">
-                    <div class="play-button">
-                        <i class="fa fa-play"></i>
-                    </div>
-                    <div class="video-title">
-                        <h4>Title of the video wil be he...</h4>
-                        <h6>Titlese</h6>
-
-                    </div>
-                    <div class="hover-text">
-                        <h4>
-                            <i style="font-size:18px" class="fa">1</i>
-                            1<i class="fa fa-star-o"></i>
-                        </h4>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="upper-section">
-                    <img src="https://img.freepik.com/free-photo/medium-shot-woman-wearing-glasses_23-2148773581.jpg?w=1060&t=st=1679400464~exp=1679401064~hmac=963dbbd612abfc5936192a17a4e531f789ff946cfe05731419e43a10b05fa54a"
-                        alt="">
-                    <div class="play-button">
-                        <i class="fa fa-play"></i>
-                    </div>
-                    <div class="video-title">
-                        <h4>Title of the video wil be he...</h4>
-                        <h6>Titlese</h6>
-
-                    </div>
-                    <div class="hover-text">
-                        <h4>
-                            <i style="font-size:18px" class="fa">1</i>
-                            1<i class="fa fa-star-o"></i>
-                        </h4>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="upper-section">
-                    <img src="https://img.freepik.com/free-photo/teenager-light-movie-projector_23-2149377405.jpg?w=1380&t=st=1679400440~exp=1679401040~hmac=cd894a7417d8ffa01a316d68fccefa5dd4985a89c247292cc4240b5a5270f392"
-                        alt="">
-                    <div class="play-button">
-                        <i class="fa fa-play"></i>
-                    </div>
-                    <div class="video-title">
-                        <h4>Title of the video wil be he...</h4>
-                        <h6>Titlese</h6>
-
-                    </div>
-                    <div class="hover-text">
-                        <h4>
-                            <i style="font-size:18px" class="fa">1</i>
-                            1<i class="fa fa-star-o"></i>
-                        </h4>
-
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

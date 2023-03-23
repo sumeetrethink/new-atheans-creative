@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <script type="text/javascript">
+        BASE_URL = "<?php echo url(''); ?>";
+    </script>
     <meta charset="utf-8">
     <link rel="icon" href="{{ asset('/images/favicon.png') }}" type="image/png">
     <!-- Fav Icon -->
@@ -22,7 +25,7 @@
         rel="stylesheet" />
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
-
+   
     <script src="{{ asset('/js/user/main.js') }}"></script>
 
 </head>
@@ -39,6 +42,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
         integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous">
     </script>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
     <script>
         openModal('voteModel')
     </script>
