@@ -101,7 +101,7 @@ class LoginController extends Controller
         }
        
         $moreVideos=Video::where('genere_id','=',$oneVideo->genere_id)->inRandomOrder()->limit(10)->get();
-        return view('MainSite.Content.Live.index',compact('oneVideo','moreVideos',));
+        return view('MainSite.Content.Live.index',compact('oneVideo','moreVideos'));
     }
     public function home()
     {
