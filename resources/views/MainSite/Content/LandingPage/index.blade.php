@@ -69,66 +69,66 @@
                 </ul>
             </div>
         </div>
-        <div id="voteModel" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Register to Vote!</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <p>Before entering, we want to make sure you are registered to vote in real life.</p>
-                            <p>It takes 30 seconds at <a target="_blank"
-                                    href="http://nac.turbovote.org">nac.turbovote.org</a></p>
-                            <p>Happy voting!</p>
-                            <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Thanks, I have
-                                registered to vote</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="turbovotePopup" class="modal fade" style="width:718px">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div width="618px"><iframe width="618px" height="680px"
-                                src="https://nac.turbovote.org/?r=widget"></iframe>Powered by TurboVote: <a
-                                href="https://nac.turbovote.org/?r=widget">register to vote, request absentee ballots,
-                                and get
-                                election reminders</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- register modal --}}
-        <div id="registerModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-                    </div>
-                    <div class="modal-body">
-                        <h4>Register yourself as:</h4>
-                        <div class="form-group">
-
-                            <a href="{{ url('/busines/register') }}" class="btn btn-success">Business</a>
-                            <a href="{{ url('/user/register') }}" class="btn btn-secondary">Creator</a>
-                            <a href="{{ url('/user/register') }}" class="btn btn-danger">Voter</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
 
     </nav>
+    <div id="voteModel" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Register to Vote!</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <p>Before entering, we want to make sure you are registered to vote in real life.</p>
+                        <p>It takes 30 seconds at <a target="_blank"
+                                href="http://nac.turbovote.org">nac.turbovote.org</a></p>
+                        <p>Happy voting!</p>
+                        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true">Thanks, I have
+                            registered to vote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="turbovotePopup" class="modal fade" style="width:718px">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
 
+                    <div width="618px"><iframe width="618px" height="680px"
+                            src="https://nac.turbovote.org/?r=widget"></iframe>Powered by TurboVote: <a
+                            href="https://nac.turbovote.org/?r=widget">register to vote, request absentee ballots,
+                            and get
+                            election reminders</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- register modal --}}
+    <div id="registerModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <h4>Register yourself as:</h4>
+                    <div class="form-group">
+
+                        <a href="{{ url('/busines/register') }}" class="btn btn-success">Business</a>
+                        <a href="{{ url('/user/register') }}" class="btn btn-secondary">Creator</a>
+                        <a href="{{ url('/user/register') }}" class="btn btn-danger">Voter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{--     content --}}
     <style>
         .modal {

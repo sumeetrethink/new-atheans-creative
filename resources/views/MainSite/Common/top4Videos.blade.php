@@ -1,4 +1,4 @@
-<style>
+i<style>
     .top-4-videos {
         background-color: rgb(190, 246, 190);
         padding: 5% 0px;
@@ -112,33 +112,47 @@
         </h3>
 
         <div class="row">
-            @foreach ($topFour as $item)
+            @foreach ($topFour as $key => $item)
                 @php
                     $encryptedUrl = Crypt::encryptString($item->id);
                 @endphp
 
 
                 <div class="col-3">
-                    <a href="{{ url('live?watch=' . $encryptedUrl) }}">
-                        <div class="upper-section">
+                    <div class="upper-section">
+                        <a href="{{ url('live?watch=' . $encryptedUrl) }}">
                             <img src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" alt="">
                             <div class="play-button">
                                 <i class="fa fa-play"></i>
                             </div>
                             <div class="video-title">
                                 <h4>{{ Str::limit($item->video_title, 30, '...') }}</h4>
-                                <h6>{{ $item->genre_name }}</h6>
-
+                                <h6>{{ $item['genere']->title }}</h6>
                             </div>
-                            <div class="hover-text">
-                                <h4>
-                                    <i style="font-size:18px" class="fa">1</i>
-                                    1<i class="fa fa-star-o"></i>
-                                </h4>
+                        </a>
+                        <div class="hover-text">
+                            <h4>
+                                <span class="like-count-{{$key}}">{{ $item['likes']->count() }}</span>
+                                @if ($item['likes']->contains('user_id', $item->user_id))
+                                    <i onclick="managelike({{ $item->id }},{{ $key }})"
+                                        class="like-icon-{{$key}} fa fa-thumbs-up"></i>
+                                @else
+                                    <i onclick="managelike({{ $item->id }},{{ $key }})"
+                                        class="like-icon-{{$key}} fa fa-thumbs-o-up"></i>
+                                @endif
+                                <span class="votes-count-{{$key}}">{{ $item['votes']->count() }}</span>
+                                @if ($item['votes']->contains('user_id', $item->user_id))
+                                    <i onclick="handleVoting({{ $item->id }},{{ $key }})"
+                                        class="vote-icon-{{$key}} fa fa-star"></i>
+                                @else
+                                    <i onclick="handleVoting({{ $item->id }},{{ $key }})"
+                                        class="vote-icon-{{$key}} fa fa-star-o"></i>
+                                @endif
+                                
+                            </h4>
 
-                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             @endforeach
         </div>

@@ -10,4 +10,12 @@ class Video extends Model
     {
         return $this->hasMany(Like::class);
     }
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+    public function genere()
+    {
+        return $this->belongsTo(Genere::class);
+    }
 }
