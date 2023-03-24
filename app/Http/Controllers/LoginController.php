@@ -32,7 +32,7 @@ class LoginController extends Controller
         if ($user) {
             if (Hash::check($req->password, $user->password)) {
                 session()->put('user', $req->email);
-                return redirect('/');
+                return redirect('/home');
             } else {
                 session(['msg-success' => 'Wrong Credentials']);
             }
@@ -89,26 +89,24 @@ class LoginController extends Controller
         if($querry)
         {
             $id= Crypt::decryptString($querry);
-            $oneVideo=Video::find($id);
+            $oneVideo=$videos = Video::with('likes')->find($id);
         }
         else
         {
             $user = User::where('email', '=', session('user'))
             ->first();
-            $oneVideo=$videos = Video::with('likes')->first();
-            
-            
+            $oneVideo=$videos = Video::with('likes')->with('votes')->first();
         }
+            
+            
        
         $moreVideos=Video::where('genere_id','=',$oneVideo->genere_id)->inRandomOrder()->limit(10)->get();
         return view('MainSite.Content.Live.index',compact('oneVideo','moreVideos'));
     }
     public function home()
     {
-        $topFour = DB::table('videos')->inRandomOrder()
-        ->join('generes', 'videos.genere_id', '=', 'generes.id')
-        ->select('videos.*', 'generes.title as genre_name')
-        ->limit(4)
+        
+        $topFour=Video::with('likes')->with('votes')->with('genere')->inRandomOrder()->limit(4)
         ->get();
         return view('MainSite.Content.Home.index',compact('topFour'));
     }

@@ -6,6 +6,7 @@ use App\Genere;
 use App\Like;
 use App\User;
 use App\Video;
+use App\Vote;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -83,4 +84,27 @@ class VideoController extends Controller
       }
      
   }
+  public function manageVotes(Request $req)
+  {
+      $user=User::where('email', '=', session('user'))->first();
+      $alreadyVoted=Vote::where('user_id','=',$user->id)->first();
+      if($alreadyVoted)
+      {
+        $alreadyVoted->delete();
+        $totalVotes=Vote::where('video_id','=',$req->videoId)->get()->count();
+        return ["count"=>$totalVotes,"status"=>"unvoted"];
+      }
+      else{
+        $vote=new Vote();
+        $vote->user_id=$user->id;
+        $vote->video_id=$req->videoId;
+        $vote->save();
+        $totalVotes=Vote::where('video_id','=',$req->videoId)->get()->count();
+        return ["count"=>$totalVotes,"status"=>"vote"];
+
+      }
+    }
+      
+
+
 }

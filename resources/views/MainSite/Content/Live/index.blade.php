@@ -74,24 +74,33 @@
 
                         <div class="d-flex m-2" data-toggle="tooltip" data-placement="bottom" title="Like this video">
                             <p class="video-des m-0 d-flex flex-column text-center"
-                                onclick="managelike({{ $oneVideo->id }})">
+                                onclick="managelike({{ $oneVideo->id }},0)">
 
 
                                 @if ($oneVideo['likes']->contains('user_id', $oneVideo->user_id))
-                                    <i class="like-icon fa fa-thumbs-up"></i>
+                                    <i class="like-icon-0 fa fa-thumbs-up"></i>
                                 @else
-                                    <i class="like-icon fa fa-thumbs-o-up"></i>
+                                    <i class="like-icon-0 fa fa-thumbs-o-up"></i>
                                 @endif
-                                <span class="likes-count">
+                                <span class="like-count-0">
                                     {{ $oneVideo->likes->count() }}
                                 </span>
 
 
                             </p>
                         </div>
-                        <div class="m-2 mr-3" data-toggle="tooltip" data-placement="bottom" title="Vote for this video">
-                            {{-- <i class="fa fa-star-o"></i> --}}
-                            <i class="fa fa-star"></i>
+                        <div  class="m-2 mr-3" data-toggle="tooltip" data-placement="bottom" title="Vote for this video">
+                            <p onclick="handleVoting({{$oneVideo->id}},0)" class="video-des m-0 d-flex flex-column text-center"
+                            >
+                            @if ($oneVideo['votes']->contains('user_id', $oneVideo->user_id))
+                            <i class="vote-icon-0 fa fa-star"></i>
+                                @else
+                            <i class="vote-icon-0 fa fa-star-o"></i>
+                            @endif
+                            <span class="votes-count-0">
+                                {{ $oneVideo->votes->count() }}
+                            </span>
+                            </p>
                         </div>
                         <div>
 

@@ -51,3 +51,4 @@ Route::get('/upload/video', [VideoController::class, 'uploadForm'])->name('uploa
 Route::post('/upload/video', [VideoController::class, 'upload'])->name('upload');
                         // manahe like dislikes
 Route::get('/manageLikes', [VideoController::class, 'manageLikes'])->name('manageLikes');
+Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes');
