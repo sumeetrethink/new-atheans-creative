@@ -51,9 +51,9 @@
                                                 autocomplete="email" autofocus tabindex="1"
                                                 class="form-control @error('email') is-invalid @enderror"
                                                 placeholder="name@domain.com" value="{{ old('email') }}">
-                                                @if (session('status'))
-                                                    <div class="alert alert-success">
-                                                    {{ session('status') }}
+                                                @if (session('msg-error-username'))
+                                                    <div class="text-danger">
+                                                    {{ session('msg-error-username') }}
                                                     </div>
                                                 @endif
                                             </div>
@@ -63,11 +63,11 @@
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     required autocomplete="password" type="password" tabindex="1"
                                                     placeholder="********">
-                                                    @error('password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                    @if (session('msg-error-password'))
+                                                    <div class="text-danger">
+                                                    {{ session('msg-error-password') }}
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="form-group text-right">
                                                 <div class="text-right">

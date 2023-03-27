@@ -45,3 +45,8 @@ function handleVoting(videoId,index)
         },
       });
 }
+// edit profile toggle function
+function openEditProfile()
+{
+    $('.toogle-profile').toggle()
+}

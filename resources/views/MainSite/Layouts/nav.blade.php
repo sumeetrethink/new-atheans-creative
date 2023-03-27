@@ -1,3 +1,10 @@
+@php
+if (session()->has('user')) {
+    $currentUser = session('user');
+}
+
+@endphp
+
 <style>
     nav {
         padding: 0px !important;
@@ -57,9 +64,9 @@
 
                 @if (session()->has('user'))
 
-                    @if (!session()->has('user'))
+                    @if ($currentUser->image)
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                class="dashboard-header" src="{{ env('APP_URL') }}/images/{{ session()->has('user') }}">
+                                class="dashboard-header" src="{{asset('Data/User/'.$currentUser->image)}}">
                         </button>
                     @else
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
@@ -73,7 +80,7 @@
 
 
                 <ul class="dropdown-menu">
-                    <li><a href="{{ url('user.profile') }}">
+                    <li><a href="{{ url('/user/profile') }}">
                             <img class="header-image"
                                 src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Profile_Black-01.png') }}"
                                 width="20"> Profile</a></li>

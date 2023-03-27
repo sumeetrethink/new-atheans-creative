@@ -130,7 +130,10 @@
                                     <img class="small-thumbnail" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
                                         alt="">
                                 </div>
-                                <h5 class="px-2 more-title">{{ $oneVideo->video_title }}</h5>
+                                <div class="">
+
+                                    <h5 class="px-2 more-title">{{ $item->video_title }}</h5>
+                                </div>
                             </a>
                         </div>
                     @endforeach
