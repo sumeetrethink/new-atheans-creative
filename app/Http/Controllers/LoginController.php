@@ -31,13 +31,18 @@ class LoginController extends Controller
             ->first();
         if ($user) {
             if (Hash::check($req->password, $user->password)) {
-                session()->put('user', $req->email);
+                session()->put('user', $user);
                 return redirect('/home');
             } else {
-                session(['msg-success' => 'Wrong Credentials']);
+                return redirect('/login')->with(['msg-error-password' => 'Wrong password']);
             }
         }
-    }
+        else
+        {
+            return redirect('/login')->with(['msg-error-username' => "Username doesn't exists"]);
+        }
+            
+        }
 
     //                                 register as user
     public function UserRegisterView(Request $req)
@@ -93,7 +98,7 @@ class LoginController extends Controller
         }
         else
         {
-            $user = User::where('email', '=', session('user'))
+            $user = User::where('email', '=', session('user')->id)
             ->first();
             $oneVideo=$videos = Video::with('likes')->with('votes')->first();
         }

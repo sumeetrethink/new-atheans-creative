@@ -3,6 +3,7 @@
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DiscoverController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -39,16 +40,24 @@ Route::get('/home', [LoginController::class, 'home'])->name('home')->middleware(
 //                                  live
 Route::get('/live', [LoginController::class, 'nacLive'])->name('nacLive')->middleware('CheckUser');
 //                                  DISCOVER
-Route::get('/discover', [DiscoverController::class, 'view'])->name('view');
+Route::get('/discover', [DiscoverController::class, 'view'])->name('view')->middleware('CheckUser');
 //get all busienss coordinates in discover page
 
-Route::get('/getBusinessCoords', [BusinessController::class, 'getBusiness'])->name('getBusiness');
+Route::get('/getBusinessCoords', [BusinessController::class, 'getBusiness'])->name('getBusiness')->middleware('CheckUser');
 
 
 
 //                                  CREATE VIDEOS
-Route::get('/upload/video', [VideoController::class, 'uploadForm'])->name('uploadForm');
-Route::post('/upload/video', [VideoController::class, 'upload'])->name('upload');
-                        // manahe like dislikes
-Route::get('/manageLikes', [VideoController::class, 'manageLikes'])->name('manageLikes');
-Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes');
+Route::get('/upload/video', [VideoController::class, 'uploadForm'])->name('uploadForm')->middleware('CheckUser');
+Route::post('/upload/video', [VideoController::class, 'upload'])->name('upload')->middleware('CheckUser');
+Route::get('/user/video/edit', [VideoController::class, 'editForm'])->name('editForm')->middleware('CheckUser');
+Route::post('/user/video/edit', [VideoController::class, 'edit'])->name('edit')->middleware('CheckUser');
+                        
+                            // manage like dislikes
+Route::get('/manageLikes', [VideoController::class, 'manageLikes'])->name('manageLikes')->middleware('CheckUser');
+Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes')->middleware('CheckUser');
+Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes')->middleware('CheckUser');
+
+//                              USER PROFILE WORK
+Route::get('/user/profile', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('CheckUser');
+Route::post('/user/update', [ProfileController::class, 'update'])->name('update')->middleware('CheckUser');
