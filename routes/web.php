@@ -61,3 +61,9 @@ Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manag
 //                              USER PROFILE WORK
 Route::get('/user/profile', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('CheckUser');
 Route::post('/user/update', [ProfileController::class, 'update'])->name('update')->middleware('CheckUser');
+
+
+//                              ADMIN PANNEL
+Route::get('/admin/add',function(){
+    return view('Admin.User.add');
+}) ;
