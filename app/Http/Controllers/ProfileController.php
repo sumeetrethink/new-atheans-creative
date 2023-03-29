@@ -18,19 +18,19 @@ class ProfileController extends Controller
                         ->join('generes', 'videos.genere_id', '=', 'generes.id')
                         ->orderBy('videos.id', 'desc')
                         ->limit(6)
-                        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name',)
+                        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
                         ->get();
         $votedVidoes = \App\Video::join('votes', 'videos.id', '=', 'votes.video_id')
                         ->where('votes.user_id', $currentUser->id)
                         ->join('generes', 'videos.genere_id', '=', 'generes.id')
                         ->orderBy('videos.id', 'desc')
                         ->limit(6)
-                        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name',)
+                        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
                         ->get();
         $yourVideos = \App\Video::where('user_id', $currentUser->id)
                         ->join('generes', 'videos.genere_id', '=', 'generes.id')
                         ->orderBy('videos.id', 'desc')
-                        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name',)
+                        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
                         ->get();                
                     
         return view('MainSite.Content.Profile.view',compact('topLikedVideos','votedVidoes','yourVideos'));
