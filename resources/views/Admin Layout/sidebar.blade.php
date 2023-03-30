@@ -20,7 +20,15 @@
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item  active ">
+                    <a href="{{ url('/admin/users/') }}"
+                        class="nav-link {{ Request::is('admin/users')||Request::is('admin/users/view')  ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            Manage Users
+                        </p>
+                    </a>
+                </li>
                
 
 
