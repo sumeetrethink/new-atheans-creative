@@ -18,10 +18,10 @@ class Businesses extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('contact');
-            $table->string('address');
-            $table->string('raw_location');
-            $table->string('lat');
-            $table->string('long');
+            $table->string('address')->nullable();
+            $table->string('raw_location')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('long')->nullable();
             $table->timestamps();
         });
     }
