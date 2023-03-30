@@ -4,6 +4,7 @@ use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DiscoverController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VideoController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,8 @@ Route::post('/user/update', [ProfileController::class, 'update'])->name('update'
 
 
 //                              ADMIN PANNEL
-Route::get('/admin/add',function(){
-    return view('Admin.User.add');
-}) ;
+Route::get('admin/users/', [UserController::class, 'list'])->name('list');
+Route::post('/admin/user/delete', [UserController::class, 'delete'])->name('delete');
+Route::get('admin/users/view/', [UserController::class, 'view'])->name('view');
+Route::post('admin/users/add', [UserController::class, 'add'])->name('add');
+Route::post('admin/users/update', [UserController::class, 'update'])->name('update');
