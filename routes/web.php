@@ -65,8 +65,15 @@ Route::post('/user/update', [ProfileController::class, 'update'])->name('update'
 
 
 //                              ADMIN PANNEL
+// users
 Route::get('admin/users/', [UserController::class, 'list'])->name('list');
 Route::post('/admin/user/delete', [UserController::class, 'delete'])->name('delete');
 Route::get('admin/users/view/', [UserController::class, 'view'])->name('view');
 Route::post('admin/users/add', [UserController::class, 'add'])->name('add');
 Route::post('admin/users/update', [UserController::class, 'update'])->name('update');
+// business
+Route::get('admin/business/', [BusinessController::class, 'list'])->name('list');
+Route::post('/admin/business/delete', [BusinessController::class, 'delete'])->name('delete');
+Route::get('admin/business/view/', [BusinessController::class, 'view'])->name('view');
+Route::post('admin/business/add', [BusinessController::class, 'add'])->name('add');
+Route::post('admin/business/update', [BusinessController::class, 'update'])->name('update');

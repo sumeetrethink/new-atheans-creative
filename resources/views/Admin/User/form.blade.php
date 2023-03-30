@@ -129,7 +129,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-info btn-sm">Add User</button>
+                            <button type="submit" class="btn btn-info btn-sm">Save</button>
                         </div>
                     </div>
                 </form>
