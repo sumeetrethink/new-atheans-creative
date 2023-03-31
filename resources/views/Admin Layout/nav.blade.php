@@ -33,7 +33,7 @@
          <li class="nav-item dropdown ">
              <a class="nav-link d-flex flex-row align-items-center " data-toggle="dropdown" href="#">
                  <i class="far fa-user p-2"></i>
-                 {{ session()->has('admin') ? session('admin') : ' ' }}
+                 {{ session()->has('admin') ? session('admin')->first_name : ' ' }}
              </a>
 
              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -43,7 +43,7 @@
                      <i class="fas fa-cog mr-2"></i> Setting
                  </a>
                  <div class="dropdown-divider"></div>
-                 <a href="{{ url('admin/logout') }}" class="dropdown-item">
+                 <a href="{{ url('/admin/logout') }}" class="dropdown-item">
                      <i class="fas fa-power-off mr-2"></i>Logout
                  </a>
 

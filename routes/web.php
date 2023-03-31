@@ -65,15 +65,26 @@ Route::post('/user/update', [ProfileController::class, 'update'])->name('update'
 
 
 //                              ADMIN PANNEL
+// ADMIN VALIDAION
+Route::get('/admin/login', [LoginController::class, 'adminLoginForm'])->name('adminLoginForm');
+Route::post('/admin/login', [LoginController::class, 'adminLogin'])->name('adminLogin');
+Route::get('admin/logout', [LoginController::class, 'adminLogout'])->name('adminLogout');
+
 // users
-Route::get('admin/users/', [UserController::class, 'list'])->name('list');
-Route::post('/admin/user/delete', [UserController::class, 'delete'])->name('delete');
-Route::get('admin/users/view/', [UserController::class, 'view'])->name('view');
-Route::post('admin/users/add', [UserController::class, 'add'])->name('add');
-Route::post('admin/users/update', [UserController::class, 'update'])->name('update');
+Route::get('admin/users/', [UserController::class, 'list'])->name('list')->middleware('AdminUser');
+Route::post('/admin/user/delete', [UserController::class, 'delete'])->name('delete')->middleware('AdminUser');
+Route::get('admin/users/view/', [UserController::class, 'view'])->name('view')->middleware('AdminUser');
+Route::post('admin/users/add', [UserController::class, 'add'])->name('add')->middleware('AdminUser');
+Route::post('admin/users/update', [UserController::class, 'update'])->name('update')->middleware('AdminUser');
 // business
-Route::get('admin/business/', [BusinessController::class, 'list'])->name('list');
-Route::post('/admin/business/delete', [BusinessController::class, 'delete'])->name('delete');
-Route::get('admin/business/view/', [BusinessController::class, 'view'])->name('view');
-Route::post('admin/business/add', [BusinessController::class, 'add'])->name('add');
-Route::post('admin/business/update', [BusinessController::class, 'update'])->name('update');
+Route::get('admin/business/', [BusinessController::class, 'list'])->name('list')->middleware('AdminUser');
+Route::post('/admin/business/delete', [BusinessController::class, 'delete'])->name('delete')->middleware('AdminUser');
+Route::get('admin/business/view/', [BusinessController::class, 'view'])->name('view')->middleware('AdminUser');
+Route::post('admin/business/add', [BusinessController::class, 'add'])->name('add')->middleware('AdminUser');
+Route::post('admin/business/update', [BusinessController::class, 'update'])->name('update')->middleware('AdminUser');
+
+//Videos
+Route::get('admin/videos/', [VideoController::class, 'adminList'])->name('adminList')->middleware('AdminUser');
+Route::post('/admin/video/delete', [VideoController::class, 'adminDelete'])->name('adminDelete')->middleware('AdminUser');
+Route::get('/admin/video/change-status', [VideoController::class, 'changeStatus'])->name('changeStatus')->middleware('AdminUser');
+Route::get('/admin/video/likes', [VideoController::class, 'getVideoLikesList'])->name('getVideoLikesList')->middleware('AdminUser');

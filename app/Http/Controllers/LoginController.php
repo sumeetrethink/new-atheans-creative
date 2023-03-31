@@ -87,6 +87,37 @@ class LoginController extends Controller
         return view('MainSite.Content.LandingPage.index');
     }
 
+    //                  ADMIN auth
+    public function adminLoginForm()
+    {
+        return view('Admin.Auth.login');
+    }
+    public function adminLogin(Request $req)
+    {
+        $req->validate(['email'=>'required','password'=>'required']);
+        $user = User::where('role_id','=',1)->where('email', '=', $req->email)
+        ->first();
+     if ($user) {
+        if (Hash::check($req->password, $user->password)) {
+            session()->put('admin', $user);
+            return redirect('/admin/users');
+        } else {
+            return redirect('/admin/login')->with(['msg-error-password' => 'Wrong password']);
+        }
+     }
+        else
+        {
+        return redirect('/admin/login')->with(['msg-error-username' => "Username doesn't exists"]);
+        }
+     
+    }
+    public function adminLogout()
+    {
+        session()->remove('admin');
+        return redirect('/admin/login');
+    }
+    //      landing pages
+
     public function nacLive(Request $req)
     {
         $querry = $req->query('watch');
@@ -94,7 +125,7 @@ class LoginController extends Controller
         if($querry)
         {
             $id= Crypt::decryptString($querry);
-            $oneVideo=$videos = Video::with('likes')->find($id);
+            $oneVideo=$videos = Video::with('likes')->with('votes')->find($id);
         }
         else
         {

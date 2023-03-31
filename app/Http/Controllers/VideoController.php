@@ -9,6 +9,7 @@ use App\Video;
 use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends Controller
 {
@@ -156,6 +157,64 @@ class VideoController extends Controller
       $video->save();
     
     return redirect()->back()->with('success', 'Video updated successfully.');
+  }
+
+
+  // ADMIN
+  public function adminList()
+  {
+      $videos=DB::table('videos')->join('users',"videos.user_id","users.id")->select("videos.*",'users.*','videos.id as video_id')->paginate(20);
+      return view('Admin.Videos.list',compact('videos'));
+  }
+  public function adminDelete(Request $req)
+  {
+      $video=Video::find($req->deleteId);
+     
+      if (file_exists(public_path('Data/Video/' . $video->file_name))) {
+        unlink(public_path('Data/Video/' . $video->file_name));
+    }
+    
+    if (isset($video->thumbnail)) {
+        if (file_exists(public_path('Data/Thumbnail/' . $video->thumbnail))) {
+            unlink(public_path(('Data/Thumbnail/' . $video->thumbnail)));
+        }
+    }
+      $video->delete();
+
+      return redirect('admin/videos')->with(['msg-success'=>'Video has been deleted']);
+  }
+  public function changeStatus(Request $req)
+  {
+     $status='';
+      if($req->id)
+      {
+        $video=Video::find($req->id);
+        if($video->is_approved=="Yes")
+        {
+          $video->is_approved="No";
+        }
+        else
+        {
+          $video->is_approved="Yes";
+        } 
+        $video->update();
+        $status=$video->is_approved;
+        return  $status;
+
+      }
+  }
+  public function getVideoLikesList(Request $req)
+  {
+    $video_id = $req->query('item');
+    // dd($video_id);
+    $likes = DB::table('likes')
+    ->join('videos', 'likes.video_id', '=', 'videos.id')
+    ->join('users', 'likes.user_id', '=', 'users.id')
+    ->select('videos.*', 'likes.*', 'users.*')
+    ->where('likes.video_id','=',$video_id)
+    ->get();
+    return view('Admin.Videos.likesList',compact('likes'));
+  
   }
       
 
