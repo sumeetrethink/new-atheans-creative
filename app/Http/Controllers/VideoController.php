@@ -158,6 +158,16 @@ class VideoController extends Controller
     
     return redirect()->back()->with('success', 'Video updated successfully.');
   }
+  public function top100()
+  {
+    $videos = Video::select('videos.*', DB::raw('(SELECT COUNT(*) FROM votes WHERE votes.video_id = videos.id) AS votes_count'))
+    ->havingRaw('votes_count > 0')
+    ->orderByDesc('votes_count')
+    ->limit(100)
+    ->get();
+    return view('MainSite.Content.Top100.top100',compact('videos'));
+
+  }
 
 
   // ADMIN

@@ -120,7 +120,7 @@ if (session()->has('user')) {
             <li class="nav-item"><a href="{{ url('live') }}" id="Nac_live"><img class="ballot"
                         src="{{ asset('/images/Group_520.jpeg') }}"> NAC Live</a></li>
 
-            <li class="nav-item"><a href="{{ url('user.top100videos') }}" id="top100videos"><img class="ballot"
+            <li class="nav-item"><a href="{{ url('/video/top-100') }}" id="top100videos"><img class="ballot"
                         src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Top100_Black-01.png') }}">Top
                     100 </a></li>
 
