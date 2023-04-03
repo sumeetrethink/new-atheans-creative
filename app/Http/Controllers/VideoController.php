@@ -165,9 +165,22 @@ class VideoController extends Controller
     ->orderByDesc('votes_count')
     ->limit(100)
     ->get();
-    return view('MainSite.Content.Top100.top100',compact('videos'));
-
+    return view('MainSite.Content.Top100.index',compact('videos'));
+    
   }
+  public function likedVideos()
+  {
+    $currentUser=User::where('id','=',session('user')->id)->first();
+    
+    $videos = \App\Video::join('likes', 'videos.id', '=', 'likes.video_id')
+    ->where('likes.user_id', $currentUser->id)
+    ->join('generes', 'videos.genere_id', '=', 'generes.id')
+    ->orderBy('videos.id', 'desc')
+    ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
+    ->get();
+    return view('MainSite.Content.LikedVideos.index',compact('videos'));
+  }
+    
 
 
   // ADMIN
