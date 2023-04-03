@@ -14,14 +14,21 @@ if (session()->has('user')) {
 
     nav li {
         padding: 10px 6px;
-        margin-left: 10px
+        margin-left: 10px;
+        cursor: pointer;
     }
-
+    
     nav li:hover {
-        background: rgb(156, 154, 154)
+        background: black;
+        color: white;
     }
-
+    nav  .active {
+        background:black;
+        color: white;
+    }
+    
     nav a {
+        
         text-decoration: none !important;
         color: black;
     }
@@ -112,19 +119,17 @@ if (session()->has('user')) {
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto" id="nav">
-            <li class="nav-item active"><a href="{{ url('/home') }}" id="home"> <img class="ballot"
-                        src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Home_Black-01.png') }}">
+            <li class="nav-item active"><a class="active" href="{{ url('/home') }}" id="home"> <i class="fa fa-home"></i>
                     Home </a></li>
 
 
             <li class="nav-item"><a href="{{ url('live') }}" id="Nac_live"><img class="ballot"
                         src="{{ asset('/images/Group_520.jpeg') }}"> NAC Live</a></li>
 
-            <li class="nav-item"><a href="{{ url('user.top100videos') }}" id="top100videos"><img class="ballot"
-                        src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Top100_Black-01.png') }}">Top
+            <li class="nav-item"><a href="{{ url('/video/top-100') }}" id="top100videos"><i class="fa fa-star"></i>Top
                     100 </a></li>
 
-            <li class="nav-item"><a href="{{ url('user.likedvideos') }}" id="likedvideos"> <i style="font-size:17px"
+            <li class="nav-item "><a  href="{{ url('user/video/liked') }}" id="likedvideos"> <i style="font-size:17px"
                         class="fa fa-thumbs-o-up"></i> Liked Videos</a></li>
             <li class="nav-item"><a href="{{ url('discover') }}" id="discover"> <i class="fa fa-search"></i>
                     Discover</a></li>

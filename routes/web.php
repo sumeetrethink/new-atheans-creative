@@ -63,6 +63,12 @@ Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manag
 Route::get('/user/profile', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('CheckUser');
 Route::post('/user/update', [ProfileController::class, 'update'])->name('update')->middleware('CheckUser');
 
+//top 100 videos lists
+Route::get('/video/top-100', [VideoController::class, 'top100'])->name('top100')->middleware('CheckUser');
+
+//users liked videos  lists
+Route::get('/user/video/liked', [VideoController::class, 'likedVideos'])->name('likedVideos')->middleware('CheckUser');
+
 
 //                              ADMIN PANNEL
 // ADMIN VALIDAION

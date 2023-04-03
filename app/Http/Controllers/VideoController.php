@@ -158,6 +158,29 @@ class VideoController extends Controller
     
     return redirect()->back()->with('success', 'Video updated successfully.');
   }
+  public function top100()
+  {
+    $videos = Video::select('videos.*', DB::raw('(SELECT COUNT(*) FROM votes WHERE votes.video_id = videos.id) AS votes_count'))
+    ->havingRaw('votes_count > 0')
+    ->orderByDesc('votes_count')
+    ->limit(100)
+    ->get();
+    return view('MainSite.Content.Top100.index',compact('videos'));
+    
+  }
+  public function likedVideos()
+  {
+    $currentUser=User::where('id','=',session('user')->id)->first();
+    
+    $videos = \App\Video::join('likes', 'videos.id', '=', 'likes.video_id')
+    ->where('likes.user_id', $currentUser->id)
+    ->join('generes', 'videos.genere_id', '=', 'generes.id')
+    ->orderBy('videos.id', 'desc')
+    ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
+    ->get();
+    return view('MainSite.Content.LikedVideos.index',compact('videos'));
+  }
+    
 
 
   // ADMIN
