@@ -1,8 +1,8 @@
 @php
-if (session()->has('user')) {
-    $currentUser = session('user');
-}
-
+    if (session()->has('user')) {
+        $currentUser = session('user');
+    }
+    
 @endphp
 
 <style>
@@ -13,28 +13,34 @@ if (session()->has('user')) {
 
 
     nav li {
-        padding: 10px 6px;
-        margin-left: 10px;
+        display: block;
         cursor: pointer;
+        padding: 0 5px;
     }
-    
+
     nav li:hover {
-        background: black;
+        background: #d4d4d4;
         color: white;
     }
-    nav  .active {
-        background:black;
+
+    nav .active {
+        padding: 0 5px;
+
+        background: #d4d4d4;
         color: white;
     }
-    
+
     nav a {
-        
+        display: block;
+        padding: 12px 8px !important;
+
         text-decoration: none !important;
         color: black;
     }
 
     nav a:hover {
-        color: #c6f9b0;
+        padding: 12px 8px !important;
+        color: black;
     }
 </style>
 {{-- custom --}}
@@ -73,7 +79,7 @@ if (session()->has('user')) {
 
                     @if ($currentUser->image)
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                class="dashboard-header" src="{{asset('Data/User/'.$currentUser->image)}}">
+                                class="dashboard-header" src="{{ asset('Data/User/' . $currentUser->image) }}">
                         </button>
                     @else
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
@@ -119,24 +125,29 @@ if (session()->has('user')) {
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto" id="nav">
-            <li class="nav-item active"><a class="active" href="{{ url('/home') }}" id="home"> <i class="fa fa-home"></i>
+            <li class="nav-item {{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('home') }}" id="home">
+                    <i class="fa fa-home"></i>
                     Home </a></li>
 
 
-            <li class="nav-item"><a href="{{ url('live') }}" id="Nac_live"><img class="ballot"
-                        src="{{ asset('/images/Group_520.jpeg') }}"> NAC Live</a></li>
+            <li class="nav-item {{ Request::is('live') ? 'active' : '   ' }}"><a href="{{ url('live') }}"
+                    id="Nac_live"><img class="ballot" src="{{ asset('/images/Group_520.jpeg') }}"> NAC Live</a></li>
 
-            <li class="nav-item"><a href="{{ url('/video/top-100') }}" id="top100videos"><i class="fa fa-star"></i>Top
+            <li class="nav-item {{ Request::is('video/top-100') ? 'active' : '' }}"><a href="{{ url('/video/top-100') }}"
+                    id="top100videos"><i class="fa fa-star"></i>Top
                     100 </a></li>
 
-            <li class="nav-item "><a  href="{{ url('user/video/liked') }}" id="likedvideos"> <i style="font-size:17px"
+            <li class="nav-item {{ Request::is('user/video/liked') ? 'active' : '' }}"><a
+                    href="{{ url('user/video/liked') }}" id="likedvideos"> <i style="font-size:17px"
                         class="fa fa-thumbs-o-up"></i> Liked Videos</a></li>
-            <li class="nav-item"><a href="{{ url('discover') }}" id="discover"> <i class="fa fa-search"></i>
+            <li class="nav-item {{ Request::is('discover') ? 'active' : '' }}"><a href="{{ url('discover') }}"
+                    id="discover"> <i class="fa fa-search"></i>
                     Discover</a></li>
-            <li class="nav-item"><a href="{{ url('user.ballot') }}" id="ballot"><img class="ballot"
+            <li class="nav-item {{ Request::is('ballot') ? 'active' : '' }}"><a href="{{ url('/ballot') }}"
+                    id="ballot"><img class="ballot"
                         src="http://3.7.41.47/newathenscreative/public/images/Group_521.jpeg"> NAC Ballot </a>
             </li>
-            <li class="nav-item"><a href="https://nacopedia.com/nac-invest" id="ballot"><img class="ballot"
+            <li class="nav-item "><a href="https://nacopedia.com/nac-invest" id="ballot"><img class="ballot"
                         src="{{ asset('/images/Group_51911.jpeg') }}"> NAC Invest </a>
             </li>
             <li class="nav-item"><a href="https://nacopedia.com/nac-network" id="ballot"><img class="ballot"

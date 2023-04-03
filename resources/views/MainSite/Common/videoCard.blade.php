@@ -104,7 +104,6 @@
         padding-left: 3px
     }
 </style>
-
 @php
     $encryptedUrl = Crypt::encryptString($item->id);
 @endphp
@@ -124,21 +123,21 @@
                 </a>
                 <div class="hover-text">
                     <h4>
-                        <span class="like-count-{{ $key }}">{{ $item['likes']->count() }}</span>
+                        <span class="like-count-{{ $key??0 }}">{{ $item['likes']->count() }}</span>
                         @if ($item['likes']->contains('user_id', $item->user_id))
-                            <i onclick="managelike({{ $item->id }},{{ $key }})"
-                                class="like-icon-{{ $key }} fa fa-thumbs-up"></i>
+                            <i onclick="managelike({{ $item->id }},{{ $key??0 }})"
+                                class="like-icon-{{ $key??0 }} fa fa-thumbs-up"></i>
                         @else
-                            <i onclick="managelike({{ $item->id }},{{ $key }})"
-                                class="like-icon-{{ $key }} fa fa-thumbs-o-up"></i>
+                            <i onclick="managelike({{ $item->id }},{{ $key??0 }})"
+                                class="like-icon-{{ $key??0 }} fa fa-thumbs-o-up"></i>
                         @endif
-                        <span class="votes-count-{{ $key }}">{{ $item['votes']->count() }}</span>
+                        <span class="votes-count-{{ $key??0 }}">{{ $item['votes']->count() }}</span>
                         @if ($item['votes']->contains('user_id', $item->user_id))
-                            <i onclick="handleVoting({{ $item->id }},{{ $key }})"
-                                class="vote-icon-{{ $key }} fa fa-star"></i>
+                            <i onclick="handleVoting({{ $item->id }},{{ $key??0 }})"
+                                class="vote-icon-{{ $key??0 }} fa fa-star"></i>
                         @else
-                            <i onclick="handleVoting({{ $item->id }},{{ $key }})"
-                                class="vote-icon-{{ $key }} fa fa-star-o"></i>
+                            <i onclick="handleVoting({{ $item->id }},{{ $key??0 }})"
+                                class="vote-icon-{{ $key??0 }} fa fa-star-o"></i>
                         @endif
 
                     </h4>

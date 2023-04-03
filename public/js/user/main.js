@@ -28,19 +28,11 @@ function handleVoting(videoId,index)
     $.ajax({
         url: BASE_URL + "/manageVotes?videoId=" + videoId,
         success: function (data) {
-            if(data["status"]=="unvoted")
+            if(data.status=='selected')
             {
-                
-                $(`.vote-icon-${index}`).removeClass().addClass(`vote-icon-${index} fa fa-star-o`);
-                // $('.like-icon').removeClass(' fa-thumbs-up ')
-                // $('.like-icon').addClass('  ')
+                const newTab = window.open('/ballot', "_blank");
+
             }
-            else if(data["status"]=="vote")
-            {
-                $(`.vote-icon-${index}`).removeClass().addClass(`vote-icon-${index} fa fa-star`);
-            }
-            
-            $(`.votes-count-${index}`).html(data["count"]);
 
         },
       });
