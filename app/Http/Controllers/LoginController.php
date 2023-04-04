@@ -146,4 +146,21 @@ class LoginController extends Controller
         ->get();
         return view('MainSite.Content.Home.index',compact('topFour'));
     }
+    public function globalSearch(Request $req)
+    {
+        $searchTerm=$req->searchInput;
+        $videos= Video::with('likes')
+        ->with('votes')
+        ->with('genere')
+        ->where(function ($query) use ($searchTerm) {
+            $query->where('video_title', 'LIKE', '%'.$searchTerm.'%')
+                  ->orWhereHas('genere', function ($query) use ($searchTerm) {
+                      $query->where('title', 'LIKE', '%'.$searchTerm.'%');
+                  });
+        })
+        ->inRandomOrder()
+        ->get();
+        return view('MainSite.Content.GlobalSearch.index',compact('videos'));
+    }
+        
 }

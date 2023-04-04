@@ -51,24 +51,17 @@
                 <img src="{{ asset('/images/logo.png') }}">
             </a>
         </div>
-        <div class="col-lg-5 col-md-5  col-sm-5 col-xs-12 float-left">
-            {{-- <div class="search-header">
-                <form class="example" action=" {{ url('search') }}" method="post" style="margin:auto;">
-                    @csrf
-                    <input type="text" class="form-control" id="search" name="search" placeholder="Search.."
-                        value="{{ request('search') }}">
-                    <button><i class="fa fa-search"></i></button>
-
-                </form>
-            </div> --}}
+        <form class="col-lg-5 col-md-5  col-sm-5 col-xs-12 float-left" action="{{url('/user/global-search')}}" method="POST">
+            @csrf
             <div class="input-group mb-3">
+            
                 <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
-                    aria-describedby="button-addon2">
+                    aria-describedby="button-addon2" name="searchInput">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="col-lg-4 col-md-4  col-sm-4 col-xs-12 float-left">
             <div class="dashboard-Header-top-botton">
                 <a href="{{ url('/upload/video') }}" class="form-control btn btn-register" target="_blank">Create</a>
