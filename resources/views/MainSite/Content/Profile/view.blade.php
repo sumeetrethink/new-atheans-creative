@@ -35,7 +35,8 @@
                 <div class="col-sm-6 profileinsta">
 
                     <div class="profile-image">
-                        <img style="width:150px;height: 150px;object-fit: cover;margin: 0" src="{{ asset('/Data/Thumbnail/' . $currentUser->image) }}">
+                        <img style="width:150px;height: 150px;object-fit: cover;margin: 0"
+                            src="{{ asset('/Data/Thumbnail/' . $currentUser->image) }}">
                     </div>
                     <div class="profile-user-settings text-center">
                         <h1 class="profile-user-name text-capitalize">{{ $currentUser->user_name }}</h1>
@@ -185,7 +186,7 @@
     <section class="px-4">
         <div class="d-flex justify-content-between">
             <h4>Your top liked videos</h4>
-            <a href="#">View All</a>
+            <a href="{{ url('/user/video/liked') }}">View All</a>
 
         </div>
         <div class="row">
@@ -213,7 +214,7 @@
     <section class="px-4 mt-4">
         <div class="d-flex justify-content-between">
             <h4>Voted videos</h4>
-            <a href="#">View All</a>
+            {{-- <a href="#">View All</a> --}}
 
         </div>
         <div class="row">
@@ -239,7 +240,7 @@
     </section>
     <section class="px-4 mt-4">
         <div class="d-flex justify-content-between">
-            <h4>Manage your  videos</h4>
+            <h4>Manage your videos</h4>
             {{-- <a href="#">View All</a> --}}
 
         </div>
@@ -265,14 +266,6 @@
             @endforeach
         </div>
     </section>
-
-
-
-
-
-
-
-
     <script>
         // to show form if validatin fails 
         $(document).ready(function() {

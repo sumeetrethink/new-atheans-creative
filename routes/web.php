@@ -30,6 +30,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/user/register', [LoginController::class, 'UserRegisterView'])->name('UserRegisterView');
 Route::post('/user/register', [LoginController::class, 'UserRegister'])->name('UserRegister');
 Route::get('/user/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/user/global-search', [LoginController::class, 'globalSearch'])->name('globalSearch');
 
 
 //                                     landing page
