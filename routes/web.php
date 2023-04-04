@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BallotController;
 use App\Http\Controllers\BusinessController;
 use App\Http\Controllers\DiscoverController;
 use App\Http\Controllers\LoginController;
@@ -69,6 +70,9 @@ Route::get('/video/top-100', [VideoController::class, 'top100'])->name('top100')
 //users liked videos  lists
 Route::get('/user/video/liked', [VideoController::class, 'likedVideos'])->name('likedVideos')->middleware('CheckUser');
 
+//BALLOT
+Route::get('/ballot', [BallotController::class, 'view'])->name('view')->middleware('CheckUser');
+Route::post('/ballot/questions', [BallotController::class, 'submitQuestions'])->name('submitQuestions')->middleware('CheckUser');
 
 //                              ADMIN PANNEL
 // ADMIN VALIDAION
