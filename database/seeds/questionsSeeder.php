@@ -3,7 +3,7 @@
 use App\Question;
 use Illuminate\Database\Seeder;
 
-class questionsSeeder extends Seeder
+class QuestionsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
