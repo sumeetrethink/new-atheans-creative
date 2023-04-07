@@ -16,7 +16,7 @@ class PollingQuestions extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('user_type');
+            $table->string('user_type')->default('admin');
             $table->timestamps();
         });
     }
