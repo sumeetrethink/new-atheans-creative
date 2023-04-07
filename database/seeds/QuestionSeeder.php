@@ -3,7 +3,7 @@
 use App\Question;
 use Illuminate\Database\Seeder;
 
-class QuestionsSeeder extends Seeder
+class QuestionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,6 +26,6 @@ class QuestionsSeeder extends Seeder
 
             Question::create($value);
         }
-            
+
     }
 }
