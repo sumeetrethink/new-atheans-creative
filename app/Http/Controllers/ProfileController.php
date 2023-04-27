@@ -33,12 +33,12 @@ class ProfileController extends Controller
                         ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
                         ->get();                
                     
-        return view('MainSite.Content.Profile.view',compact('topLikedVideos','votedVidoes','yourVideos'));
+        return view('MainSite.Content.Profile.view',compact('topLikedVideos','votedVidoes','yourVideos','currentUser'));
     }
     public function update(Request $req)
     {
        $currentUser=User::where('id','=',session('user')->id)->first();
-       
+       $timestamp = time();
        $req->validate([
            'first_name'=>'required',
            'last_name'=>'required',
@@ -46,16 +46,26 @@ class ProfileController extends Controller
            'phone'=>'required',
            'email'=>'required',
            'zipcode'=>'required',
-           'password'=>'required',
-           'password'  => 'required|same:confirm_password|min:6',
+           
         ]);
+           
+        if ($req->file('image')) {
+            $thumnailRequest = $req->file('image');
+            $originalThumnail = $thumnailRequest->getClientOriginalName();
+            $Thumbnailfilename = $timestamp . '_' . $originalThumnail;
+            $uploaded = $thumnailRequest->move(public_path('Data/User/Profile'), $Thumbnailfilename);
+            $currentUser->image = $Thumbnailfilename;
+        }
         $currentUser->first_name=$req->first_name;
         $currentUser->last_name=$req->last_name;
         $currentUser->user_name =$req->user_name;
         $currentUser->phone=$req->phone;
-        $currentUser->image=$req->image;
         $currentUser->email =$req->email;
-        $currentUser->password=Hash::make($req->password);
+        if($req->password)
+        {
+            $currentUser->password=Hash::make($req->password);
+        }
+
         $currentUser->zip_code=$req->zipcode;
         $currentUser->lat=$req->lat;
         $currentUser->long=$req->long;

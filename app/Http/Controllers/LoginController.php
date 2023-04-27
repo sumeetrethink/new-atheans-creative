@@ -134,14 +134,14 @@ class LoginController extends Controller
             $id = Crypt::decryptString($querry);
             $oneVideo =Video::with('likes')->with('votes')->find($id);
         } else {
-            $user = User::where('email', '=', session('user')->id)
-                ->first();
+            
             $oneVideo = Video::with('likes')->with('votes')->first();
         }
+        $user = User::find($oneVideo->user_id);
         $moreVideos=Video::where('genere_id','=',$oneVideo->genere_id)->with('likes')->with('votes')->get();
 
 
-        return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos'));
+        return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos','user'));
     }
     public function home()
     {

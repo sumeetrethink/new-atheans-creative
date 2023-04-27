@@ -1,22 +1,22 @@
 @extends('MainSite.Content.index')
 @section('content')
+@if ($selected_for_votes)
     <section class="top-4-videos">
         <div class="container">
             <h3>
-                Your liked videos
+                Your video for vote
             </h3>
             <div class="container">
                 <div class="row">
-                    @if ($selected_for_votes)
+                    
                         @include('MainSite.Common.videoCard', ['item' => $selected_for_votes])
-                    @endif
+                    
                 </div>
             </div>
-            @if (!$selected_for_votes)
-                <h5 class="text-center">You dont have any voted videos</h5>
-            @endif
+           
         </div>
     </section>
+@endif
     @if ($selected_for_votes)
         <div style="background: #fff;padding:20px 0px">
             <div class="container" style="margin-bottom: 20px">
@@ -67,5 +67,16 @@
             </div>
         </div>
     @endif
+    {{-- voted videos --}}
+    <section class="container mt-4">
+        <h3>
+            Your voted videos
+        </h3>
+        <div class="row mt-4">
+            @foreach ($votedVidoes as $item)
+                @include('MainSite.Common.videoCard', ['item' => $item])
+            @endforeach
+        </div>
+    </section>
 
 @endsection

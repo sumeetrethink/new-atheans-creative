@@ -32,7 +32,10 @@
 
 <body>
     @include('MainSite.Layouts.nav')
-    @yield('content')
+    <div style="min-height: 100vh">
+        @yield('content')
+    </div>
+    @include('MainSite.Layouts.footer')
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

@@ -5,7 +5,7 @@
         z-index: -1;
     }
 
-    .top-4-videos .upper-section {
+   .upper-section {
         position: relative;
         border-radius: 10px;
         height: 200px;
@@ -14,7 +14,7 @@
         cursor: pointer;
     }
 
-    .top-4-videos .upper-section img {
+   .upper-section img {
         border-radius: 10px;
         width: 100%;
         height: 100%;
