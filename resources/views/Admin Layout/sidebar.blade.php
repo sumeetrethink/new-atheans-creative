@@ -5,7 +5,7 @@
    </a> --}}
     <div class="sidebar">
 
-        <a href="https://www.getpet.in" class="brand-link">
+        <a href="{{url('admin/dashboard')}}" class="brand-link">
             {{-- <img src="http://15.206.87.117/suvarnakar-new/public/Theme2/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
             <span class="brand-text font-weight-light">NAC-Admin</span>
         </a>
@@ -20,28 +20,28 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item  active ">
+                <li class="nav-item">
                     <a href="{{ url('/admin/users/') }}"
                         class="nav-link {{ Request::is('admin/users')||Request::is('admin/users/view')  ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
                             Manage Users
                         </p>
                     </a>
                 </li>
-                <li class="nav-item  active ">
-                    <a href="{{ url('/admin/users/') }}"
-                        class="nav-link {{ Request::is('admin/users')||Request::is('admin/users/view')  ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user"></i>
+                <li class="nav-item">
+                    <a href="{{ url('/admin/business') }}"
+                        class="nav-link {{ Request::is('admin/business')||Request::is('admin/business/view')  ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-briefcase"></i>
                         <p>
                             Manage Businesses
                         </p>
                     </a>
                 </li>
-                <li class="nav-item  active ">
+                <li class="nav-item">
                     <a href="{{ url('/admin/videos/') }}"
-                        class="nav-link {{ Request::is('admin/users')||Request::is('admin/users/view')  ? 'active' : '' }}">
-                        <i class="nav-icon fas fa-user"></i>
+                        class="nav-link {{ Request::is('admin/videos')||Request::is('admin/videos/view')  ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-play-circle"></i>
                         <p>
                             Manage Videos
                         </p>

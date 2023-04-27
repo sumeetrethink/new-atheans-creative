@@ -55,10 +55,10 @@
             @csrf
             <div class="input-group mb-3">
             
-                <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
+                <input type="text" class="form-control" placeholder="search..." aria-label="Recipient's username"
                     aria-describedby="button-addon2" name="searchInput">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
             </div>
         </form>
@@ -72,7 +72,7 @@
 
                     @if ($currentUser->image)
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                class="dashboard-header" src="{{ asset('Data/User/' . $currentUser->image) }}">
+                                class="dashboard-header" src="{{ asset('Data/User/Profile/'. $currentUser->image) }}">
                         </button>
                     @else
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
@@ -85,7 +85,7 @@
                 @endif
 
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu ">
                     <li><a href="{{ url('/user/profile') }}">
                             <img class="header-image"
                                 src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Profile_Black-01.png') }}"
@@ -93,7 +93,7 @@
                     <li><a href="{{ url('user.settings') }}"><img class="header-image"
                                 src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Gears_Black-01.png') }}"
                                 width="20">Settings</a></li>
-                    <li> <a class="dropdown-item" href="{{ url('/user/logout') }}"><i class="fa fa-sign-out"
+                    <li> <a  href="{{ url('/user/logout') }}"><i class="fa fa-sign-out"
                                 style="font-size:17px"></i>
                             LogOut</a>
                     </li>
@@ -133,9 +133,9 @@
             <li class="nav-item {{ Request::is('user/video/liked') ? 'active' : '' }}"><a
                     href="{{ url('user/video/liked') }}" id="likedvideos"> <i style="font-size:17px"
                         class="fa fa-thumbs-o-up"></i> Liked Videos</a></li>
-            <li class="nav-item {{ Request::is('discover') ? 'active' : '' }}"><a href="{{ url('discover') }}"
-                    id="discover"> <i class="fa fa-search"></i>
-                    Discover</a></li>
+            <li class="nav-item {{ Request::is('universe') ? 'active' : '' }}"><a href="{{ url('universe') }}"
+                    id="universe"> <i class="fa fa-search"></i>
+                    Universe</a></li>
             <li class="nav-item {{ Request::is('ballot') ? 'active' : '' }}"><a href="{{ url('/ballot') }}"
                     id="ballot"><img class="ballot"
                         src="http://3.7.41.47/newathenscreative/public/images/Group_521.jpeg"> NAC Ballot </a>

@@ -99,7 +99,7 @@
                         <div class="col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="videofield">Zip code <span class="text-danger">*</span></label>
-                                <input type="text" name="zipcode" inputmode="numeric" pattern="[0-9]{5}" maxlength="5"
+                                <input type="text" name="zipcode" inputmode="numeric"  maxlength="6"
                                     class="form-control" placeholder="Add zip code here">
                                 @if ($errors->has('zipcode'))
                                     <span class="help-block">

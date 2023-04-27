@@ -36,7 +36,7 @@
 
                     <div class="profile-image">
                         <img style="width:150px;height: 150px;object-fit: cover;margin: 0"
-                            src="{{ asset('/Data/Thumbnail/' . $currentUser->image) }}">
+                            src="{{ asset('/Data/User/Profile/' . $currentUser->image) }}">
                     </div>
                     <div class="profile-user-settings text-center">
                         <h1 class="profile-user-name text-capitalize">{{ $currentUser->user_name }}</h1>

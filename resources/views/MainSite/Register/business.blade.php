@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="{{ asset('/images/favicon.png') }}" type="image/png">
+    <!-- Fav Icon -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Athens Creative - Business Registration</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAu9Ltc5yipYhDTmsSQSTKZmX0_TJgX-k&libraries=places&callback=initAutocomplete">
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/user/theme.css') }}">
+    <!-- Custom css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/user/responsive.css') }}">
+
+    <!-- Custom css -->
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse-login">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6 col-xs-6 ">
+                    <div class="navbar-header">
+                        <a class="login-header" href="{{ url('/') }}"><img
+                                src="{{ asset('images/mainlogo.png') }}"> </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </nav>
+
+    </nav>
+    <section class="Register-page">
+        <div class="container top-bottom">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 float-left">
+
+                <div class="panel panel-login">
+
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12  col-sm-12 col-xs-12 float-left">
+                                <a href="#" class="active" id="login-form-link">Business Registration</a>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row left-right">
+                            <div class="col-lg-12">
+
+                                <form action="{{ url('/business/register') }}" method="POST"
+                                    id="business-registration-form">
+                                    @csrf
+
+                                    <div class="form-group input">
+                                        <label>Name<span class="required">*</span></label>
+                                        <input type="text" id="input-field" value="{{ old('name') }}"
+                                            name="name" placeholder="Your business name" onkeyup="validate();"
+                                            class="form-control register-input">
+                                            @error('name')
+                                            <span class="text-danger">{{$message}}</span>
+                                          @enderror
+                                    </div>
+                                    <div class="form-group input">
+                                        <label>Email<span class="required">*</span></label>
+                                        <input type="text" id="input-field" value="{{ old('email') }}"
+                                            name="email" placeholder="Email" onkeyup="validate();"
+                                            class="form-control register-input">
+                                            @error('email')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group input">
+                                        <label>Phone<span class="required">*</span></label>
+                                        <input type="number" id="input-field" value="{{ old('phone') }}"
+                                            name="phone" placeholder="Your business name" onkeyup="validate();"
+                                            class="form-control register-input">
+                                            @error('phone')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                    </div>
+
+
+
+
+                                    <div class="form-group input">
+                                        <label for="address">Address<span class="required">*</span></label>
+                                        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address"
+                                            class="form-control register-input">
+                                            @error('address')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+
+                                    <input type="hidden" id="location_details" name="location_details">
+                            </div>
+
+                            <div class="form-group input mt-2">
+                                <div class="row">
+                                    <div class="register-button">
+                                        <input type="button" name="register-submit" tabindex="4"
+                                            class="form-control btn btn-register" value="Register"
+                                            onclick="submitForm()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p>
+                                <span class="required">*</span>Required field
+                            </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 float-left">
+                {{-- <img src="{{ asset('/images/main_logo.png') }}"> --}}
+                <div id="map" style="height: 565px; width: 100%"></div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById('business-registration-form')
+            form.submit()
+        }
+
+        function initAutocomplete() {
+            let lat, lng;
+            const currentPosition = navigator.geolocation.getCurrentPosition(position => {
+                lat = position.coords.latitude
+                lng = position.coords.longitude
+            })
+            const center = currentPosition ? {
+                lat,
+                lng
+            } : {
+                lat: -33.8688,
+                lng: 151.2195
+            }
+
+            const map = new google.maps.Map(
+                document.getElementById("map"), {
+                    center: center,
+                    zoom: 13,
+                    mapTypeId: "roadmap",
+                    disableDefaultUI: true,
+                    zoomControl: true,
+                }
+            );
+
+            // Create the search box and link it to the UI element.
+            const input = document.getElementById("address");
+            const searchBox = new google.maps.places.SearchBox(input);
+
+            // Embedd input inside map
+            // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener("bounds_changed", () => {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            let markers = [];
+
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach((marker) => {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                const bounds = new google.maps.LatLngBounds();
+
+                places.forEach((place) => {
+                    if (!place.geometry || !place.geometry.location) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    // console.log(place);
+                    document.getElementById('address').value = place.formatted_address;
+                    // document.getElementById('formatted_address').innerHTML = place.formatted_address;
+                    document.getElementById('location_details').value = JSON.stringify(place)
+
+                    // custom icon
+                    // const icon = {
+                    //   url: place.icon,
+                    //   size: new google.maps.Size(71, 71),
+                    //   origin: new google.maps.Point(0, 0),
+                    //   anchor: new google.maps.Point(17, 34),
+                    //   scaledSize: new google.maps.Size(25, 25),
+                    // };
+
+                    // Create a marker for each place.
+                    markers.push(
+                        new google.maps.Marker({
+                            map,
+                            // icon,
+                            title: place.name,
+                            position: place.geometry.location,
+                        })
+                    );
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+
+        window.initAutocomplete = initAutocomplete;
+    </script>
+
+</body>
+
+</html>

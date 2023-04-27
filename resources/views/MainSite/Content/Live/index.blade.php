@@ -59,11 +59,11 @@
         <div class="row">
             <div class="col-8">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <video width="320" height="240" controls
+                    <video id="my-video" width="320" height="240" controls controlsList="nodownload"
                         poster="{{ asset('Data/Thumbnail/' . $oneVideo->thumbnail) }}">
                         <source src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
-
                     </video>
+
                 </div>
                 <div class="row">
                     <div class="col-9">
@@ -77,7 +77,7 @@
                                 onclick="managelike({{ $oneVideo->id }},0)">
 
 
-                                @if ($oneVideo['likes']->contains('user_id', $oneVideo->user_id))
+                                @if ($oneVideo['likes']->contains('user_id', session('user')->id))
                                     <i class="like-icon-0 fa fa-thumbs-up"></i>
                                 @else
                                     <i class="like-icon-0 fa fa-thumbs-o-up"></i>
@@ -89,17 +89,17 @@
 
                             </p>
                         </div>
-                        <div  class="m-2 mr-3" data-toggle="tooltip" data-placement="bottom" title="Vote for this video">
-                            <p onclick="handleVoting({{$oneVideo->id}},0)" class="video-des m-0 d-flex flex-column text-center"
-                            >
-                            @if ($oneVideo['votes']->contains('user_id', $oneVideo->user_id))
-                            <i class="vote-icon-0 fa fa-star"></i>
+                        <div class="m-2 mr-3" data-toggle="tooltip" data-placement="bottom" title="Vote for this video">
+                            <p onclick="handleVoting({{ $oneVideo->id }},0)"
+                                class="video-des m-0 d-flex flex-column text-center">
+                                @if ($oneVideo['votes']->contains('user_id', session('user')->id))
+                                    <i class="vote-icon-0 fa fa-star"></i>
                                 @else
-                            <i class="vote-icon-0 fa fa-star-o"></i>
-                            @endif
-                            <span class="votes-count-0">
-                                {{ $oneVideo->votes->count() }}
-                            </span>
+                                    <i class="vote-icon-0 fa fa-star-o"></i>
+                                @endif
+                                <span class="votes-count-0">
+                                    {{ $oneVideo->votes->count() }}
+                                </span>
                             </p>
                         </div>
                         <div>
@@ -149,5 +149,7 @@
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
+        
+       
     </script>
 @endsection
