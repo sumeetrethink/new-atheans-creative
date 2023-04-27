@@ -22,8 +22,15 @@ class BallotController extends Controller
             ->orderBy('videos.id', 'desc')
             ->select('videos.*', "videos.id as video_id", 'generes.title as genere_name')
             ->first();
+        $votedVidoes = \App\Video::join('votes', 'videos.id', '=', 'votes.video_id')
+            ->where('votes.user_id', $currentUser->id)
+            ->join('generes', 'videos.genere_id', '=', 'generes.id')
+            ->orderBy('videos.id', 'desc')
+            ->limit(6)
+            ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
+            ->get();
 
-        return view('MainSite.Content.Ballot.index', compact('selected_for_votes', 'polling_questions'));
+        return view('MainSite.Content.Ballot.index', compact('selected_for_votes', 'polling_questions','votedVidoes'));
     }
 
     public function submitQuestions(Request $request)

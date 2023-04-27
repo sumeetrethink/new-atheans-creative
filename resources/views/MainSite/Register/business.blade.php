@@ -43,8 +43,7 @@
 
 
     </nav>
-
-    </nav>
+    
     <section class="Register-page">
         <div class="container top-bottom">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 float-left">
@@ -55,8 +54,14 @@
                         <div class="row">
                             <div class="col-md-12  col-sm-12 col-xs-12 float-left">
                                 <a href="#" class="active" id="login-form-link">Business Registration</a>
+                                @if(session('msg-success'))
+                                <div class="alert alert-success">
+                                    {{session('msg-success')}}
+                                </div>
+                                @endif
                             </div>
                         </div>
+                        
                         <hr>
                     </div>
 
@@ -89,7 +94,7 @@
                                     <div class="form-group input">
                                         <label>Phone<span class="required">*</span></label>
                                         <input type="number" id="input-field" value="{{ old('phone') }}"
-                                            name="phone" placeholder="Your business name" onkeyup="validate();"
+                                            name="phone" placeholder="+1 00000000000" onkeyup="validate();"
                                             class="form-control register-input">
                                             @error('phone')
                                                 <span class="text-danger">{{$message}}</span>

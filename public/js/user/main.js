@@ -30,12 +30,12 @@ function handleVoting(videoId,index)
         success: function (data) {
             if(data.status=='selected')
             {
-                const newTab = window.open('/ballot', "_blank");
-
+                const newTab = window.open(`${BASE_URL}/ballot`, "_blank");
             }
-
         },
-      });
+    });
+
+
 }
 // edit profile toggle function
 function openEditProfile()

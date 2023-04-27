@@ -14,13 +14,13 @@
             ;
         }
     </style>
-    @php
+    {{-- @php
         use Illuminate\Support\Facades\Crypt;
         if (session()->has('user')) {
             $currentUser = session('user');
         }
         
-    @endphp
+    @endphp --}}
     @if (session()->has('success'))
         <div class="alert alert-success mt-1" role="alert">
             {{ session('success') }}
@@ -123,7 +123,7 @@
                         <div class="form-group">
                             <label>Zip Code<span class="required">*</span></label>
                             <input type="text" onkeyup="validate();" id="zip-field" name="zipcode" inputmode="numeric"
-                                pattern="[0-9]{5}" maxlength="5" value="{{ $currentUser->zip_code }}"
+                                  value="{{ $currentUser->zip_code }}"
                                 class="form-control register-input" placeholder="Zip Code">
                             @if ($errors->has('zipcode'))
                                 <span class="help-block">
@@ -183,7 +183,7 @@
         </div>
     </section>
     {{-- liked videos --}}
-    <section class="px-4">
+    <section class="px-4 container">
         <div class="d-flex justify-content-between">
             <h4>Your top liked videos</h4>
             <a href="{{ url('/user/video/liked') }}">View All</a>
@@ -209,12 +209,13 @@
                 </div>
             @endforeach
         </div>
+        <hr>
     </section>
     {{-- voted videos --}}
-    <section class="px-4 mt-4">
+    <section class="px-4 mt-4 container">
         <div class="d-flex justify-content-between">
             <h4>Voted videos</h4>
-            {{-- <a href="#">View All</a> --}}
+            <a href="{{url('ballot')}}">View All</a>
 
         </div>
         <div class="row">
@@ -237,8 +238,9 @@
                 </div>
             @endforeach
         </div>
+        <hr>
     </section>
-    <section class="px-4 mt-4">
+    <section class="px-4 mt-4 container">
         <div class="d-flex justify-content-between">
             <h4>Manage your videos</h4>
             {{-- <a href="#">View All</a> --}}
