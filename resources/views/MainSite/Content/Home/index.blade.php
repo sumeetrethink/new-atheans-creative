@@ -9,16 +9,24 @@
     <section class="top-4-videos">
         <div class="container">
             <h3>
-                TOP 4 Videos
+                Top 4 Videos
             </h3>
             <div class="container">
-
                 <div class="row">
-                    @foreach ($topFour as $key => $item)
-                    @include('MainSite.Common.videoCard', ['item' => $item])
-                    @endforeach
+                    @for($i = 0; $i < min($videos->count(), 4); $i++)
+                        @include('MainSite.Common.videoCard', ['item' => $videos[$i]])
+                    @endfor
                 </div>
             </div>
         </div>
     </section>
+    <section class="container">
+        <div class="row">
+            @for($i = 5; $i < $videos->count(); $i++)
+                @include('MainSite.Common.videoCard', ['item' => $videos[$i]])
+            @endfor
+        </div>
+    </section>
+
+                        
 @endsection

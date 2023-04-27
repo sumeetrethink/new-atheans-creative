@@ -30,7 +30,7 @@ class VideoController extends Controller
         'genre' => 'required|not_in:0',
         'tags' => 'required',
         'file' => 'required|mimes:mp4,avi,mov|max:1500000',
-        'thumbnail' => 'mimes:png,jpeg,jpg|max:1500000',
+        // 'thumbnail' => 'mimes:png,jpeg,jpg|max:1500000',
         'zipcode' => 'required',
         'video_description' => 'required',
       ]

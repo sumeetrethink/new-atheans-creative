@@ -31,6 +31,9 @@ Route::get('/user/register', [LoginController::class, 'UserRegisterView'])->name
 Route::post('/user/register', [LoginController::class, 'UserRegister'])->name('UserRegister');
 Route::get('/user/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/user/global-search', [LoginController::class, 'globalSearch'])->name('globalSearch');
+// business registration
+Route::get('/business/register', [BusinessController::class, 'registerBusinessForm'])->name('registerBusinessForm');
+Route::post('/business/register', [BusinessController::class, 'registerBusiness'])->name('registerBusiness');
 
 
 //                                     landing page
@@ -43,7 +46,7 @@ Route::get('/home', [LoginController::class, 'home'])->name('home')->middleware(
 //                                  live
 Route::get('/live', [LoginController::class, 'nacLive'])->name('nacLive')->middleware('CheckUser');
 //                                  DISCOVER
-Route::get('/discover', [DiscoverController::class, 'view'])->name('view')->middleware('CheckUser');
+Route::get('/universe', [DiscoverController::class, 'view'])->name('view');
 //get all busienss coordinates in discover page
 
 Route::get('/getBusinessCoords', [BusinessController::class, 'getBusiness'])->name('getBusiness')->middleware('CheckUser');
@@ -81,6 +84,7 @@ Route::get('/admin/login', [LoginController::class, 'adminLoginForm'])->name('ad
 Route::post('/admin/login', [LoginController::class, 'adminLogin'])->name('adminLogin');
 Route::get('admin/logout', [LoginController::class, 'adminLogout'])->name('adminLogout');
 
+Route::get('/admin/dashboard', [LoginController::class, 'dashbaord'])->name('dashbaord')->middleware('AdminUser');
 // users
 Route::get('admin/users/', [UserController::class, 'list'])->name('list')->middleware('AdminUser');
 Route::post('/admin/user/delete', [UserController::class, 'delete'])->name('delete')->middleware('AdminUser');
@@ -99,3 +103,11 @@ Route::get('admin/videos/', [VideoController::class, 'adminList'])->name('adminL
 Route::post('/admin/video/delete', [VideoController::class, 'adminDelete'])->name('adminDelete')->middleware('AdminUser');
 Route::get('/admin/video/change-status', [VideoController::class, 'changeStatus'])->name('changeStatus')->middleware('AdminUser');
 Route::get('/admin/video/likes', [VideoController::class, 'getVideoLikesList'])->name('getVideoLikesList')->middleware('AdminUser');
+
+
+
+
+
+Route::get('/coming-soon', function () {
+    return view('comingsoon');
+});

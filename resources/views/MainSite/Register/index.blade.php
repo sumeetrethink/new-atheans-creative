@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    
+
 
 
 
@@ -26,7 +26,6 @@
 
     <!-- Custom css -->
 </head>
-
 <body>
     <section class="Register-page">
         <div class="container top-bottom">
@@ -45,125 +44,107 @@
                             <div class="col-lg-6 ">
 
                                 <form action="" name='foo' method="POST" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
+                                    @csrf
                                     <div class="form-group input">
                                         <label>First name<span class="required">*</span></label>
                                         <input type="text" id="input-field" value="{{ old('first_name') }}"
-                                            name="first_name" placeholder="First Name" 
+                                            name="first_name" placeholder="First Name"
                                             class="form-control register-input">
+                                            @error('first_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                                
+                                    </div>
+                                    <div class="form-group input">
+                                        <label>Last name<span class="required">*</span></label>
+                                        <input type="text" id="last-field" value="{{ old('last_name') }}"
+                                            name="last_name" placeholder="Last Name"
+                                            class="form-control register-input">
+                                            @error('last_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                    </div>
 
-                                        @if ($errors->has('first_name'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('first_name') }}</strong>
-                                            </span>
-                                        @endif
+                                    <div class="form-group input">
+                                        <label>Phone<span class="required">*</span></label>
+                                        <input type="text" id="phone-field" name="phone"
+                                            value="{{ old('phone') }}" maxlength="15" placeholder="Phone number"
+                                            class="form-control register-input">
+                                            @error('phone')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                    </div>
+                                    <div class="form-group input">
+                                        <label>Email<span class="required">*</span></label>
+                                        <input type="email" name="email" value="{{ old('email') }}"
+                                            placeholder="Email address" class="form-control register-input">
+                                            @error('email')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
                                     <div class="form-group input">
                                         <label>Username<span class="required">*</span></label>
                                         <input type="text" name="user_name" value="{{ old('user_name') }}"
                                             minlength="4" placeholder="User Name" class="form-control register-input">
-
-                                        @if ($errors->has('user_name'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('user_name') }}</strong>
-                                            </span>
-                                        @endif
+                                            @error('user_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
-                                    <div class="form-group input">
-                                        <label>Phone<span class="required">*</span></label>
-                                        <input type="text" id="phone-field" name="phone"
-                                            value="{{ old('phone') }}" maxlength="15" placeholder="Phone number"
-                                            class="form-control register-input" >
 
-                                        @if ($errors->has('phone'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('phone') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group input">
-                                        <label>Password<span class="required">*</span></label>
-                                        <input type="password" name="password" placeholder="Password"
-                                            class="form-control register-input">
 
-                                        @if ($errors->has('password'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
+
+
                             </div>
                             <div class="col-lg-6">
-                                <div class="form-group input">
-                                    <label>Last name<span class="required">*</span></label>
-                                    <input type="text" id="last-field" value="{{ old('last_name') }}"
-                                        name="last_name" placeholder="Last Name" 
-                                        class="form-control register-input">
+                                
 
-                                    @if ($errors->has('last_name'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('last_name') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group input">
-                                    <label>Email<span class="required">*</span></label>
-                                    <input type="email" name="email" value="{{ old('email') }}"
-                                        placeholder="Email address" class="form-control register-input">
-
-
-
-                                    <span class="help-block">
-                                        <strong id="error_email">{{ $errors->first('email') }}</strong>
-                                    </span>
-
-                                </div>
                                 <div class="form-group input">
                                     <label>Zip Code<span class="required">*</span></label>
-                                    <input type="text" name="zip_code" value="{{ old('zip_code') }}" maxlength="5"
+                                    <input type="text" name="zip_code" value="{{ old('zip_code') }}" maxlength="6"
                                         placeholder="Zip Code" class="form-control register-input">
-
-                                    @if ($errors->has('zip_code'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('zip_code') }}</strong>
-                                        </span>
-                                    @endif
+                                        @error('zip_code')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                </div>
+                                <div class="form-group input">
+                                    <label>Password<span class="required">*</span></label>
+                                    <input type="password" name="password" placeholder="Password"
+                                        class="form-control register-input">
+                                        @error('password')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                                 <div class="form-group input">
                                     <label>Confirm password<span class="required">*</span></label>
                                     <input type="password" name="password_confirmation" placeholder="Confirm password"
                                         class="form-control register-input error-border">
-
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                        </span>
-                                    @endif
+                                        @error('password_confirmation')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                                 <div class="form-group input">
                                     <label>Profile Picture<span class="required">*</span></label>
                                     <input type="file" name="image"
                                         class="form-control register-input error-border">
-                                    @if ($errors->has('image'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('image') }}</strong>
-                                        </span>
-                                    @endif
+                                        @error('image')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                             </div>
+                        </div>
                             <div class="form-group input">
-                                <div class="row">
+                                <div class="row text-center">
                                     <div class="register-button">
                                         <input type="submit" name="register-submit" tabindex="4"
                                             class="form-control btn btn-register" value="Register">
                                     </div>
+                                    <a href="{{ url('/login') }}" style="padding-bottom: 5px">
+                                        Already have an account?
+                                    </a>
                                 </div>
                             </div>
-                            <a href="{{url('/login')}}" style="padding-bottom: 5px">
-                                Already have an account?
-                            </a>
+
                             </form>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -179,7 +160,7 @@
 
 
 
-    
+
 
 
 </body>

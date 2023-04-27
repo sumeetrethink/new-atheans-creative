@@ -4,7 +4,7 @@
 <section class="top-4-videos">
     <div class="container">
         <h3>
-            TOP 100 Videos based on global votings
+            Top 100 videos based on global votings
         </h3>
         <div class="container">
             <div class="row">

@@ -35,7 +35,7 @@
         <div class="container">
             <div class="col-md-3 col-xs-3 ">
                 <div class="navbar-header">
-                    <a class="login-header" href="/landing-page"><img src="{{ asset('images/mainlogo.png') }}"> </a>
+                    <a class="login-header" href="{{url('/')}}"><img src="{{ asset('images/mainlogo.png') }}"> </a>
                 </div>
             </div>
             <div class="col-md-5 col-xs-6 d-flex justify-content-center">
@@ -59,12 +59,12 @@
                     {{-- <li><a href="{{ url('business.register') }}">Register your Business</a></li> --}}
 
                     @if (session()->has('user'))
-                        <li><a href="{{ url('user.profile') }}"><img class="header-image"
+                        <li><a href="{{ url('/user/profile') }}"><img class="header-image"
                                     src="{{ asset('/images/user.png') }}"> </a></li>
                     @else
                         <li><a href="{{ url('login') }}">Login</a></li>
                         <li><span class="hh">/</span></li>
-                        <li><a onclick="openModal('registerModal')">Register</a></li>
+                        <li><a href="#" onclick="openModal('registerModal')">Register</a></li>
                     @endif
                 </ul>
             </div>
@@ -72,6 +72,7 @@
        
 
     </nav>
+    {{-- vote model --}}
     <div id="voteModel" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -113,7 +114,8 @@
     <div id="registerModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header pb-0 mb-0">
+                    <h3 class="pl-0 ml-0">Register</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                 </div>
@@ -121,7 +123,7 @@
                     <h4>Register yourself as:</h4>
                     <div class="form-group">
 
-                        <a href="{{ url('/busines/register') }}" class="btn btn-success">Business</a>
+                        <a href="{{ url('/business/register') }}" class="btn btn-success">Business</a>
                         <a href="{{ url('/user/register') }}" class="btn btn-secondary">Creator</a>
                         <a href="{{ url('/user/register') }}" class="btn btn-danger">Voter</a>
                     </div>
@@ -163,12 +165,12 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="col-md-6  col-sm-12 col-xs-12 index-page">
-                        <a href="{{ '/discover' }}" data-toggle="tooltip" title="NAC Live">
+                        <a href="{{ url('/universe')}}" data-toggle="tooltip" title="NAC Live">
                             <div class="index-image">
                                 <img src="{{ asset('/images/Group_520.png') }}">
                             </div>
                         </a>
-                        <h4>NAC Discover <i class="fa fa-question-circle" onclick="openModal('Discover')"></i></h4>
+                        <h4>NAC Universe <i class="fa fa-question-circle" onclick="openModal('universe')"></i></h4>
                     </div>
                 </div>
                 <div class="col-sm-4 d-flex justify-content-center">
@@ -237,13 +239,13 @@
         </div>
     </div>
     <!-- The Modal -->
-    <div class="modal" id="Discover">
+    <div class="modal" id="universe">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">NAC Discover</h4>
+                    <h4 class="modal-title">NAC Universe</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
