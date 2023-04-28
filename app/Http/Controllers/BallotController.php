@@ -26,11 +26,17 @@ class BallotController extends Controller
             ->where('votes.user_id', $currentUser->id)
             ->join('generes', 'videos.genere_id', '=', 'generes.id')
             ->orderBy('videos.id', 'desc')
-            ->limit(6)
             ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
             ->get();
-
-        return view('MainSite.Content.Ballot.index', compact('selected_for_votes', 'polling_questions','votedVidoes'));
+        $topLikedVideos = \App\Video::join('likes', 'videos.id', '=', 'likes.video_id')
+            ->where('likes.user_id', $currentUser->id)
+            ->join('generes', 'videos.genere_id', '=', 'generes.id')
+            ->orderBy('videos.id', 'desc')
+            ->limit(4)
+            ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
+            ->get();
+            $history=[];
+        return view('MainSite.Content.Ballot.index', compact('history','selected_for_votes', 'polling_questions','votedVidoes','topLikedVideos'));
     }
 
     public function submitQuestions(Request $request)

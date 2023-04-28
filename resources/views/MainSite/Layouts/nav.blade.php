@@ -1,9 +1,4 @@
-@php
-    if (session()->has('user')) {
-        $currentUser = session('user');
-    }
-    
-@endphp
+
 
 <style>
     nav {
@@ -42,6 +37,7 @@
         padding: 12px 8px !important;
         color: black;
     }
+    .dropdown-menu li a {color: black}
 </style>
 {{-- custom --}}
 <div class="uppper-section container p-2">
@@ -70,9 +66,9 @@
 
                 @if (session()->has('user'))
 
-                    @if ($currentUser->image)
+                    @if ($userData->image)
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
-                                class="dashboard-header" src="{{ asset('Data/User/Profile/'. $currentUser->image) }}">
+                                class="dashboard-header" src="{{ asset('Data/User/Profile/'.$userData->image) }}">
                         </button>
                     @else
                         <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown"><img
@@ -85,14 +81,12 @@
                 @endif
 
 
-                <ul class="dropdown-menu ">
+                <ul class="dropdown-menu " >
                     <li><a href="{{ url('/user/profile') }}">
                             <img class="header-image"
                                 src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Profile_Black-01.png') }}"
                                 width="20"> Profile</a></li>
-                    <li><a href="{{ url('user.settings') }}"><img class="header-image"
-                                src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Gears_Black-01.png') }}"
-                                width="20">Settings</a></li>
+                    
                     <li> <a  href="{{ url('/user/logout') }}"><i class="fa fa-sign-out"
                                 style="font-size:17px"></i>
                             LogOut</a>
@@ -134,7 +128,7 @@
                     href="{{ url('user/video/liked') }}" id="likedvideos"> <i style="font-size:17px"
                         class="fa fa-thumbs-o-up"></i> Liked Videos</a></li>
             <li class="nav-item {{ Request::is('universe') ? 'active' : '' }}"><a href="{{ url('universe') }}"
-                    id="universe"> <i class="fa fa-search"></i>
+                    id="universe"> <img class="ballot" src="{{ asset('/images/universe.png') }}">
                     Universe</a></li>
             <li class="nav-item {{ Request::is('ballot') ? 'active' : '' }}"><a href="{{ url('/ballot') }}"
                     id="ballot"><img class="ballot"
