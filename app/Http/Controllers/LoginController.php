@@ -153,19 +153,22 @@ class LoginController extends Controller
     public function globalSearch(Request $req)
     {
         $searchTerm = $req->searchInput;
-        $videos = Video::with('likes')
-            ->with('votes')
-            ->with('genere')
-            ->where(function ($query) use ($searchTerm) {
-                $query->where('video_title', 'LIKE', '%' . $searchTerm . '%')
-                    ->orWhereHas('genere', function ($query) use ($searchTerm) {
-                        $query->where('title', 'LIKE', '%' . $searchTerm . '%');
-                    });
-            })
-            ->inRandomOrder()
-            ->get();
-        return view('MainSite.Content.GlobalSearch.index', compact('videos'));
-    }
+        if (!$searchTerm) {
+            $videos = collect(); // create an empty collection
+        } else {
+            $videos = Video::with('likes')
+                        ->with('votes')
+                        ->with('genere')
+                        ->where(function ($query) use ($searchTerm) {
+                            $query->where('video_title', 'LIKE', '%' . $searchTerm . '%');
+                        })
+                        ->inRandomOrder()
+                        ->get();
+        }
+            return view('MainSite.Content.GlobalSearch.index', compact('videos'));
+        }
+                   
+            
 
 
     // dashboard

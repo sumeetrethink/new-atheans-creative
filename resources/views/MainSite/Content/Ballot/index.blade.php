@@ -1,22 +1,22 @@
 @extends('MainSite.Content.index')
 @section('content')
-@if ($selected_for_votes)
-    <section class="top-4-videos">
-        <div class="container">
-            <h3>
-                Your video for vote
-            </h3>
+    @if ($selected_for_votes)
+        <section class="top-4-videos">
             <div class="container">
-                <div class="row">
-                    
+                <h3>
+                    Your video for vote
+                </h3>
+                <div class="container">
+                    <div class="row">
+
                         @include('MainSite.Common.videoCard', ['item' => $selected_for_votes])
-                    
+
+                    </div>
                 </div>
+
             </div>
-           
-        </div>
-    </section>
-@endif
+        </section>
+    @endif
     @if ($selected_for_votes)
         <div style="background: #fff;padding:20px 0px">
             <div class="container" style="margin-bottom: 20px">
@@ -27,8 +27,8 @@
                         @php
                             $encryptedId = Crypt::encryptString($selected_for_votes->id);
                         @endphp
-                            
-                        <input type="hidden" name="video" value="{{$encryptedId}}">
+
+                        <input type="hidden" name="video" value="{{ $encryptedId }}">
                         @foreach ($polling_questions as $key => $item)
                             <p style="padding-top: 15px">{{ $key + 1 }}) {{ $item->title }}</p>
                             <div style="display: flex;margin-left:20px">
@@ -67,15 +67,46 @@
             </div>
         </div>
     @endif
-    {{-- voted videos --}}
-    <section class="container mt-4">
+    {{-- liked videos --}}
+
+    <section class="container mt-4 mb-4 pb-4">
         <h3>
+            Your liked videos
+        </h3>
+        <div class="row mt-4">
+            @forelse  ($topLikedVideos as $item)
+                @include('MainSite.Common.videoCard', ['item' => $item])
+            @empty
+                <p class="text-center">No videos found.</p>
+            @endforelse
+        </div>
+    </section>
+
+    {{-- voted videos --}}
+
+    <section class="container mt-4">
+        <h3 class="mt-4">
             Your voted videos
         </h3>
         <div class="row mt-4">
-            @foreach ($votedVidoes as $item)
+            @forelse ($votedVidoes as $item)
                 @include('MainSite.Common.videoCard', ['item' => $item])
-            @endforeach
+            @empty
+                <p class="text-center">No videos found.</p>
+            @endforelse
+        </div>
+    </section>
+    {{-- history section --}}
+    <section class="container mt-4 pt-4">
+        <h3 class="mt-4">
+            Your history
+        </h3>
+        <div class="row mt-4 justify-content-center">
+            @forelse ($history as $item)
+                @include('MainSite.Common.videoCard', ['item' => $item])
+            @empty
+                <p class="text-center">No history found.</p>
+            @endforelse
         </div>
     </section>
 

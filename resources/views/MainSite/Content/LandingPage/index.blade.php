@@ -35,7 +35,8 @@
         <div class="container">
             <div class="col-md-3 col-xs-3 ">
                 <div class="navbar-header">
-                    <a class="login-header" href="{{url('/')}}"><img src="{{ asset('images/mainlogo.png') }}"> </a>
+                    <a class="login-header" href="{{ url('/') }}"><img src="{{ asset('images/mainlogo.png') }}">
+                    </a>
                 </div>
             </div>
             <div class="col-md-5 col-xs-6 d-flex justify-content-center">
@@ -58,18 +59,20 @@
                 <ul class="nav navbar-nav navbar-right-loginpage lineheight" style="display: inline !important">
                     {{-- <li><a href="{{ url('business.register') }}">Register your Business</a></li> --}}
 
-                    @if (session()->has('user'))
-                        <li><a href="{{ url('/user/profile') }}"><img class="header-image"
-                                    src="{{ asset('/images/user.png') }}"> </a></li>
-                    @else
-                        <li><a href="{{ url('login') }}">Login</a></li>
-                        <li><span class="hh">/</span></li>
-                        <li><a href="#" onclick="openModal('registerModal')">Register</a></li>
-                    @endif
+                    
+                        @if (session()->has('user'))
+                            <li><a href="{{ url('/user/profile') }}">
+                                <img  class="dashboard-header" src="{{ session('user')->image ? asset('Data/User/Profile/' . session('user')->image) : asset('/images/user.png') }}">
+                                </a></li>
+                        @else
+                            <li><a href="{{ url('login') }}">Login</a></li>
+                            <li><span class="hh">/</span></li>
+                            <li><a href="#" onclick="openModal('registerModal')">Register</a></li>
+                        @endif
                 </ul>
             </div>
         </div>
-       
+
 
     </nav>
     {{-- vote model --}}
@@ -165,9 +168,9 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="col-md-6  col-sm-12 col-xs-12 index-page">
-                        <a href="{{ url('/universe')}}" data-toggle="tooltip" title="NAC Live">
+                        <a href="{{ url('/universe') }}" data-toggle="tooltip" title="NAC Live">
                             <div class="index-image">
-                                <img src="{{ asset('/images/Group_520.png') }}">
+                                <img src="{{ asset('/images/universe.png') }}">
                             </div>
                         </a>
                         <h4>NAC Universe <i class="fa fa-question-circle" onclick="openModal('universe')"></i></h4>

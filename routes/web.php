@@ -30,7 +30,7 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/user/register', [LoginController::class, 'UserRegisterView'])->name('UserRegisterView');
 Route::post('/user/register', [LoginController::class, 'UserRegister'])->name('UserRegister');
 Route::get('/user/logout', [LoginController::class, 'logout'])->name('logout');
-Route::post('/user/global-search', [LoginController::class, 'globalSearch'])->name('globalSearch');
+Route::post('/user/global-search', [LoginController::class, 'globalSearch'])->name('globalSearch')->middleware('CheckUser');
 // business registration
 Route::get('/business/register', [BusinessController::class, 'registerBusinessForm'])->name('registerBusinessForm');
 Route::post('/business/register', [BusinessController::class, 'registerBusiness'])->name('registerBusiness');

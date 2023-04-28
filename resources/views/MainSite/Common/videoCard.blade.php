@@ -124,7 +124,7 @@
                 <div class="hover-text">
                     <h4>
                         <span class="like-count-{{ $key??0 }}">{{ $item['likes']->count() }}</span>
-                        @if ($item['likes']->contains('user_id', $item->user_id))
+                        @if ($item['likes']->contains('user_id', session('user')->id))
                             <i onclick="managelike({{ $item->id }},{{ $key??0 }})"
                                 class="like-icon-{{ $key??0 }} fa fa-thumbs-up"></i>
                         @else
@@ -132,7 +132,7 @@
                                 class="like-icon-{{ $key??0 }} fa fa-thumbs-o-up"></i>
                         @endif
                         <span class="votes-count-{{ $key??0 }}">{{ $item['votes']->count() }}</span>
-                        @if ($item['votes']->contains('user_id', $item->user_id))
+                        @if ($item['votes']->contains('user_id', session('user')->id))
                             <i onclick="handleVoting({{ $item->id }},{{ $key??0 }})"
                                 class="vote-icon-{{ $key??0 }} fa fa-star"></i>
                         @else
