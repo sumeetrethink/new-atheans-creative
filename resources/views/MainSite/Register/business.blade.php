@@ -12,7 +12,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAu9Ltc5yipYhDTmsSQSTKZmX0_TJgX-k&libraries=places&callback=initAutocomplete">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_6_IIXGx3RAb8QZ8q0SGES3twv3Dwebs&libraries=places&callback=initAutocomplete">
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,7 +43,7 @@
 
 
     </nav>
-    
+
     <section class="Register-page">
         <div class="container top-bottom">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 float-left">
@@ -54,14 +54,14 @@
                         <div class="row">
                             <div class="col-md-12  col-sm-12 col-xs-12 float-left">
                                 <a href="#" class="active" id="login-form-link">Business Registration</a>
-                                @if(session('msg-success'))
-                                <div class="alert alert-success">
-                                    {{session('msg-success')}}
-                                </div>
+                                @if (session('msg-success'))
+                                    <div class="alert alert-success">
+                                        {{ session('msg-success') }}
+                                    </div>
                                 @endif
                             </div>
                         </div>
-                        
+
                         <hr>
                     </div>
 
@@ -78,17 +78,17 @@
                                         <input type="text" id="input-field" value="{{ old('name') }}"
                                             name="name" placeholder="Your business name" onkeyup="validate();"
                                             class="form-control register-input">
-                                            @error('name')
-                                            <span class="text-danger">{{$message}}</span>
-                                          @enderror
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="form-group input">
                                         <label>Email<span class="required">*</span></label>
                                         <input type="text" id="input-field" value="{{ old('email') }}"
                                             name="email" placeholder="Email" onkeyup="validate();"
                                             class="form-control register-input">
-                                            @error('email')
-                                            <span class="text-danger">{{$message}}</span>
+                                        @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     <div class="form-group input">
@@ -96,9 +96,9 @@
                                         <input type="number" id="input-field" value="{{ old('phone') }}"
                                             name="phone" placeholder="+1 00000000000" onkeyup="validate();"
                                             class="form-control register-input">
-                                            @error('phone')
-                                                <span class="text-danger">{{$message}}</span>
-                                            @enderror
+                                        @error('phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
 
@@ -106,14 +106,16 @@
 
                                     <div class="form-group input">
                                         <label for="address">Address<span class="required">*</span></label>
-                                        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address"
-                                            class="form-control register-input">
-                                            @error('address')
-                                            <span class="text-danger">{{$message}}</span>
+                                        <input type="text" id="address" name="address" value=""
+                                            placeholder="Address" class="form-control register-input">
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-
                                     <input type="hidden" id="location_details" name="location_details">
+                                    <input type="hidden" id="location_lat" name="location_lat">
+                                    <input type="hidden" id="location_long" name="location_long">
+
                             </div>
 
                             <div class="form-group input mt-2">
@@ -216,6 +218,11 @@
                     // document.getElementById('formatted_address').innerHTML = place.formatted_address;
                     document.getElementById('location_details').value = JSON.stringify(place)
 
+                    let coordinates = JSON.parse(JSON.stringify(place?.geometry?.location))
+                    document.getElementById('location_lat').value = coordinates?.lat
+                    document.getElementById('location_long').value = coordinates?.lng
+
+
                     // custom icon
                     // const icon = {
                     //   url: place.icon,
@@ -248,6 +255,7 @@
 
         window.initAutocomplete = initAutocomplete;
     </script>
+    
 
 </body>
 

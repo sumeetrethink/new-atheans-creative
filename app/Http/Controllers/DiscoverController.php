@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class DiscoverController extends Controller
 {
-    public function view()
+    public function view(Request $req)
     {
-        $Business=Business::get();
-        $Videos=Video::get();
-        return view('MainSite.Content.Discover.index',compact("Business",'Videos'));
+        $Video='';
+        $videoID = $req->query('locate');
+        $Video=Video::where('is_approved','=','Yes')->find($videoID);
+        $Business=Business::where('is_approved','=','Yes')->get();
+        $Videos=Video::where('is_approved','=','Yes')->get();
+        
+        return view('MainSite.Content.Discover.index',compact("Business",'Videos','Video'));
     }
 }

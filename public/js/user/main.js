@@ -1,6 +1,32 @@
-function openModal(id) {
-    $(`#${id}`).modal('show');
+function getCityDetailsFromPincode(pincode) {
+    return new Promise(function(resolve, reject) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({ 'address': pincode }, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          for (var i = 0; i < results[0].address_components.length; i++) {
+            var addressType = results[0].address_components[i].types[0];
+            if (addressType === "locality") {
+              var lat = results[0].geometry.location.lat();
+              var lng = results[0].geometry.location.lng();
+              var cityDetails = { lat: lat, lng: lng };
+              resolve(cityDetails);
+            }
+          }
+          reject("City not found");
+        } else {
+          reject("Geocoder failed due to: " + status);
+        }
+      });
+    });
 }
+
+function openModal(id) {
+    if(id)
+    {
+        $(`#${id}`).modal('show');
+    }
+}
+
 function managelike(videoId,index)
 {
     $.ajax({
