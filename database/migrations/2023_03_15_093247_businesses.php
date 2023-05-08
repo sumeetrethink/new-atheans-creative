@@ -22,6 +22,7 @@ class Businesses extends Migration
             $table->string('raw_location')->nullable();
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
+            $table->enum('is_approved',['Yes','No'])->default('No');
             $table->timestamps();
         });
     }

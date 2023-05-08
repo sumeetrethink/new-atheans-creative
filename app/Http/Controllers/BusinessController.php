@@ -85,6 +85,7 @@ class BusinessController extends Controller
   }
   public function registerBusiness(Request $req)
   {
+    
     $req->validate([
       'address' => 'required',
       'name' => 'required|unique:businesses,name',
@@ -95,7 +96,9 @@ class BusinessController extends Controller
     $Business->email = $req->email;
     $Business->contact = $req->phone;
     $Business->address = $req->address;
-    $Business->raw_location = 'null';
+    $Business->raw_location = $req->location_details;
+    $Business->lat = $req->location_lat;
+    $Business->long = $req->location_long;
     $Business->save();
     return redirect()->back()->with(['msg-success'=>"Your business is registered with us"]);
   }

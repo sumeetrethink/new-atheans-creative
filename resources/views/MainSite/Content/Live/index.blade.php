@@ -123,7 +123,7 @@
                         </div>
                         <div>
                             <a data-toggle="tooltip" data-placement="bottom" title="locate on map"
-                            class="btn btn-secondary btn-xs" href="#" >Locate on Map </a>
+                            class="btn btn-secondary btn-xs" href="{{url('/universe?locate='.$oneVideo->id)}}" >Locate on Map </a>
                             <a data-toggle="tooltip" data-placement="bottom" title="Buy t-shirt"
                                 class="btn btn-success btn-xs ads" href="#" >Buy T-shirt</a>
                         </div>
