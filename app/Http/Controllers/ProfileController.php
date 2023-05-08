@@ -14,6 +14,7 @@ class ProfileController extends Controller
     { 
         $currentUser=User::where('id','=',session('user')->id)->first();
         $topLikedVideos = \App\Video::join('likes', 'videos.id', '=', 'likes.video_id')
+                        ->where('videos.is_approved','=','Yes')
                         ->where('likes.user_id', $currentUser->id)
                         ->join('generes', 'videos.genere_id', '=', 'generes.id')
                         ->orderBy('videos.id', 'desc')
@@ -22,6 +23,7 @@ class ProfileController extends Controller
                         ->get();
         $votedVidoes = \App\Video::join('votes', 'videos.id', '=', 'votes.video_id')
                         ->where('votes.user_id', $currentUser->id)
+                        ->where('videos.is_approved','=','Yes')
                         ->join('generes', 'videos.genere_id', '=', 'generes.id')
                         ->orderBy('videos.id', 'desc')
                         ->limit(6)
@@ -30,6 +32,7 @@ class ProfileController extends Controller
         $yourVideos = \App\Video::where('user_id', $currentUser->id)
                         ->join('generes', 'videos.genere_id', '=', 'generes.id')
                         ->orderBy('videos.id', 'desc')
+                        ->where('videos.is_approved','=','Yes')
                         ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
                         ->get();                
                     
