@@ -168,6 +168,7 @@ class VideoController extends Controller
       ->join('generes', 'videos.genere_id', '=', 'generes.id')
       ->orderBy('videos.id', 'desc')
       ->select('videos.*', "videos.id as video_id", 'generes.title as genere_name')
+      ->where('videos.is_approved','=','Yes')
       ->get();
     return view('MainSite.Content.LikedVideos.index', compact('videos'));
   }

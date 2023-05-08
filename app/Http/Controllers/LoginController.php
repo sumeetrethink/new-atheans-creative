@@ -132,13 +132,13 @@ class LoginController extends Controller
 
         if ($querry) {
             $id = Crypt::decryptString($querry);
-            $oneVideo =Video::with('likes')->with('votes')->find($id);
+            $oneVideo =Video::where('is_approved','=','Yes')->with('likes')->with('votes')->find($id);
         } else {
             
-            $oneVideo = Video::with('likes')->with('votes')->first();
+            $oneVideo = Video::where('is_approved','=','Yes')->with('likes')->with('votes')->first();
         }
         $user = User::find($oneVideo->user_id);
-        $moreVideos=Video::where('genere_id','=',$oneVideo->genere_id)->with('likes')->with('votes')->get();
+        $moreVideos=Video::where('is_approved','=','Yes')->where('genere_id','=',$oneVideo->genere_id)->with('likes')->with('votes')->get();
 
 
         return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos','user'));
@@ -146,7 +146,7 @@ class LoginController extends Controller
     public function home()
     {
 
-        $videos = Video::with('likes')->with('votes')->with('genere')->inRandomOrder()->limit(20)
+        $videos = Video::where('is_approved','=','Yes')->with('likes')->with('votes')->with('genere')->inRandomOrder()->limit(20)
             ->get();
         return view('MainSite.Content.Home.index', compact('videos'));
     }
@@ -162,6 +162,7 @@ class LoginController extends Controller
                         ->where(function ($query) use ($searchTerm) {
                             $query->where('video_title', 'LIKE', '%' . $searchTerm . '%');
                         })
+                        ->where('is_approved','=','Yes')
                         ->inRandomOrder()
                         ->get();
         }
