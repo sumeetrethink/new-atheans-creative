@@ -128,7 +128,6 @@
 
                         <a href="{{ url('/business/register') }}" class="btn btn-success">Business</a>
                         <a href="{{ url('/user/register') }}" class="btn btn-secondary">Creator</a>
-                        <a href="{{ url('/user/register') }}" class="btn btn-danger">Voter</a>
                     </div>
                 </div>
             </div>

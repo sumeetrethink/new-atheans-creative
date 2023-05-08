@@ -97,6 +97,7 @@ Route::post('/admin/business/delete', [BusinessController::class, 'delete'])->na
 Route::get('admin/business/view/', [BusinessController::class, 'view'])->name('view')->middleware('AdminUser');
 Route::post('admin/business/add', [BusinessController::class, 'add'])->name('add')->middleware('AdminUser');
 Route::post('admin/business/update', [BusinessController::class, 'update'])->name('update')->middleware('AdminUser');
+Route::get('admin/business/change-status', [BusinessController::class, 'statusChange'])->name('statusChange')->middleware('AdminUser');
 
 //Videos
 Route::get('admin/videos/', [VideoController::class, 'adminList'])->name('adminList')->middleware('AdminUser');

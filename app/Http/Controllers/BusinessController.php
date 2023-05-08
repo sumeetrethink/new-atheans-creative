@@ -75,6 +75,14 @@ class BusinessController extends Controller
     return redirect('/admin/business')->with(['msg-success' => "Business has been added"]);
   }
   
+  function statusChange(Request $req)
+  {
+      $business=Business::find($req->id);
+      $status=$business->is_approved=="Yes"?"No":"Yes";
+      $business->is_approved=$status;
+      $business->update();
+      return  $status;
+  }
   
   
   // for normal user
