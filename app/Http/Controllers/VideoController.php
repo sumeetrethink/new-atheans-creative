@@ -8,6 +8,7 @@ use App\User;
 use App\Video;
 use App\Vote;
 use App\SelectedForVote;
+use App\VideoHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
@@ -172,6 +173,27 @@ class VideoController extends Controller
       ->get();
     return view('MainSite.Content.LikedVideos.index', compact('videos'));
   }
+  // user history
+  public function historyAdd(Request $req)
+  {
+    $videId=$req->videoId;
+    $is_history=VideoHistory::where("user_id",'=',session('user')->id)->where('video_id','=',$videId)->first();
+    if(!$is_history)
+    {
+      $history=new VideoHistory();
+      $history->user_id=session('user')->id;
+      $history->video_id=$videId;
+      $history->save();
+    }
+    return true;
+  }
+    
+    
+    
+
+
+
+
 
 
 

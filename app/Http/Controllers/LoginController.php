@@ -135,10 +135,14 @@ class LoginController extends Controller
             $oneVideo =Video::where('is_approved','=','Yes')->with('likes')->with('votes')->find($id);
         } else {
             
-            $oneVideo = Video::where('is_approved','=','Yes')->with('likes')->with('votes')->first();
+            $oneVideo = Video::where('is_approved','=','Yes')->with('likes')->with('votes')->inRandomOrder()->first();
         }
         $user = User::find($oneVideo->user_id);
-        $moreVideos=Video::where('is_approved','=','Yes')->where('genere_id','=',$oneVideo->genere_id)->with('likes')->with('votes')->get();
+        $moreVideos=Video::where('is_approved','=','Yes')
+                        ->where('id', '!=', $oneVideo->id)
+                        // ->where('genere_id','=',$oneVideo->genere_id)
+                        ->with('likes')->with('votes')
+                        ->get();
 
 
         return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos','user'));

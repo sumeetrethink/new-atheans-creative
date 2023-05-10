@@ -9,6 +9,7 @@ use App\User;
 use App\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class BallotController extends Controller
 {
@@ -35,7 +36,19 @@ class BallotController extends Controller
             ->limit(4)
             ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
             ->get();
-            $history=[];
+        $Allvideos = \App\Video::join('generes', 'videos.genere_id', '=', 'generes.id')
+        ->orderBy('videos.id', 'desc')
+        ->select('videos.*',"videos.id as video_id" ,'generes.title as genere_name')
+        ->get();
+        
+        
+        $historyVideoIds = DB::table('video_histories')
+            ->where('user_id', $currentUser->id)
+            ->pluck('video_id')
+            ->toArray();
+        
+        $history = $Allvideos->whereIn('id', $historyVideoIds)->take(4);
+        
         return view('MainSite.Content.Ballot.index', compact('history','selected_for_votes', 'polling_questions','votedVidoes','topLikedVideos'));
     }
 

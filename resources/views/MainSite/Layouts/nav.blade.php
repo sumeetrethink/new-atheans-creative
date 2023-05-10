@@ -134,10 +134,10 @@
                     id="ballot"><img class="ballot"
                         src="http://3.7.41.47/newathenscreative/public/images/Group_521.jpeg"> NAC Ballot </a>
             </li>
-            <li class="nav-item "><a href="https://nacopedia.com/nac-invest" id="ballot"><img class="ballot"
+            <li class="nav-item "><a href="{{url('/coming-soon')}}" id="ballot"><img class="ballot"
                         src="{{ asset('/images/Group_51911.jpeg') }}"> NAC Invest </a>
             </li>
-            <li class="nav-item"><a href="https://nacopedia.com/nac-network" id="ballot"><img class="ballot"
+            <li class="nav-item"><a href="{{url('/coming-soon')}}" id="ballot"><img class="ballot"
                         src="{{ asset('/images/Group_518.jpeg') }}"> NAC Network </a>
             </li>
         </ul>

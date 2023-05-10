@@ -138,7 +138,7 @@
                                         <input type="submit" name="register-submit" tabindex="4"
                                             class="form-control btn btn-register" value="Register">
                                     </div>
-                                    <a href="{{ url('/login') }}" style="padding-bottom: 5px">
+                                    <a href="{{ url('/login') }}" class="mt-2">
                                         Already have an account?
                                     </a>
                                 </div>
