@@ -200,7 +200,7 @@ class VideoController extends Controller
   // ADMIN
   public function adminList()
   {
-    $videos = DB::table('videos')->join('users', "videos.user_id", "users.id")->select("videos.*", 'users.*', 'videos.id as video_id')->paginate(20);
+    $videos = DB::table('videos')->join('users', "videos.user_id", "users.id")->select("videos.*", 'users.*', 'videos.id as video_id')->orderBy('videos.id','desc')->paginate(20);
     return view('Admin.Videos.list', compact('videos'));
   }
   public function adminDelete(Request $req)

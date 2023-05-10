@@ -40,10 +40,9 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <div id="overlay"></div>
+    
 
-    <img id="full-size-image" class="full-size">
-    <button id="close-button" onclick="closeFullSize()" class="close-button">X</button>
+   
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__shake" src="{{ asset('Theme2/dist/img/AdminLTELogo.png') }}" alt="AdminLTELogo"

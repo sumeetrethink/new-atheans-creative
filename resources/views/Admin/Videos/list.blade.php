@@ -18,6 +18,15 @@
 
                 }
             @endif
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Videos</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -30,9 +39,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div>
-                                        <a href="{{ url('/admin/business/view') }}"
-                                            class="float-right btn btn-primary m-2">Add
-                                            Business</a>
+                                      
                                     </div>
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                         cellspacing="0" role="grid" aria-describedby="dataTable_info"

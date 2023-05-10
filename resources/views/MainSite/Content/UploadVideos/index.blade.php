@@ -47,7 +47,7 @@
                                     id="myForm">
                                     @csrf
                                     <label class="videofield">Title <span class="text-danger">*</span></label>
-                                    <input type="text" name="video_name" class="form-control"
+                                    <input value="{{old('video_name')}}" type="text" name="video_name" class="form-control"
                                         placeholder="Add Name here">
                                     @if ($errors->has('video_name'))
                                         <span class="help-block">
@@ -59,7 +59,7 @@
                         <div class="col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="videofield">Creator Name <span class="text-danger">*</span></label>
-                                <input type="text" name="creater_name" class="form-control"
+                                <input value="{{old('creater_name')}}"  type="text" name="creater_name" class="form-control"
                                     placeholder="Add video Creator here">
                                 @if ($errors->has('creater_name'))
                                     <span class="help-block">
@@ -71,7 +71,7 @@
                         <div class="col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label>Genre <span class="text-danger">*</span></label>
-                                <select class="form-control" name="genre">
+                                <select value="{{old('genre')}}" class="form-control" name="genre">
                                     <option value="0">--Choose--</option>
                                     @foreach ($generes as $item)
                                         <option value="{{ $item->id }}">{{ $item->title }}</option>
@@ -87,7 +87,7 @@
                         <div class="col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label class="videofield">Tags <span class="text-danger">*</span></label>
-                                <input type="text" name="tags" class="form-control" placeholder="Add Tags here">
+                                <input type="text" name="tags" class="form-control" placeholder="Add Tags here" value="{{old('tags')}}">
                                 <h6>Multiple tags should be separated by commas.</h6>
                                 @if ($errors->has('tags'))
                                     <span class="help-block">
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class="videofield">Zip code <span class="text-danger">*</span></label>
                                 <input type="text" name="zipcode" inputmode="numeric"  maxlength="6"
-                                    class="form-control" placeholder="Add zip code here">
+                                    class="form-control" placeholder="Add zip code here" value="{{old('zipcode')}}">
                                 @if ($errors->has('zipcode'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('zipcode') }}</strong>
@@ -143,7 +143,7 @@
                                 </div>
                             <div class="form-group">
                                 <label class="videofield">Link of Google Drive/Youtube/Vimeo/Dropbox</label>
-                                <input type="text" name="other_video_link" class="form-control"
+                                <input value="{{old('other_video_link')}}" type="text" name="other_video_link" class="form-control"
                                     placeholder="Add Link of Google Drive/Youtube/Vimeo/Dropbox">
                                 @if ($errors->has('other_video_link'))
                                     <span class="help-block">
@@ -155,7 +155,7 @@
                                 <label class="videofield">Description <span class="text-danger">*</span></label>
                                 <!--  <input type="textarea" name="video_description" class="form-control" placeholder="Add video decription here" rows="3"> -->
                                 <textarea class="form-control" rows="4" placeholder="Add video decription here" name="video_description"
-                                    id="comment"></textarea>
+                                    id="comment">{{old('video_description')}}</textarea>
                                 @if ($errors->has('video_description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('video_description') }}</strong>

@@ -181,6 +181,7 @@ class LoginController extends Controller
     {
         $users = User::get()->count();
         $business = Business::get()->count();
-        return view('Admin.Dashboard.index', compact('users', 'business'));
+        $videos = Video::where('is_approved','=','Yes')->get()->count();
+        return view('Admin.Dashboard.index', compact('users', 'business','videos'));
     }
 }

@@ -198,11 +198,11 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
                     <a href="{{ url('live?watch=' . $encryptedUrl) }}">
                         <div class="media card-body p-2">
-                            <img style="width: 100px" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
-                                alt="" class="mr-3">
-                            <div class="media-body align-self-end pb-0 mb-0">
-                                <h6 class="mt-0 m-0 p-0 break-word">{{ Str::limit($item->video_title, 40, '...') }}</h6>
-                                <p class="text-muted m-0 p-0">By {{ $item->creator_name }}</p>
+                            <img style="width: 70px;height: 70px;object-fit: cover" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
+                                alt="" class="mr-2" >
+                            <div class="media-body  pb-0 mb-0">
+                                <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">{{ Str::limit($item->video_title, 40, '...') }}</h6>
+                                <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By {{ $item->creator_name }}</p>
                             </div>
                         </div>
                     </a>
@@ -227,11 +227,11 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
                     <a href="{{ url('live?watch=' . $encryptedUrl) }}">
                         <div class="media card-body p-2">
-                            <img style="width: 100px" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
-                                alt="" class="mr-3">
-                            <div class="media-body align-self-end pb-0 mb-0">
-                                <h6 class="mt-0 m-0 p-0 break-word">{{ Str::limit($item->video_title, 40, '...') }}</h6>
-                                <p class="text-muted m-0 p-0">By {{ $item->creator_name }}</p>
+                            <img style="width: 70px;height: 70px;object-fit: cover" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
+                                alt="" class="mr-2" >
+                            <div class="media-body  pb-0 mb-0">
+                                <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">{{ Str::limit($item->video_title, 40, '...') }}</h6>
+                                <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By {{ $item->creator_name }}</p>
                             </div>
                         </div>
                     </a>
@@ -253,18 +253,18 @@
                 @php
                     $encryptedUrl = Crypt::encryptString($item->video_id);
                 @endphp
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
-                    <a href="{{ url('user/video/edit/?id=' . $encryptedUrl) }}">
-                        <div class="media card-body p-2">
-                            <img style="width: 100px" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
-                                alt="" class="mr-3">
-                            <div class="media-body align-self-end pb-0 mb-0">
-                                <h6 class="mt-0 m-0 p-0 break-word">{{ Str::limit($item->video_title, 40, '...') }}</h6>
-                                <p class="text-muted m-0 p-0">By {{ $item->creator_name }}</p>
-                            </div>
+               <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
+                <a href="{{ url('live?watch=' . $encryptedUrl) }}">
+                    <div class="media card-body p-2">
+                        <img style="width: 70px;height: 70px;object-fit: cover" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
+                            alt="" class="mr-2" >
+                        <div class="media-body  pb-0 mb-0">
+                            <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">{{ Str::limit($item->video_title, 40, '...') }}</h6>
+                            <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By {{ $item->creator_name }}</p>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+            </div>
             @endforeach
         </div>
     </section>
