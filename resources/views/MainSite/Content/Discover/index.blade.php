@@ -133,8 +133,7 @@
     <script>
         // to zoom automaticaly on coordinates
         var zoom = {!! json_encode($Video) !!};
-
-
+        let currentUrl='http://3.7.41.47/nac/public/';
         var Business = {!! json_encode($Business) !!};
         var Videos = {!! json_encode($Videos) !!};
         // initialise map
@@ -207,7 +206,7 @@
                         position: coordinates,
                         map: map,
                         icon: {
-                            url: '/images/map/marker-yellow.png',
+                            url: `${currentUrl}/images/map/marker-yellow.png`,
                             anchor: new google.maps.Point(10, 34)
                         }
                     });

@@ -65,9 +65,9 @@
                                 <img  class="dashboard-header" src="{{ session('user')->image ? asset('Data/User/Profile/' . session('user')->image) : asset('/images/user.png') }}">
                                 </a></li>
                         @else
-                            <li><a href="{{ url('login') }}">Login</a></li>
+                            <li><a href="{{ url('login') }}" style="color: #1c5c00">Login</a></li>
                             <li><span class="hh">/</span></li>
-                            <li><a href="#" onclick="openModal('registerModal')">Register</a></li>
+                            <li><a href="#" onclick="openModal('registerModal')" style="color: #1c5c00">Register</a></li>
                         @endif
                 </ul>
             </div>
@@ -118,7 +118,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header pb-0 mb-0">
-                    <h3 class="pl-0 ml-0">Register</h3>
+                    <h3 class="pl-0 ml-0" >Register</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                 </div>

@@ -1,5 +1,8 @@
+<style>
+    .os-scrollbar-horizontal{display: none}
+</style>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    {{-- <a href="index3.html" class="brand-link">
+{{-- <a href="index3.html" class="brand-link">
    <img src="{{asset('/images/Logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
   
    </a> --}}

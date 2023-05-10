@@ -191,7 +191,6 @@
             $.ajax({
                 url: BASE_URL + "/user/history/add?videoId=" + video?.id,
                 success: function(data) {
-                    console.log("added to hisopty")
                 },
             });
         });
