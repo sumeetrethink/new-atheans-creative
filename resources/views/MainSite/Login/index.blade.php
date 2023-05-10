@@ -48,12 +48,12 @@
                                             <div class="form-group ">
                                                 <label class="text-label">Email</label>
                                                 <input id="email" type="email" name="email" required
-                                                autocomplete="email" autofocus tabindex="1"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                placeholder="name@domain.com" value="{{ old('email') }}">
+                                                    autocomplete="email" autofocus tabindex="1"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    placeholder="name@domain.com" value="{{ old('email') }}">
                                                 @if (session('msg-error-username'))
                                                     <div class="text-danger">
-                                                    {{ session('msg-error-username') }}
+                                                        {{ session('msg-error-username') }}
                                                     </div>
                                                 @endif
                                             </div>
@@ -63,19 +63,21 @@
                                                     class="form-control @error('password') is-invalid @enderror"
                                                     required autocomplete="password" type="password" tabindex="1"
                                                     placeholder="********">
-                                                    @if (session('msg-error-password'))
+                                                @if (session('msg-error-password'))
                                                     <div class="text-danger">
-                                                    {{ session('msg-error-password') }}
+                                                        {{ session('msg-error-password') }}
                                                     </div>
                                                 @endif
                                             </div>
-                                            <div class="form-group text-right">
-                                                <div class="text-right">
-                                                    <a class="btn btn-link" >
-                                                        Forgot password?
-                                                    </a>
-                                                </div>
+                                            <div class="form-group " style="display: flex;justify-content: space-between">
+                                                <a href="{{url('/')}}" class="btn btn-link">
+                                                    Back to home
+                                                </a>
+                                                <a class="btn btn-link">
+                                                    Forgot password?
+                                                </a>
                                             </div>
+
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-sm-3 col-xs-6">
@@ -85,13 +87,13 @@
                                                     </div>
                                                     <div class="col-sm-3 col-xs-6"
                                                         style="float: right;width: 26%;right: 38px;">
-                                                        <a href="{{url('/user/register')}}" tabindex=""
+                                                        <a href="{{ url('/user/register') }}" tabindex=""
                                                             class="form-control btn btn-register">Register</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -101,16 +103,7 @@
             </div>
         </div>
     </section>
-   
+
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-

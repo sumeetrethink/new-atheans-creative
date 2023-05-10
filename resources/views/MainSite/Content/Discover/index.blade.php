@@ -102,8 +102,8 @@
             </tbody>
         </table>
     </div> --}}
-{{-- videos list tables --}}
-{{-- <h1 class="mt-4">Top Videos</h1>
+    {{-- videos list tables --}}
+    {{-- <h1 class="mt-4">Top Videos</h1>
 <div class="mt-4 mx-4">
     <table class="table table-bordered dataTable ">
         <thead>
@@ -143,7 +143,38 @@
                 lat: 20.5937,
                 lng: 78.9629
             },
-            zoom: 3
+            zoom: 3,
+            styles: [{
+                    featureType: 'poi.business',
+                    stylers: [{
+                        visibility: 'off'
+                    }]
+                },
+                {
+                    featureType: 'poi.attraction',
+                    stylers: [{
+                        visibility: 'off'
+                    }]
+                },
+                {
+                    featureType: 'transit',
+                    stylers: [{
+                        visibility: 'off'
+                    }]
+                },
+                {
+                    featureType: 'poi.school',
+                    stylers: [{
+                        visibility: 'off'
+                    }]
+                },
+                {
+                    featureType: 'poi.park',
+                    stylers: [{
+                        visibility: 'off'
+                    }]
+                },
+            ]
         });
 
         // mark business
@@ -160,7 +191,7 @@
             marker.addListener('click', function() {
                 // create and open info window
                 var infoWindow = new google.maps.InfoWindow({
-                    content: '<h4>' + business_item.name + '</h4><p>' + business_item.address +
+                    content: '<h6 style="margin:0px">' + business_item.name + '</h6><p style="font-size:10px;margin-bottom:0">' + business_item.address +
                         '</p>'
                 });
                 infoWindow.open(map, marker);
@@ -176,14 +207,15 @@
                         position: coordinates,
                         map: map,
                         icon: {
-                            url: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+                            url: '/images/map/marker-yellow.png',
                             anchor: new google.maps.Point(10, 34)
                         }
                     });
                     marker.addListener('click', function() {
                         // create and open info window
                         var infoWindow = new google.maps.InfoWindow({
-                            content: '<h3>' + element.video_title + '</h3><p>' +
+                            content: '<h6 style="margin:0px">' + element.video_title +
+                                '</h6><p style="font-size:10px;margin-bottom:0">' +
                                 element.creator_name +
                                 '</p>'
                         });

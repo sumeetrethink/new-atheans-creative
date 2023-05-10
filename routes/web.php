@@ -58,7 +58,10 @@ Route::get('/upload/video', [VideoController::class, 'uploadForm'])->name('uploa
 Route::post('/upload/video', [VideoController::class, 'upload'])->name('upload')->middleware('CheckUser');
 Route::get('/user/video/edit', [VideoController::class, 'editForm'])->name('editForm')->middleware('CheckUser');
 Route::post('/user/video/edit', [VideoController::class, 'edit'])->name('edit')->middleware('CheckUser');
-                        
+
+// user hsitory 
+Route::get('/user/history/add', [VideoController::class, 'historyAdd'])->name('historyAdd')->middleware('CheckUser');
+
                             // manage like dislikes
 Route::get('/manageLikes', [VideoController::class, 'manageLikes'])->name('manageLikes')->middleware('CheckUser');
 Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes')->middleware('CheckUser');

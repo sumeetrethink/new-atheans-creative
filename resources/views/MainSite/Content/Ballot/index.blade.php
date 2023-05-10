@@ -73,7 +73,7 @@
         <h3>
             Your liked videos
         </h3>
-        <div class="row mt-4">
+        <div class="row mt-4 pt-4 mb-4">
             @forelse  ($topLikedVideos as $item)
                 @include('MainSite.Common.videoCard', ['item' => $item])
             @empty
@@ -88,7 +88,7 @@
         <h3 class="mt-4">
             Your voted videos
         </h3>
-        <div class="row mt-4">
+        <div class="row  mt-4 pt-4 mb-4">
             @forelse ($votedVidoes as $item)
                 @include('MainSite.Common.videoCard', ['item' => $item])
             @empty
@@ -97,15 +97,15 @@
         </div>
     </section>
     {{-- history section --}}
-    <section class="container mt-4 pt-4">
+    <section class="container mt-4 mb-4 pb-4">
         <h3 class="mt-4">
-            Your history
+            Your History
         </h3>
-        <div class="row mt-4 justify-content-center">
+        <div class="row mt-4 pt-4 mb-4">
             @forelse ($history as $item)
                 @include('MainSite.Common.videoCard', ['item' => $item])
             @empty
-                <p class="text-center">No history found.</p>
+                <p class="text-center">No videos found.</p>
             @endforelse
         </div>
     </section>

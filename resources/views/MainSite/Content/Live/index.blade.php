@@ -10,7 +10,7 @@
             text-decoration: none !important;
         }
 
-        i {
+        .home-upper-section i {
             font-size: 23px !important;
             cursor: pointer;
         }
@@ -54,14 +54,25 @@
         .more-title {
             color: black
         }
-        .profile-image-outer{width: 50px;height: 50px;border-radius: 50%}
-        .profile-image-outer img{width: 50px;height: 50px;object-fit: cover;border-radius: 50%}
+
+        .profile-image-outer {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%
+        }
+
+        .profile-image-outer img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%
+        }
     </style>
     <section class="home-upper-section p-4">
         <div class="row">
             <div class="col-8">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <video autoplay id="my-video" width="320" height="240" controls controlsList="nodownload"
+                    <video id="my-video" width="320" height="240" controls controlsList="nodownload"
                         poster="{{ asset('Data/Thumbnail/' . $oneVideo->thumbnail) }}">
                         <source src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
                     </video>
@@ -70,17 +81,19 @@
                 <div class="row">
                     <div class="col-9">
                         <h3 class="pt-2 m-0 video-title" style="">{{ $oneVideo->video_title }}</h3>
-                       
+
 
                     </div>
                 </div>
                 <div class="row mt-3 justify-content-between align-items-center">
                     <div class="col-6 d-flex flex-row pt-2">
                         <div class="profile-image-outer">
-                            <img class="creator-profile" src="{{$user&&$user->image?asset('Data/User/Profile/'. $user->image):''}}" alt="">
+                            <img class="creator-profile"
+                                src="{{ $user && $user->image ? asset('Data/User/Profile/' . $user->image) : '' }}"
+                                alt="">
                         </div>
                         <div class="creator-name mx-3 mb-4" style="align-self: flex-end">
-                            <h6  class="font-weight-bold m-0 p-0">{{$user->first_name .' '.$user->last_name}}</h6>
+                            <h6 class="font-weight-bold m-0 p-0">{{ $user->first_name . ' ' . $user->last_name }}</h6>
                             <p style="font-size: 14px" class="m-0 p-0">
                                 Creator
                             </p>
@@ -123,14 +136,16 @@
                         </div>
                         <div>
                             <a data-toggle="tooltip" data-placement="bottom" title="locate on map"
-                            class="btn btn-secondary btn-xs" href="{{url('/universe?locate='.$oneVideo->id)}}" >Locate on Map </a>
+                                class="btn btn-secondary btn-xs"
+                                href="{{ url('/universe?locate=' . $oneVideo->id) }}">Locate
+                                on Map </a>
                             <a data-toggle="tooltip" data-placement="bottom" title="Buy t-shirt"
-                                class="btn btn-success btn-xs ads" href="#" >Buy T-shirt</a>
+                                class="btn btn-success btn-xs ads" href="#">Buy T-shirt</a>
                         </div>
 
                     </div>
                 </div>
-                    
+
                 <div class="row m-0 description-section d-flex flex-column">
                     <h5 class="m-0">Description</h5>
                     <h6>{{ $oneVideo->description }}</h6>
@@ -170,7 +185,16 @@
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
-        
-       
+        var video = {!! json_encode($oneVideo) !!};
+        const videoPlayer = document.querySelector('#my-video');
+        videoPlayer?.addEventListener('play', function() {
+            $.ajax({
+                url: BASE_URL + "/user/history/add?videoId=" + video?.id,
+                success: function(data) {
+                    console.log("added to hisopty")
+                },
+            });
+        });
     </script>
+
 @endsection
