@@ -140,7 +140,7 @@ class LoginController extends Controller
         $user = User::find($oneVideo->user_id);
         $moreVideos=Video::where('is_approved','=','Yes')
                         ->where('id', '!=', $oneVideo->id)
-                        // ->where('genere_id','=',$oneVideo->genere_id)
+                        ->where('genere_id','=',$oneVideo->genere_id)
                         ->with('likes')->with('votes')
                         ->get();
 
