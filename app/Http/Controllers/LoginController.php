@@ -6,11 +6,13 @@ use App\Business;
 use App\Like;
 use App\User;
 use App\Video;
+use App\VideoHistory as AppVideoHistory;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use VideoHistory;
 
 class LoginController extends Controller
 {
@@ -129,28 +131,35 @@ class LoginController extends Controller
     public function nacLive(Request $req)
     {
         $querry = $req->query('watch');
-
+        $id = '';
         if ($querry) {
             $id = Crypt::decryptString($querry);
-            $oneVideo =Video::where('is_approved','=','Yes')->with('likes')->with('votes')->find($id);
+            $oneVideo = Video::where('is_approved', '=', 'Yes')->with('likes')->with('votes')->find($id);
+            $is_history = AppVideoHistory::where("user_id", '=', session('user')->id)->where('video_id', '=', $id)->first();
+            if (!$is_history) {
+                $history = new AppVideoHistory();
+                $history->user_id = session('user')->id;
+                $history->video_id = $id;
+                $history->save();
+            }
         } else {
-            
-            $oneVideo = Video::where('is_approved','=','Yes')->with('likes')->with('votes')->inRandomOrder()->first();
+            $oneVideo = Video::where('is_approved', '=', 'Yes')->with('likes')->with('votes')->inRandomOrder()->first();
         }
         $user = User::find($oneVideo->user_id);
-        $moreVideos=Video::where('is_approved','=','Yes')
-                        ->where('id', '!=', $oneVideo->id)
-                        ->where('genere_id','=',$oneVideo->genere_id)
-                        ->with('likes')->with('votes')
-                        ->get();
+
+        $moreVideos = Video::where('is_approved', '=', 'Yes')
+            ->where('id', '!=', $oneVideo->id)
+            ->where('genere_id', '=', $oneVideo->genere_id)
+            ->with('likes')->with('votes')
+            ->get();
 
 
-        return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos','user'));
+        return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos', 'user', 'id'));
     }
     public function home()
     {
 
-        $videos = Video::where('is_approved','=','Yes')->with('likes')->with('votes')->with('genere')->inRandomOrder()->limit(20)
+        $videos = Video::where('is_approved', '=', 'Yes')->with('likes')->with('votes')->with('genere')->inRandomOrder()->limit(20)
             ->get();
         return view('MainSite.Content.Home.index', compact('videos'));
     }
@@ -161,19 +170,19 @@ class LoginController extends Controller
             $videos = collect(); // create an empty collection
         } else {
             $videos = Video::with('likes')
-                        ->with('votes')
-                        ->with('genere')
-                        ->where(function ($query) use ($searchTerm) {
-                            $query->where('video_title', 'LIKE', '%' . $searchTerm . '%');
-                        })
-                        ->where('is_approved','=','Yes')
-                        ->inRandomOrder()
-                        ->get();
+                ->with('votes')
+                ->with('genere')
+                ->where(function ($query) use ($searchTerm) {
+                    $query->where('video_title', 'LIKE', '%' . $searchTerm . '%');
+                })
+                ->where('is_approved', '=', 'Yes')
+                ->inRandomOrder()
+                ->get();
         }
-            return view('MainSite.Content.GlobalSearch.index', compact('videos'));
-        }
-                   
-            
+        return view('MainSite.Content.GlobalSearch.index', compact('videos'));
+    }
+
+
 
 
     // dashboard
@@ -181,7 +190,7 @@ class LoginController extends Controller
     {
         $users = User::get()->count();
         $business = Business::get()->count();
-        $videos = Video::where('is_approved','=','Yes')->get()->count();
-        return view('Admin.Dashboard.index', compact('users', 'business','videos'));
+        $videos = Video::where('is_approved', '=', 'Yes')->get()->count();
+        return view('Admin.Dashboard.index', compact('users', 'business', 'videos'));
     }
 }
