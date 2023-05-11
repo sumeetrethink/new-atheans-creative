@@ -72,9 +72,10 @@
         <div class="row">
             <div class="col-8">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <video id="my-video" width="320" height="240" controls controlsList="nodownload"
+                    {{-- {{dd($id)}} --}}
+                    <video {{$id?"autoplay":''}} id="my-video" width="320" height="240" controls controlsList="nodownload"
                         poster="{{ asset('Data/Thumbnail/' . $oneVideo->thumbnail) }}">
-                        <source src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
+                        <source  src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
                     </video>
 
                 </div>
