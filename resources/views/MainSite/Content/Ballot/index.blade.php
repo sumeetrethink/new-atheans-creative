@@ -67,29 +67,26 @@
             </div>
         </div>
     @endif
-    {{-- liked videos --}}
-
-    <section class="container mt-4 mb-4 pb-4">
-        <h3>
-            Your liked videos
-        </h3>
-        <div class="row mt-4 pt-4 mb-4">
-            @forelse  ($topLikedVideos as $item)
-                @include('MainSite.Common.videoCard', ['item' => $item])
-            @empty
-                <p class="text-center">No videos found.</p>
-            @endforelse
-        </div>
-    </section>
-
     {{-- voted videos --}}
-
     <section class="container mt-4">
         <h3 class="mt-4">
             Your voted videos
         </h3>
         <div class="row  mt-4 pt-4 mb-4">
             @forelse ($votedVidoes as $item)
+                @include('MainSite.Common.videoCard', ['item' => $item])
+            @empty
+                <p class="text-center">No videos found.</p>
+            @endforelse
+        </div>
+    </section>
+    {{-- liked videos --}}
+    <section class="container mt-4 mb-4 pb-4">
+        <h3>
+            Your liked videos
+        </h3>
+        <div class="row mt-4 pt-4 mb-4">
+            @forelse  ($topLikedVideos as $item)
                 @include('MainSite.Common.videoCard', ['item' => $item])
             @empty
                 <p class="text-center">No videos found.</p>
@@ -109,5 +106,9 @@
             @endforelse
         </div>
     </section>
+
+
+    
+
 
 @endsection

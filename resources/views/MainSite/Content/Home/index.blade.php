@@ -1,30 +1,40 @@
 @extends('MainSite.Content.index')
 @section('content')
-    <style>
-        .top-4-videos {
-            background: #dbf7e2
-        }
-    </style>
+<style>
+     .select-option-main {
+            height: 100vh;
+            background: linear-gradient(to left, white 30%, #bcf8a2 100%) !important;
 
-    <section class="top-4-videos">
-        <div class="container">
-            <h3>
-                Top 4 Videos
-            </h3>
-            <div class="container">
-                <div class="row">
-                    @for($i = 0; $i < min($videos->count(), 4); $i++)
-                        @include('MainSite.Common.videoCard', ['item' => $videos[$i]])
-                    @endfor
-                </div>
+        }
+        .option-button{margin: 0px 80px;text-align: center}
+
+        .select-option-main .buttons {
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+</style>
+    {{-- descide options section  --}}
+    <section class="select-option-main">
+        <div class="buttons">
+            <div class="option-button">
+                <a href="{{ url('/coming-soon') }}" data-toggle="tooltip" title="NAC Ballot">
+                    <div class="index-image">
+                        <img src="{{ asset('/images/header-icons/radio1.png') }}">
+                    </div>
+                </a>
+                <h4 class="font-weight-bold mt-3">NAC Radio</h4>
             </div>
-        </div>
-    </section>
-    <section class="container">
-        <div class="row">
-            @for($i = 5; $i < $videos->count(); $i++)
-                @include('MainSite.Common.videoCard', ['item' => $videos[$i]])
-            @endfor
+            <div class="option-button">
+                <a href="{{ url('/live') }}" data-toggle="tooltip" title="NAC Ballot">
+                    <div class="index-image">
+                        <img src="{{ asset('/images/header-icons/TV.png') }}">
+                    </div>
+                </a>
+                <h4 class="font-weight-bold mt-3">NAC TV</h4>
+            </div>
         </div>
     </section>
 

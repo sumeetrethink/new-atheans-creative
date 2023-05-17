@@ -47,9 +47,7 @@
                 <li> <a href="{{ url('/coming-soon') }}" class=""><img
                             src="http://3.7.41.47/newathenscreative/public/images/header-icons/OD2020_NACIconDesigns_Business_Black+Grey-01_1.png"
                             width="40"></a></li>
-                <li><a href="{{ url('/coming-soon') }}" class=""><img
-                            src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Nacopedia_Black-01 (1).png') }}"
-                            width="40"></a></li>
+
                 <li><a href="{{ url('/coming-soon') }}" class=""><img
                             src="{{ asset('/images/header-icons/OD2020_NACIconDesigns_Education_Black-01 (1).png') }}"
                             width="40"></a></li>
@@ -59,16 +57,18 @@
                 <ul class="nav navbar-nav navbar-right-loginpage lineheight" style="display: inline !important">
                     {{-- <li><a href="{{ url('business.register') }}">Register your Business</a></li> --}}
 
-                    
-                        @if (session()->has('user'))
-                            <li><a href="{{ url('/user/profile') }}">
-                                <img  class="dashboard-header" src="{{ session('user')->image ? asset('Data/User/Profile/' . session('user')->image) : asset('/images/user.png') }}">
-                                </a></li>
-                        @else
-                            <li><a href="{{ url('login') }}" style="color: #1c5c00">Login</a></li>
-                            <li><span class="hh">/</span></li>
-                            <li><a href="#" onclick="openModal('registerModal')" style="color: #1c5c00">Register</a></li>
-                        @endif
+
+                    @if (session()->has('user'))
+                        <li><a href="{{ url('/user/profile') }}">
+                                <img class="dashboard-header"
+                                    src="{{ session('user')->image ? asset('Data/User/Profile/' . session('user')->image) : asset('/images/user.png') }}">
+                            </a></li>
+                    @else
+                        <li><a href="{{ url('login') }}" style="color: #1c5c00">Login</a></li>
+                        <li><span class="hh">/</span></li>
+                        <li><a href="#" onclick="openModal('registerModal')" style="color: #1c5c00">Register</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </div>
@@ -118,7 +118,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header pb-0 mb-0">
-                    <h3 class="pl-0 ml-0" >Register</h3>
+                    <h3 class="pl-0 ml-0">Register</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                 </div>

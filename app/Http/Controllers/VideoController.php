@@ -247,4 +247,20 @@ class VideoController extends Controller
       ->get();
     return view('Admin.Videos.likesList', compact('likes'));
   }
+  public function updateButton(Request $req)
+  {
+    $video=Video::find($req->videoId);
+    $video->ads_button_link=$req->buttonLink;
+    $video->ads_button_text=$req->buttonText;
+    $result=$video->update();
+    if($result)
+    {
+      return redirect()->back()->with(['msg-success'=>'Link has been updated']);
+    }
+    else
+    {
+      return redirect()->back()->with(['msg-error'=>'Something went wrong']);
+    }
+  }
+
 }

@@ -34,7 +34,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-12  col-sm-12 col-xs-12 float-left">
-                                <a href="#" class="active" id="login-form-link">Register</a>
+                                <a href="#" class="active" id="login-form-link">Register as creator</a>
                             </div>
                         </div>
                         <hr>
@@ -134,12 +134,16 @@
                         </div>
                             <div class="form-group input">
                                 <div class="row text-center">
-                                    <div class="register-button">
+                                    <div class="register-button" style="margin-bottom: 5px">
                                         <input type="submit" name="register-submit" tabindex="4"
                                             class="form-control btn btn-register" value="Register">
                                     </div>
                                     <a href="{{ url('/login') }}" class="mt-2">
                                         Already have an account?
+                                    </a>
+                                    |
+                                    <a href="{{ url('/business/register') }}" class="mt-2">
+                                        Register your business.
                                     </a>
                                 </div>
                             </div>
@@ -148,7 +152,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6  col-sm-6 col-xs-12 float-left">
+            <div style="margin-top: inherit;" class="col-lg-6 col-md-6  col-sm-6 col-xs-12 float-left">
                 <div class="image-register">
                     <img src="{{ asset('/images/main_logo.png') }}">
                 </div>
