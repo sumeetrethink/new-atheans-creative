@@ -1,6 +1,8 @@
 @extends('MainSite.Content.index')
 @section('content')
     <style>
+       
+
         .embed-responsive {
             height: 500px;
             /* set the height to match the height of the iframe */
@@ -68,24 +70,26 @@
             border-radius: 50%
         }
     </style>
-    <section class="home-upper-section p-4">
+    
+    {{-- nac live  --}}
+    <section id="" class="home-upper-section p-4">
         <div class="row">
             <div class="col-8">
                 <div class="embed-responsive embed-responsive-16by9">
                     {{-- {{dd($id)}} --}}
-                    <video {{$id?"autoplay":''}} id="my-video" width="320" height="240" controls controlsList="nodownload"
-                        poster="{{ asset('Data/Thumbnail/' . $oneVideo->thumbnail) }}">
-                        <source  src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
+                    <video {{ $id ? 'autoplay' : '' }} id="my-video" width="320" height="240" controls
+                        controlsList="nodownload" poster="{{ asset('Data/Thumbnail/' . $oneVideo->thumbnail) }}">
+                        <source src="{{ asset('Data/Video/' . $oneVideo->file_name) }}" type="video/mp4">
                     </video>
 
                 </div>
                 <div class="row">
                     <div class="col-9">
                         <h3 class="pt-2 m-0 video-title" style="">{{ $oneVideo->video_title }}</h3>
-
-
                     </div>
                 </div>
+
+
                 <div class="row mt-3 justify-content-between align-items-center">
                     <div class="col-6 d-flex flex-row pt-2">
                         <div class="profile-image-outer">
@@ -105,7 +109,8 @@
 
                     <div class="col-6 d-flex  justify-content-end">
 
-                        <div class="d-flex mx-2" data-toggle="tooltip" data-placement="bottom" title="Like this video">
+                        <div class="d-flex align-items-center mx-2" data-toggle="tooltip" data-placement="bottom"
+                            title="Like this video">
                             <p class="video-des m-0 d-flex flex-column text-center"
                                 onclick="managelike({{ $oneVideo->id }},0)">
 
@@ -115,14 +120,16 @@
                                 @else
                                     <i class="like-icon-0 fa fa-thumbs-o-up"></i>
                                 @endif
-                                <span class="like-count-0">
+                                {{-- dont need to show count right  now --}}
+                                {{-- <span class="like-count-0">
                                     {{ $oneVideo->likes->count() }}
-                                </span>
+                                </span> --}}
 
 
                             </p>
                         </div>
-                        <div class="mx-2 mr-3" data-toggle="tooltip" data-placement="bottom" title="Vote for this video">
+                        <div class="d-flex align-items-center mx-2 mr-3" data-toggle="tooltip" data-placement="bottom"
+                            title="Vote for this video">
                             <p onclick="handleVoting({{ $oneVideo->id }},0)"
                                 class="video-des m-0 d-flex flex-column text-center">
                                 @if ($oneVideo['votes']->contains('user_id', session('user')->id))
@@ -130,9 +137,9 @@
                                 @else
                                     <i class="vote-icon-0 fa fa-star-o"></i>
                                 @endif
-                                <span class="votes-count-0">
+                                {{-- <span class="votes-count-0">
                                     {{ $oneVideo->votes->count() }}
-                                </span>
+                                </span> --}}
                             </p>
                         </div>
                         <div>
@@ -140,8 +147,10 @@
                                 class="btn btn-secondary btn-xs"
                                 href="{{ url('/universe?locate=' . $oneVideo->id) }}">Locate
                                 on Map </a>
-                            <a data-toggle="tooltip" data-placement="bottom" title="Buy t-shirt"
-                                class="btn btn-success btn-xs ads" href="#">Buy T-shirt</a>
+                                @if($oneVideo->ads_button_link)
+                            <a data-toggle="tooltip" data-placement="bottom" title="{{$oneVideo->ads_button_text}}"
+                                class="btn btn-success btn-xs ads" target="__blank" href="{{$oneVideo->ads_button_link}}">{{$oneVideo->ads_button_text}}</a>
+                                @endif
                         </div>
 
                     </div>
@@ -191,10 +200,8 @@
         videoPlayer?.addEventListener('play', function() {
             $.ajax({
                 url: BASE_URL + "/user/history/add?videoId=" + video?.id,
-                success: function(data) {
-                },
+                success: function(data) {},
             });
         });
     </script>
-
 @endsection

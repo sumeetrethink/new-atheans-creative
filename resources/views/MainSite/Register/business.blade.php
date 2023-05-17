@@ -118,7 +118,7 @@
 
                             </div>
 
-                            <div class="form-group input mt-2">
+                            <div class="input mt-2">
                                 <div class="row">
                                     <div class="register-button">
                                         <input type="button" name="register-submit" tabindex="4"
@@ -128,8 +128,12 @@
                                 </div>
                             </div>
 
-                            <p>
-                                <span class="required">*</span>Required field
+                            <p class="text-center" style="padding: 15px 0px">
+                                <a href="{{ url('/login') }}" class="mt-2">
+                                    Already have an account?
+                                </a>
+                                |
+                                <a href="{{url('/user/register')}}" class="">Want to register as a creator ?</a>
                             </p>
                             </form>
                         </div>
@@ -137,7 +141,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 float-left">
+            <div  class="col-lg-6 col-md-6 col-sm-6 col-xs-12 float-left">
                 {{-- <img src="{{ asset('/images/main_logo.png') }}"> --}}
                 <div id="map" style="height: 565px; width: 100%"></div>
             </div>

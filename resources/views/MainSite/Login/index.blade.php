@@ -8,8 +8,8 @@
     <title>New Athens Creative </title>
     {{-- bootstrap --}}
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     {{-- custom csss --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/user/theme.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/user/responsive.css') }}"> <!-- Custom css -->
@@ -69,8 +69,9 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                            <div class="form-group " style="display: flex;justify-content: space-between">
-                                                <a href="{{url('/')}}" class="btn btn-link">
+                                            <div class="form-group "
+                                                style="display: flex;justify-content: space-between">
+                                                <a href="{{ url('/') }}" class="btn btn-link">
                                                     Back to home
                                                 </a>
                                                 <a class="btn btn-link">
@@ -87,7 +88,8 @@
                                                     </div>
                                                     <div class="col-sm-3 col-xs-6"
                                                         style="float: right;width: 26%;right: 38px;">
-                                                        <a href="{{ url('/user/register') }}" tabindex=""
+                                                        <a href="#" onclick="openModal('registerModal')"
+                                                            tabindex=""
                                                             class="form-control btn btn-register">Register</a>
                                                     </div>
                                                 </div>
@@ -103,7 +105,38 @@
             </div>
         </div>
     </section>
+    {{-- register modal --}}
+    <div id="registerModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div style="display: flex;
+                justify-content: space-between;">
+                    <h3 class="p-0 m-0">Register</h3>
+                    <button style="padding: 0 10px" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                   
 
+                <div class="modal-body">
+                    <h4>Register yourself as:</h4>
+                    <div class="form-group">
+
+                        <a href="{{ url('/business/register') }}" class="btn btn-success">Business</a>
+                        <a href="{{ url('/user/register') }}" class="btn btn-danger">Creator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function openModal(id) {
+            if (id) {
+                $('#registerModal').modal();
+
+            }
+        }
+    </script>
 </body>
 
 </html>

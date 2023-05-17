@@ -45,6 +45,8 @@ Route::get('/home', [LoginController::class, 'home'])->name('home')->middleware(
 
 //                                  live
 Route::get('/live', [LoginController::class, 'nacLive'])->name('nacLive')->middleware('CheckUser');
+// if couldnot encrypt id using jquerry redict to this with id=
+Route::get('/redicrectToWatch', [LoginController::class, 'redicrectToWatch'])->name('redicrectToWatch')->middleware('CheckUser');
 //                                  DISCOVER
 Route::get('/universe', [DiscoverController::class, 'view'])->name('view');
 //get all busienss coordinates in discover page
@@ -107,6 +109,7 @@ Route::get('admin/videos/', [VideoController::class, 'adminList'])->name('adminL
 Route::post('/admin/video/delete', [VideoController::class, 'adminDelete'])->name('adminDelete')->middleware('AdminUser');
 Route::get('/admin/video/change-status', [VideoController::class, 'changeStatus'])->name('changeStatus')->middleware('AdminUser');
 Route::get('/admin/video/likes', [VideoController::class, 'getVideoLikesList'])->name('getVideoLikesList')->middleware('AdminUser');
+Route::post('/admin/video/update/button', [VideoController::class, 'updateButton'])->name('updateButton')->middleware('AdminUser');
 
 
 

@@ -156,6 +156,13 @@ class LoginController extends Controller
 
         return view('MainSite.Content.Live.index', compact('oneVideo', 'moreVideos', 'user', 'id'));
     }
+    // if couldnot encrypt id using jquerry redicrt to this url 
+    public function redicrectToWatch(Request $req)
+    {
+        $id = $req->query('id');
+        $encryptedUrl = Crypt::encryptString($id);
+        return redirect('live?watch='.$encryptedUrl);
+    }
     public function home()
     {
 

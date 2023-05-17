@@ -17,19 +17,19 @@
         }
 
         .lands-marker {
-            color: blue
-        }
-
-        .business-marker {
-            color: red
-        }
-
-        .videos-marker {
             color: yellow
         }
 
-        .home-marker {
+        .business-marker {
+            color: rgb(28, 89, 196)
+        }
+
+        .videos-marker {
             color: green
+        }
+
+        .home-marker {
+            color: red
         }
 
         .map-parent {
@@ -133,9 +133,12 @@
     <script>
         // to zoom automaticaly on coordinates
         var zoom = {!! json_encode($Video) !!};
-        let currentUrl='http://3.7.41.47/nac/public/';
+        let currentUrl = 'http://3.7.41.47/nac/public/';
+        let localUrl = 'http://127.0.0.1:8000/';
         var Business = {!! json_encode($Business) !!};
         var Videos = {!! json_encode($Videos) !!};
+        let currentInfoWindow = null;
+
         // initialise map
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {
@@ -185,15 +188,26 @@
 
             let marker = new google.maps.Marker({
                 position: business_location,
-                map: map
+                map: map,
+                icon: {
+                    url: `${currentUrl}/images/map/marker-blue.png`,
+                    anchor: new google.maps.Point(10, 34)
+                }
             });
             marker.addListener('click', function() {
+                // Close the currently open info window, if any
+                if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                }
                 // create and open info window
                 var infoWindow = new google.maps.InfoWindow({
-                    content: '<h6 style="margin:0px">' + business_item.name + '</h6><p style="font-size:10px;margin-bottom:0">' + business_item.address +
+                    content: '<h6 style="margin:0px">' + business_item.name +
+                        '</h6><p style="font-size:10px;margin-bottom:0">' + business_item.address +
                         '</p>'
                 });
                 infoWindow.open(map, marker);
+                // Update the currentInfoWindow variable
+                currentInfoWindow = infoWindow;
             });
             marker.setMap(map);
         });
@@ -206,19 +220,26 @@
                         position: coordinates,
                         map: map,
                         icon: {
-                            url: `${currentUrl}/images/map/marker-yellow.png`,
+                            url: `${currentUrl}/images/map/marker-green.png`,
                             anchor: new google.maps.Point(10, 34)
                         }
                     });
                     marker.addListener('click', function() {
+                        if (currentInfoWindow) {
+                            currentInfoWindow.close();
+                        }
                         // create and open info window
                         var infoWindow = new google.maps.InfoWindow({
                             content: '<h6 style="margin:0px">' + element.video_title +
                                 '</h6><p style="font-size:10px;margin-bottom:0">' +
                                 element.creator_name +
-                                '</p>'
+                                '</p><a href="' + currentUrl + 'redicrectToWatch?id=' +
+                                element.id +
+                                '" style="font-size:10px;margin-bottom:0">Go to video</a>'
                         });
                         infoWindow.open(map, marker);
+                        currentInfoWindow = infoWindow;
+
                     });
                     marker.setMap(map);
                 }

@@ -79,6 +79,8 @@
             </div>
         </div>
     </div>
+    
+    {{-- delte mdal --}}
     <div class="modal fade show" id="modal-default" style=" padding-right: 17px;" aria-modal="true" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -100,4 +102,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

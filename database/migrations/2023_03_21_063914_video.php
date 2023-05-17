@@ -25,6 +25,8 @@ class Video extends Migration
             $table->string('description');
             $table->string('thumbnail');
             $table->string('other_video_link')->nullable();
+            $table->string('ads_button_text')->nullable();
+            $table->string('ads_button_link')->nullable();
             $table->enum('is_approved',["Yes","No"])->default('No');
             $table->string('lat')->nullable();
             $table->string('long')->nullable();
