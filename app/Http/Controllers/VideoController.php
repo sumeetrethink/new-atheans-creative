@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Genere;
 use App\Like;
+use App\Response;
 use App\User;
 use App\Video;
 use App\Vote;
@@ -86,7 +87,14 @@ class VideoController extends Controller
   {
     $user = User::where('email', '=', session('user')->email)->first();
     $alreadyVoted = Vote::where('user_id', '=', $user->id)->where('video_id', '=', $req->videoId)->first();
+    // check if the user has voted for limit 4
+    $votedLimit = Vote::where('user_id', '=', $user->id)->get()->count();
+    if($votedLimit==3)
+    {
+      return ["status" => "no_exhausted"];
+    }
     $alreadySelcted = SelectedForVote::where('user_id', '=', $user->id)->where('video_id', '=', $req->videoId)->first();
+
     if ($alreadyVoted) {
       return ["status" => "already"];
     } else {
@@ -99,6 +107,43 @@ class VideoController extends Controller
       $vote->save();
       return ["status" => "selected"];
     }
+  }
+  // remove votes
+  public function removeVote(Request $req)
+  {
+     $userid=session('user')->id;
+     $vote=Vote::where('user_id','=',$userid)->where('video_id','=',$req->videoId)->first();
+     if($vote)
+     {
+        $responses=Response::where('user_id','=',$userid)->where('video_id','=',$req->videoId)->get();
+        foreach ($responses as $key => $item) {
+          $item->delete();
+        }
+        $result=$vote->delete();
+        if($result)
+        {
+          return redirect()->back()->with(['msg-success'=>'Your vote has been removed for this video ']);
+        }
+     }
+     else
+     {
+      return redirect()->back()->with(['msg-error'=>'You have not voted for this video']);
+     }
+  }
+  // set video for revote
+  public function setForrevote(Request $req)
+  {
+    $userid=session('user')->id;
+    $AlreadySelected=SelectedForVote::where('user_id','=',$userid)->where('video_id','=',$req->videoId)->first();
+    if($AlreadySelected)
+    {
+      $AlreadySelected->delete();
+    }
+      $Selected = new SelectedForVote();
+      $Selected->user_id = $userid;
+      $Selected->video_id = $req->videoId;
+      $result=$Selected->save();
+      return redirect('/ballot');
   }
   public function editForm(Request $req)
   {

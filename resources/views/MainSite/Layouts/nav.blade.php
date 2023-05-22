@@ -199,7 +199,7 @@
                                 class="dashboard-header" src="{{ asset('Data/User/Profile/' . $userData->image) }}">
                         </button>
                     @else
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><img
+                    <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><img
                                 class="dashboard-header" src="{{ asset('/images/user.png') }}"> </button>
                     @endif
                     <div class="dropdown-menu">

@@ -13,6 +13,7 @@
     <!-- Custom css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/user/theme.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/user/responsive.css') }}">
+    
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.6.2/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-.11.1.min.js"></script>
     <script src="{{ asset('/js/user/main.js') }}"></script>
@@ -342,14 +343,14 @@
             </div>
         </div>
     </div>
+{{-- test --}}
+
+{{-- test end --}}
     <script>
         function openModal(id) {
             $(`#${id}`).modal('show');
         }
     </script>
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

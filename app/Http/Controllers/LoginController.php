@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business;
 use App\Like;
+use App\RealEstate;
 use App\User;
 use App\Video;
 use App\VideoHistory as AppVideoHistory;
@@ -188,10 +189,6 @@ class LoginController extends Controller
         }
         return view('MainSite.Content.GlobalSearch.index', compact('videos'));
     }
-
-
-
-
     // dashboard
     public function dashbaord()
     {
@@ -200,4 +197,29 @@ class LoginController extends Controller
         $videos = Video::where('is_approved', '=', 'Yes')->get()->count();
         return view('Admin.Dashboard.index', compact('users', 'business', 'videos'));
     }
+
+
+// zillow data parsing route
+
+public function zillowDataForm()
+{
+    return view('welcome');
+}
+public function zillowDataadd(Request $req)
+{
+    $data=json_decode($req->data,true);
+    foreach($data as $item)
+    {
+      $realEstate=new RealEstate();
+      $realEstate->jsonData=json_encode($item);
+      $realEstate->lat=$item['latitude']??0;
+      $realEstate->long=$item['longitude']??0;
+      $realEstate->cityName=$item['city'];
+      $realEstate->price=$item['price'];
+      $realEstate->status=$item['homeStatus'];
+      $realEstate->save();
+    }
+    return redirect()->back()->with(['msg-success'=>'Addedd successfully']);
+}
+
 }

@@ -135,8 +135,9 @@
         var zoom = {!! json_encode($Video) !!};
         let currentUrl = 'http://3.7.41.47/nac/public/';
         let localUrl = 'http://127.0.0.1:8000/';
-        var Business = {!! json_encode($Business) !!};
-        var Videos = {!! json_encode($Videos) !!};
+        let Business = {!! json_encode($Business) !!};
+        let Videos = {!! json_encode($Videos) !!};
+        let properties = {!! json_encode($properties) !!};
         let currentInfoWindow = null;
 
         // initialise map
@@ -179,6 +180,22 @@
             ]
         });
 
+        // realstate properties
+        properties?.forEach(oneProp => {
+            let property = {
+                lat: parseFloat(oneProp.lat),
+                lng: parseFloat(oneProp.long)
+            };
+            let marker = new google.maps.Marker({
+                position: property,
+                map: map,
+                icon: {
+                    url: `${currentUrl}/images/map/marker-green.png`,
+                    anchor: new google.maps.Point(10, 34)
+                }
+            });
+            marker.setMap(map);
+        });
         // mark business
         Business?.forEach(business_item => {
             let business_location = {
@@ -247,6 +264,8 @@
                 console.error(error);
             });
         });
+        
+        
 
         function zoomToLocation(lat, lng, zoomLevel) {
             var center = new google.maps.LatLng(lat, lng);

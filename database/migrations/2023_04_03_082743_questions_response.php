@@ -18,6 +18,7 @@ class QuestionsResponse extends Migration
             $table->string('question_id');
             $table->string('response_type')->nullable();
             $table->string('user_id');
+            $table->string('video_id');
             $table->timestamps();
         });
     }
