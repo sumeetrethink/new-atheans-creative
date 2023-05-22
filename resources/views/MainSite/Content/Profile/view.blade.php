@@ -123,8 +123,8 @@
                         <div class="form-group">
                             <label>Zip Code<span class="required">*</span></label>
                             <input type="text" onkeyup="validate();" id="zip-field" name="zipcode" inputmode="numeric"
-                                  value="{{ $currentUser->zip_code }}"
-                                class="form-control register-input" placeholder="Zip Code">
+                                value="{{ $currentUser->zip_code }}" class="form-control register-input"
+                                placeholder="Zip Code">
                             @if ($errors->has('zipcode'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('zipcode') }}</strong>
@@ -198,11 +198,13 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
                     <a href="{{ url('live?watch=' . $encryptedUrl) }}">
                         <div class="media card-body p-2">
-                            <img style="width: 70px;height: 70px;object-fit: cover" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
-                                alt="" class="mr-2" >
+                            <img style="width: 70px;height: 70px;object-fit: cover"
+                                src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" alt="" class="mr-2">
                             <div class="media-body  pb-0 mb-0">
-                                <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">{{ Str::limit($item->video_title, 40, '...') }}</h6>
-                                <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By {{ $item->creator_name }}</p>
+                                <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">
+                                    {{ Str::limit($item->video_title, 40, '...') }}</h6>
+                                <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By
+                                    {{ $item->creator_name }}</p>
                             </div>
                         </div>
                     </a>
@@ -215,7 +217,7 @@
     <section class="px-4 mt-4 container">
         <div class="d-flex justify-content-between">
             <h4>Voted videos</h4>
-            <a href="{{url('ballot')}}">View All</a>
+            {{-- <a href="{{url('ballot')}}">View All</a> --}}
 
         </div>
         <div class="row">
@@ -225,16 +227,25 @@
                     $encryptedUrl = Crypt::encryptString($item->video_id);
                 @endphp
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
-                    <a href="{{ url('live?watch=' . $encryptedUrl) }}">
-                        <div class="media card-body p-2">
-                            <img style="width: 70px;height: 70px;object-fit: cover" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
-                                alt="" class="mr-2" >
-                            <div class="media-body  pb-0 mb-0">
-                                <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">{{ Str::limit($item->video_title, 40, '...') }}</h6>
-                                <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By {{ $item->creator_name }}</p>
+                    <div class="media card-body p-2">
+                        <a href="{{ url('live?watch=' . $encryptedUrl) }}">
+                            <img style="width: 70px;height: 70px;object-fit: cover"
+                                src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" alt="" class="mr-2">
+                        </a>
+                        <div class="media-body  pb-0 mb-0">
+                            <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">
+                                {{ Str::limit($item->video_title, 40, '...') }}</h6>
+                            <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By
+                                {{ $item->creator_name }}</p>
+                            <div class="d-flex">
+                                <p onclick="removeVote({{ $item->id }})" title="Remove Vote" class=" m-0 p-0 pt-2"
+                                    style="font-size: 18px;color: red"> <i class="fa fa-trash"></i></p>
+                                <p onclick="revote({{ $item->id }})" title="Revote" class="mx-2 m-0 p-0 pt-2"
+                                    style="font-size: 18px;color: red"> <i class="fa fa-repeat"></i></p>
                             </div>
+
                         </div>
-                    </a>
+                    </div>
                 </div>
             @endforeach
         </div>
@@ -253,21 +264,74 @@
                 @php
                     $encryptedUrl = Crypt::encryptString($item->video_id);
                 @endphp
-               <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
-                <a href="{{ url('live?watch=' . $encryptedUrl) }}">
-                    <div class="media card-body p-2">
-                        <img style="width: 70px;height: 70px;object-fit: cover" src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}"
-                            alt="" class="mr-2" >
-                        <div class="media-body  pb-0 mb-0">
-                            <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">{{ Str::limit($item->video_title, 40, '...') }}</h6>
-                            <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By {{ $item->creator_name }}</p>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 card rounded m-2 p-0">
+                    <a href="{{ url('live?watch=' . $encryptedUrl) }}">
+                        <div class="media card-body p-2">
+                            <img style="width: 70px;height: 70px;object-fit: cover"
+                                src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" alt="" class="mr-2">
+                            <div class="media-body  pb-0 mb-0">
+                                <h6 class="mt-0 m-0 p-0 break-word" style="font-size: 14px;color: black">
+                                    {{ Str::limit($item->video_title, 40, '...') }}</h6>
+                                <p class="text-muted m-0 p-0" style="font-size: 12px;color: grey">By
+                                    {{ $item->creator_name }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
             @endforeach
         </div>
     </section>
+    {{--  modals  --}}
+    <div class="modal" id="remove-vote-modal" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Remove Vote</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="{{url('remove/vote')}}" method="POST">
+                    @csrf
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input type="hidden" name="videoId" class="videoId">
+                        Are you sure you want to remove your vote for this video?
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="re-vote-modal" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Re-Vote </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="{{url('/setForrevote')}}" method="POST">
+                    @csrf
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <input type="hidden" name="videoId" class="videoId">
+                        Are you sure you want to revote this this video?
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
         // to show form if validatin fails 
         $(document).ready(function() {

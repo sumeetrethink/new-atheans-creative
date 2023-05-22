@@ -64,10 +64,12 @@ Route::post('/user/video/edit', [VideoController::class, 'edit'])->name('edit')-
 // user hsitory 
 Route::get('/user/history/add', [VideoController::class, 'historyAdd'])->name('historyAdd')->middleware('CheckUser');
 
-                            // manage like dislikes
+                            // manage activited likes/votes
 Route::get('/manageLikes', [VideoController::class, 'manageLikes'])->name('manageLikes')->middleware('CheckUser');
 Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes')->middleware('CheckUser');
 Route::get('/manageVotes', [VideoController::class, 'manageVotes'])->name('manageVotes')->middleware('CheckUser');
+Route::post('/remove/vote', [VideoController::class, 'removeVote'])->name('removeVote')->middleware('CheckUser');
+Route::post('/setForrevote', [VideoController::class, 'setForrevote'])->name('setForrevote')->middleware('CheckUser');
 
 //                              USER PROFILE WORK
 Route::get('/user/profile', [ProfileController::class, 'viewProfile'])->name('viewProfile')->middleware('CheckUser');
@@ -82,6 +84,7 @@ Route::get('/user/video/liked', [VideoController::class, 'likedVideos'])->name('
 //BALLOT
 Route::get('/ballot', [BallotController::class, 'view'])->name('view')->middleware('CheckUser');
 Route::post('/ballot/questions', [BallotController::class, 'submitQuestions'])->name('submitQuestions')->middleware('CheckUser');
+Route::post('/ballot/questions/resubmit', [BallotController::class, 'resubmitQuestions'])->name('resubmitQuestions')->middleware('CheckUser');
 
 //                              ADMIN PANNEL
 // ADMIN VALIDAION
@@ -118,3 +121,8 @@ Route::post('/admin/video/update/button', [VideoController::class, 'updateButton
 Route::get('/coming-soon', function () {
     return view('comingsoon');
 });
+
+
+// zillow data parsing to database
+Route::get('admin/zillow/add', [LoginController::class, 'zillowDataForm'])->name('zillowDataForm')->middleware('AdminUser');
+Route::post('zillow/data/add', [LoginController::class, 'zillowDataadd'])->name('zillowDataadd')->middleware('AdminUser');

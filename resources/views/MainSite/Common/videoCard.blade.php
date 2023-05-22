@@ -109,7 +109,7 @@
 @endphp
 
 
-        <div class="col-3">
+        <div class="col-12 col-md-4  col-lg-3 mt-2">
             <div class="upper-section">
                 <a href="{{ url('live?watch=' . $encryptedUrl) }}">
                     <img src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" alt="">

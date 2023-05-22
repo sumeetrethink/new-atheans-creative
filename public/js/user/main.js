@@ -58,6 +58,15 @@ function handleVoting(videoId,index)
             {
                 const newTab = window.open(`${BASE_URL}/ballot`, "_blank");
             }
+            else if(data.status=='no_exhausted')
+            {
+              $('#vote-limit-modal').modal('show')
+            }
+            else if(data.status=='already')
+            {
+              $('#already-voted-modal').modal('show')
+            }
+              
         },
     });
 
@@ -67,6 +76,16 @@ function handleVoting(videoId,index)
 function openEditProfile()
 {
     $('.toogle-profile').toggle()
+}
+function removeVote(id)
+{
+  $('#remove-vote-modal').modal('show');
+  $('.videoId').val(id)
+}
+function revote(id)
+{
+  $('#re-vote-modal').modal('show');
+  $('.videoId').val(id)
 }
 
 

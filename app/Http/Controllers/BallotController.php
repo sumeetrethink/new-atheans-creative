@@ -15,6 +15,7 @@ class BallotController extends Controller
 {
     public function view()
     {
+        $previousResonses=[];
         $polling_questions = Question::get();
         $currentUser = User::where('id', '=', session('user')->id)->first();
         $selected_for_votes = \App\Video::join('selected_for_votes', 'videos.id', '=', 'selected_for_votes.video_id')
@@ -23,6 +24,12 @@ class BallotController extends Controller
             ->orderBy('videos.id', 'desc')
             ->select('videos.*', "videos.id as video_id", 'generes.title as genere_name')
             ->first();
+            if($selected_for_votes)
+            {
+                // if this video is resubmitting the response then give previous responses as well
+                $previousResonses=Response::where('user_id','=',$currentUser->id)->where('video_id','=',$selected_for_votes->video_id)->get();
+            }
+
         $votedVidoes = \App\Video::join('votes', 'videos.id', '=', 'votes.video_id')
             ->where('votes.user_id', $currentUser->id)
             ->join('generes', 'videos.genere_id', '=', 'generes.id')
@@ -49,12 +56,12 @@ class BallotController extends Controller
         
         $history = $Allvideos->whereIn('id', $historyVideoIds)->take(4);
         
-        return view('MainSite.Content.Ballot.index', compact('history','selected_for_votes', 'polling_questions','votedVidoes','topLikedVideos'));
+        return view('MainSite.Content.Ballot.index', compact('previousResonses','history','selected_for_votes', 'polling_questions','votedVidoes','topLikedVideos'));
     }
 
     public function submitQuestions(Request $request)
     {
-        $video_id= $id= Crypt::decryptString($request->video);
+        $video_id=Crypt::decryptString($request->video);
         $currentUser = User::where('id', '=', session('user')->id)->first();
         $polling_questions = Question::get();
         foreach ($polling_questions as $key => $item) {
@@ -62,6 +69,7 @@ class BallotController extends Controller
             $reponse->question_id = $item->id;
             $reponse->response_type = $request[$item->id];
             $reponse->user_id = $currentUser->id;
+            $reponse->video_id = $video_id;
             $reponse->save();
         }
         $vote = new Vote();
@@ -75,4 +83,30 @@ class BallotController extends Controller
             return redirect('/ballot')->with(['msg-success' => "You have successfully voted for the video"]);
         }
     }
+  public function resubmitQuestions(Request $request)
+  {
+      $video_id= Crypt::decryptString($request->video);
+      $currentUser = User::where('id', '=', session('user')->id)->first();
+      $oldResponses=Response::where('user_id','=',$currentUser->id)->where('video_id','=',$video_id)->get();
+      $selected_for_votes = SelectedForVote::where('video_id', '=', $video_id)->where('user_id', '=', $currentUser->id)->first();
+
+      foreach ($oldResponses as $key => $value) {
+        $value->delete();
+      }
+        $polling_questions = Question::get();
+        foreach ($polling_questions as $key => $item) {
+            $reponse = new Response();
+            $reponse->question_id = $item->id;
+            $reponse->response_type = $request[$item->id];
+            $reponse->user_id = $currentUser->id;
+            $reponse->video_id = $video_id;
+            $reponse->save();
+        }
+        $result = $selected_for_votes->delete();
+        if ($result) {
+
+            return redirect('/ballot')->with(['msg-success' => "You have successfully resubmitted  your video"]);
+        }
+        
+  }
 }
