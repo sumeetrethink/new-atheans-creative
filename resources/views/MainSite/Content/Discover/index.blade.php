@@ -16,12 +16,10 @@
             padding-right: 10px
         }
 
-        .lands-marker {
-            color: yellow
-        }
+       
 
         .business-marker {
-            color: rgb(28, 89, 196)
+            color: #800080;
         }
 
         .videos-marker {
@@ -29,7 +27,7 @@
         }
 
         .home-marker {
-            color: red
+            color: #0ea5e9
         }
 
         .map-parent {
@@ -60,16 +58,13 @@
             </div>
             <div class="one-marker  d-flex align-items-center">
                 <i class="fa fa-map-marker videos-marker"></i>
-                <h6>Videos</h6>
+                <h6>TV Shows</h6>
             </div>
             <div class=" one-marker d-flex align-items-center ">
                 <i class="fa fa-map-marker home-marker"></i>
-                <h6>Home</h6>
+                <h6>Properties</h6>
             </div>
-            <div class="one-marker d-flex align-items-center ">
-                <i class="fa fa-map-marker lands-marker"></i>
-                <h6>Lands</h6>
-            </div>
+           
         </div>
     </div>
     <div class="row d-flex justify-content-start mt-4 mx-4">
@@ -131,6 +126,32 @@
 </div> --}}
 
     <script>
+        function getCityDetailsFromPincode(pincode) {
+            return new Promise(function(resolve, reject) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    'address': pincode
+                }, function(results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        for (var i = 0; i < results[0].address_components.length; i++) {
+                            var addressType = results[0].address_components[i].types[0];
+                            if (addressType === "locality") {
+                                var lat = results[0].geometry.location.lat();
+                                var lng = results[0].geometry.location.lng();
+                                var cityDetails = {
+                                    lat: lat,
+                                    lng: lng
+                                };
+                                resolve(cityDetails);
+                            }
+                        }
+                        reject("City not found");
+                    } else {
+                        reject("Geocoder failed due to: " + status);
+                    }
+                });
+            });
+        }
         // to zoom automaticaly on coordinates
         var zoom = {!! json_encode($Video) !!};
         let currentUrl = 'http://3.7.41.47/nac/public/';
@@ -190,11 +211,24 @@
                 position: property,
                 map: map,
                 icon: {
-                    url: `${currentUrl}/images/map/marker-green.png`,
+                    url: `${currentUrl}/images/map/marker-blue.png`,
                     anchor: new google.maps.Point(10, 34)
                 }
             });
-            marker.setMap(map);
+            marker.addListener('click', function() {
+                        if (currentInfoWindow) {
+                            currentInfoWindow.close();
+                        }
+                        // create and open info window
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: '<h6 style="margin:0px">' + JSON.parse(oneProp.jsonData).address.streetAddress +
+                                '</h6>'
+                        });
+                        infoWindow.open(map, marker);
+                        currentInfoWindow = infoWindow;
+
+                    });
+                    marker.setMap(map);
         });
         // mark business
         Business?.forEach(business_item => {
@@ -207,7 +241,7 @@
                 position: business_location,
                 map: map,
                 icon: {
-                    url: `${currentUrl}/images/map/marker-blue.png`,
+                    url: `${currentUrl}/images/map/marker-purple.png`,
                     anchor: new google.maps.Point(10, 34)
                 }
             });
@@ -264,8 +298,8 @@
                 console.error(error);
             });
         });
-        
-        
+
+
 
         function zoomToLocation(lat, lng, zoomLevel) {
             var center = new google.maps.LatLng(lat, lng);
