@@ -68,5 +68,8 @@ function revote(id)
   $('.videoId').val(id)
 }
 
-
+function handleHomeLoanModal()
+{
+    $('#home-loan-modal').modal('show');
+}
             
