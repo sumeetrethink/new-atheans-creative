@@ -16,7 +16,7 @@
             padding-right: 10px
         }
 
-       
+
 
         .business-marker {
             color: #800080;
@@ -37,7 +37,7 @@
         .marker-place {
             position: absolute;
             background: white;
-            z-index: 99999;
+            z-index: 1;
             bottom: 2px;
             left: 1px;
             width: 8%;
@@ -64,67 +64,49 @@
                 <i class="fa fa-map-marker home-marker"></i>
                 <h6>Properties</h6>
             </div>
-           
+
         </div>
     </div>
-    <div class="row d-flex justify-content-start mt-4 mx-4">
+    <div class=" d-flex justify-content-between mt-4 mx-4">
         <input type="text" id="search-input" class="form-control col-2" placeholder="Pin to location ">
+        <button onclick="handleHomeLoanModal('home-loan-modal')" class="btn btn-success"> Home Loan</button>
     </div>
-    {{-- business list tables --}}
-    {{-- <h1 class="mt-4">Top Businesses</h1>
-    <div class="mt-4 mx-4">
-        <table class="table table-bordered dataTable ">
-            <thead>
-                <tr role="row">
-                    <th class="sorting">
-                        S.No.</th>
-                    <th class="sorting">
-                        Business Name</th>
-                    <th class="sorting">
-                        Location
-                    </th>
-                </tr>
+    
+    <div class="modal" id="home-loan-modal" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Home loan</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form  method="POST">
+                    @csrf
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">Phone</label>
+                            <input type="number" class="form-control" >
+                        </div>
+                    </div>
 
-            </thead>
-            <tbody id="ProductTable">
-                @foreach ($Business->take(5) as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->name}}</td>
-                    <td>{{ $item->address }}</td>
-                </tr>            
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
-    {{-- videos list tables --}}
-    {{-- <h1 class="mt-4">Top Videos</h1>
-<div class="mt-4 mx-4">
-    <table class="table table-bordered dataTable ">
-        <thead>
-            <tr role="row">
-                <th class="sorting">
-                    S.No.</th>
-                <th class="sorting">
-                    Video Title</th>
-                <th class="sorting">
-                    Creator Name
-                </th>
-            </tr>
-
-        </thead>
-        <tbody id="ProductTable">
-            @foreach ($Videos->take(5) as $item)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->video_title}}</td>
-                <td>{{ $item->creator_name }}</td>
-            </tr>            
-            @endforeach
-        </tbody>
-    </table>
-</div> --}}
-
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <script>
         function getCityDetailsFromPincode(pincode) {
             return new Promise(function(resolve, reject) {
@@ -216,19 +198,20 @@
                 }
             });
             marker.addListener('click', function() {
-                        if (currentInfoWindow) {
-                            currentInfoWindow.close();
-                        }
-                        // create and open info window
-                        var infoWindow = new google.maps.InfoWindow({
-                            content: '<h6 style="margin:0px">' + JSON.parse(oneProp.jsonData).address.streetAddress +
-                                '</h6>'
-                        });
-                        infoWindow.open(map, marker);
-                        currentInfoWindow = infoWindow;
+                if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                }
+                // create and open info window
+                var infoWindow = new google.maps.InfoWindow({
+                    content: '<h6 style="margin:0px">' + JSON.parse(oneProp.jsonData).address
+                        .streetAddress +
+                        '</h6>'
+                });
+                infoWindow.open(map, marker);
+                currentInfoWindow = infoWindow;
 
-                    });
-                    marker.setMap(map);
+            });
+            marker.setMap(map);
         });
         // mark business
         Business?.forEach(business_item => {

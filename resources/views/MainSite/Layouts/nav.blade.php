@@ -157,7 +157,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light pb-0">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{url('/')}}"><img class="m-0" src="{{ asset('/images/logo.png') }}" alt=""></a>
+        <a class="navbar-brand mr-4" href="{{url('/')}}"><img class="m-0 pr-2" src="{{ asset('/images/logo.png') }}" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
