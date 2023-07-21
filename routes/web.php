@@ -118,6 +118,9 @@ Route::post('/admin/video/update/button', [VideoController::class, 'updateButton
 
 
 
+Route::get('/terms-condtions', function () {
+    return view('comingsoon');
+});
 Route::get('/coming-soon', function () {
     return view('comingsoon');
 });

@@ -16,7 +16,7 @@
             padding-right: 10px
         }
 
-       
+
 
         .business-marker {
             color: #800080;
@@ -64,12 +64,17 @@
                 <i class="fa fa-map-marker home-marker"></i>
                 <h6>Properties</h6>
             </div>
-           
+
         </div>
     </div>
     <div class=" d-flex justify-content-between mt-4 mx-4">
         <input type="text" id="search-input" class="form-control col-2" placeholder="Pin to location ">
-        <button onclick="handleHomeLoanModal('home-loan-modal')" class="btn btn-success"> Home Loan</button>
+        <div class="">
+            <button onclick="handleHomeLoanModal('home-loan-modal','Home Loan')" class="btn btn-success"> Home Loan</button>
+            <button onclick="handleHomeLoanModal('home-loan-modal','Need Realtor')" class="btn btn-success"> Need
+                Realtor</button>
+        </div>
+
     </div>
     {{-- business list tables --}}
     {{-- <h1 class="mt-4">Top Businesses</h1>
@@ -126,41 +131,45 @@
     </table>
 </div> --}}
 
-<div class="modal" id="home-loan-modal" data-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Home loan</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form  method="POST">
-                @csrf
-                <!-- Modal body -->
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <input type="text" class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label for="">Email</label>
-                        <input type="email" class="form-control" >
-                    </div>
-                    <div class="form-group">
-                        <label for="">Phone</label>
-                        <input type="number" class="form-control" >
-                    </div>
+    <div class="modal" id="home-loan-modal" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="loan-pop-up-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
+                <form method="POST">
+                    @csrf
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Name</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Phone</label>
+                            <input type="number" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Message</label>
+                            <textarea type="message" class="form-control" placeholder="Write somthing...."></textarea>
+                        </div>
+                    </div>
 
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Submit</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
     <script>
         function getCityDetailsFromPincode(pincode) {
             return new Promise(function(resolve, reject) {
@@ -252,19 +261,20 @@
                 }
             });
             marker.addListener('click', function() {
-                        if (currentInfoWindow) {
-                            currentInfoWindow.close();
-                        }
-                        // create and open info window
-                        var infoWindow = new google.maps.InfoWindow({
-                            content: '<h6 style="margin:0px">' + JSON.parse(oneProp.jsonData).address.streetAddress +
-                                '</h6>'
-                        });
-                        infoWindow.open(map, marker);
-                        currentInfoWindow = infoWindow;
+                if (currentInfoWindow) {
+                    currentInfoWindow.close();
+                }
+                // create and open info window
+                var infoWindow = new google.maps.InfoWindow({
+                    content: '<h6 style="margin:0px">' + JSON.parse(oneProp.jsonData).address
+                        .streetAddress +
+                        '</h6>'
+                });
+                infoWindow.open(map, marker);
+                currentInfoWindow = infoWindow;
 
-                    });
-                    marker.setMap(map);
+            });
+            marker.setMap(map);
         });
         // mark business
         Business?.forEach(business_item => {
@@ -363,6 +373,11 @@
             }).catch(function(error) {
                 console.error(error);
             });
+        }
+
+        function handleHomeLoanModal(id, heading) {
+            $('#loan-pop-up-title').text(heading)
+            $(`#${id}`).modal('show');
         }
     </script>
 @endsection

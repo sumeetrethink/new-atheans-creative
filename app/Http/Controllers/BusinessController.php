@@ -50,6 +50,7 @@ class BusinessController extends Controller
     $Business->email = $req->email;
     $Business->contact = $req->phone;
     $Business->address = $req->address;
+    $Business->website = $req->website;
     $Business->raw_location = 'null';
     $Business->save();
     return redirect('/admin/business')->with(['msg-success' => 'Business has been added']);
@@ -108,7 +109,14 @@ class BusinessController extends Controller
     $Business->lat = $req->location_lat;
     $Business->long = $req->location_long;
     $Business->save();
-    return redirect()->back()->with(['msg-success'=>"Your business is registered with us"]);
+    if($req->type=='yes')
+    {
+      return redirect('user/register')->with(['msg-success' => 'Your business is registered with us',]);
+    }
+    else
+    {
+      return redirect('/admin/business')->with(['msg-success' => 'Your business is registered with us']);
+    }
   }
   
 

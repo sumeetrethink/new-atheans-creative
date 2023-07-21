@@ -149,15 +149,21 @@
     .common-nav {
         background-color: #f8f9fa !important
     }
-    .nav-item a{color:black !important}
-    .nav-item .active{background-color: #d4d4d4;}
-    
+
+    .nav-item a {
+        color: black !important
+    }
+
+    .nav-item .active {
+        background-color: #d4d4d4;
+    }
 </style>
 {{-- new navigation  --}}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light pb-0">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{url('/')}}"><img class="m-0" src="{{ asset('/images/logo.png') }}" alt=""></a>
+        <a class="navbar-brand" href="{{ url('/') }}"><img class="m-0" src="{{ asset('/images/logo.png') }}"
+                alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -193,23 +199,25 @@
             <li class="col-12 col-md-4 d-flex justify-content-end align-items-center">
                 <a href="{{ url('/upload/video') }}" class="form-control btn btn-register" target="_blank">Create</a>
                 @if (session()->has('user'))
-                <div class="dropdown">
-                    @if ($userData->image)
-                        <button style="border: none" class="px-3 dropdown-toggle" type="button" data-toggle="dropdown" ><img
-                                class="dashboard-header" src="{{ asset('Data/User/Profile/' . $userData->image) }}">
-                        </button>
-                    @else
-                    <button class="btn  dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"><img
-                                class="dashboard-header" src="{{ asset('/images/user.png') }}"> </button>
-                    @endif
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ url('/user/profile') }}"> <i class="fa fa-user"
-                            style="font-size:17px"></i> Profile</a>
-                        <a class="dropdown-item"  href="{{ url('/user/logout') }}"><i class="fa fa-sign-out"
-                            style="font-size:17px"></i>
-                        LogOut</a>
-                      </div>
-                      </div>
+                    <div class="dropdown">
+                        @if ($userData->image)
+                            <button style="border: none;background: none" class="px-3 dropdown-toggle" type="button"
+                                data-toggle="dropdown"><img class="dashboard-header"
+                                    src="{{ asset('Data/User/Profile/' . $userData->image) }}">
+                            </button>
+                        @else
+                            <button style="border: none;background: none" type="button" class="px-3 dropdown-toggle"
+                                data-toggle="dropdown" aria-expanded="false"><img class="dashboard-header"
+                                    src="{{ asset('/images/user.png') }}"> </button>
+                        @endif
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ url('/user/profile') }}"> <i class="fa fa-user"
+                                    style="font-size:17px"></i> Profile</a>
+                            <a class="dropdown-item" href="{{ url('/user/logout') }}"><i class="fa fa-sign-out"
+                                    style="font-size:17px"></i>
+                                LogOut</a>
+                        </div>
+                    </div>
                 @else
                     <button class="btn  dropdown-toggle" type="button" style="pointer-events: none;"
                         data-toggle="dropdown"><img class="dashboard-header" src="{{ asset('/images/user.png') }}">
