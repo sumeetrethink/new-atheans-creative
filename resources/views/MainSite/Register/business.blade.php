@@ -72,7 +72,7 @@
                                     id="business-registration-form">
                                     @csrf
                                     <input type="hidden" id="form_type" name="type">
-                                    <div class="form-group input">
+                                    <div class="" style="margin-bottom: 10px">
                                         <label>Name<span class="required">*</span></label>
                                         <input type="text" id="input-field" value="{{ old('name') }}"
                                             name="name" placeholder="Your business name" onkeyup="validate();"
@@ -81,7 +81,8 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group input">
+
+                                    <div class="col-6 "  style="margin-bottom: 10px">
                                         <label>Email<span class="required">*</span></label>
                                         <input type="text" id="input-field" value="{{ old('email') }}"
                                             name="email" placeholder="Email" onkeyup="validate();"
@@ -90,7 +91,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group input">
+                                    <div class="col-6 " style="margin-bottom: 10px">
                                         <label>Phone<span class="required">*</span></label>
                                         <input type="number" id="input-field" value="{{ old('phone') }}"
                                             name="phone" placeholder="+1 00000000000" onkeyup="validate();"
@@ -99,7 +100,7 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group input">
+                                    <div class="" style="margin-bottom: 10px">
                                         <label>Website</label>
                                         <input type="text" id="input-field" value="{{ old('website') }}"
                                             name="website" class="form-control register-input">
@@ -111,10 +112,17 @@
 
 
 
-                                    <div class="form-group input">
+                                    <div class="" style="margin-bottom: 10px">
                                         <label for="address">Address<span class="required">*</span></label>
                                         <input type="text" id="address" name="address" value=""
                                             placeholder="Address" class="form-control register-input">
+                                        @error('address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    <div class="" style="margin-bottom: 10px">
+                                        <label for="address">About</label>
+                                        <textarea name="about" class="form-control" placeholder="write something about yout business"></textarea>
                                         @error('address')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

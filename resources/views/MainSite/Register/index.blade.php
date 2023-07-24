@@ -37,10 +37,10 @@
                             <div class="col-md-12  col-sm-12 col-xs-12 float-left">
                                 <a href="#" class="active" id="login-form-link">Register as creator</a>
                                 @if (session('msg-success'))
-                                <div class="alert alert-success">
-                                    {{ session('msg-success') }}
-                                </div>
-                            @endif
+                                    <div class="alert alert-success">
+                                        {{ session('msg-success') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <hr>
@@ -132,7 +132,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group input">
-                                    <label>Profile Picture<span class="required">*</span></label>
+                                    <label>Profile Picture</label>
                                     <input type="file" name="image"
                                         class="form-control register-input error-border">
                                     @error('image')

@@ -52,14 +52,15 @@
     <div class="map-parent">
         <div id="map"></div>
         <div class="marker-place">
-            <div class=" one-marker d-flex align-items-center">
-                <i class="fa fa-map-marker business-marker"></i>
-                <h6>Business</h6>
-            </div>
             <div class="one-marker  d-flex align-items-center">
                 <i class="fa fa-map-marker videos-marker"></i>
                 <h6>TV Shows</h6>
             </div>
+            <div class=" one-marker d-flex align-items-center">
+                <i class="fa fa-map-marker business-marker"></i>
+                <h6>Business</h6>
+            </div>
+
             <div class=" one-marker d-flex align-items-center ">
                 <i class="fa fa-map-marker home-marker"></i>
                 <h6>Properties</h6>
@@ -74,62 +75,70 @@
             <button onclick="handleHomeLoanModal('home-loan-modal','Need Realtor')" class="btn btn-success"> Need
                 Realtor</button>
         </div>
-
     </div>
+    {{-- top tv shows --}}
+    <div class="d-flex justify-content-between align-items-center mx-4 mt-4">
+        <h1 class="m-0 pb-2">Tv Shows</h1>
+        <a href="">View All</a>
+    </div>
+    <div class="mx-4 row">
+        @foreach ($Videos as $item)
+            @php
+                $encryptedUrl = Crypt::encryptString($item->id);
+            @endphp
+            <div class="card mx-2" style="width: 18rem;">
+
+                <img src="{{ asset('Data/Thumbnail/' . $item->thumbnail) }}" class="card-img-top" alt="">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title font-weight-bold mb-0">{{ substr($item->video_title, 0, 20) }}</h5>
+                    <p class="card-text mt-0"><span class="font-weight-bold mr-1">Gener:</span>{{ $item->genere }}</p>
+                    <div class="mt-auto">
+                        <a href="{{ url('live?watch=' . $encryptedUrl) }}" class="btn btn-primary">Watch</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
     {{-- business list tables --}}
-    {{-- <h1 class="mt-4">Top Businesses</h1>
-    <div class="mt-4 mx-4">
-        <table class="table table-bordered dataTable ">
-            <thead>
-                <tr role="row">
-                    <th class="sorting">
-                        S.No.</th>
-                    <th class="sorting">
-                        Business Name</th>
-                    <th class="sorting">
-                        Location
-                    </th>
-                </tr>
+    <div class="d-flex justify-content-between align-items-center mx-4 mt-4">
+        <h1 class="m-0 pb-2">Top Businesses</h1>
+        <a href="{{url('business/view-all')}}">View All</a>
+    </div>
+    <div class="mx-4 row">
+        @foreach ($Business as $item)
+            <div class="card mx-2" style="width: 18rem;">
+                {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title font-weight-bold">{{ $item->name }}</h5>
+                    <p class="card-text">{{ substr($item->about, 0, 20) }}</p>
+                    <div class="mt-auto">
+                        <a target="_blank" href="{{ $item->website }}" class="btn btn-primary">Website</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    {{-- top Properties --}}
+    <div class="d-flex justify-content-between align-items-center mx-4 mt-4">
+        <h1 class="m-0 pb-2">Properties</h1>
+        <a href="{{url('properties/view-all')}}">View All</a>
+    </div>
+    <div class="mx-4 row mb-4">
+        @foreach ($properties as $item)
+            <div class="card mx-2" style="width: 18rem;">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title font-weight-bold">{{ $item->name }}</h5>
+                    <p class="card-text m-0"><span class="font-weight-bold mr-1">City:</span>{{ $item->cityName }}</p>
+                    <p class="card-text m-0"><span class="font-weight-bold mr-1">Price:</span>{{ $item->price }}</p>
+                    <div class="mt-auto">
+                        {{-- <a target="_blank" href="{{ $item->website }}" class="btn btn-primary">Website</a> --}}
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 
-            </thead>
-            <tbody id="ProductTable">
-                @foreach ($Business->take(5) as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->name}}</td>
-                    <td>{{ $item->address }}</td>
-                </tr>            
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
-    {{-- videos list tables --}}
-    {{-- <h1 class="mt-4">Top Videos</h1>
-<div class="mt-4 mx-4">
-    <table class="table table-bordered dataTable ">
-        <thead>
-            <tr role="row">
-                <th class="sorting">
-                    S.No.</th>
-                <th class="sorting">
-                    Video Title</th>
-                <th class="sorting">
-                    Creator Name
-                </th>
-            </tr>
-
-        </thead>
-        <tbody id="ProductTable">
-            @foreach ($Videos->take(5) as $item)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->video_title}}</td>
-                <td>{{ $item->creator_name }}</td>
-            </tr>            
-            @endforeach
-        </tbody>
-    </table>
-</div> --}}
 
     <div class="modal" id="home-loan-modal" data-backdrop="false">
         <div class="modal-dialog">
