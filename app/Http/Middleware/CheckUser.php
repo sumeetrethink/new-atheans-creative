@@ -20,7 +20,7 @@ class CheckUser
         }
         else
         {
-            return redirect('/login');
+            return redirect('/user/register');
         }
 
     }
