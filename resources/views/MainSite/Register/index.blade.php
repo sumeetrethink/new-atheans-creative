@@ -26,7 +26,6 @@
 
     <!-- Custom css -->
 </head>
-
 <body>
     <section class="Register-page">
         <div class="container top-bottom">
@@ -36,11 +35,6 @@
                         <div class="row">
                             <div class="col-md-12  col-sm-12 col-xs-12 float-left">
                                 <a href="#" class="active" id="login-form-link">Register as creator</a>
-                                @if (session('msg-success'))
-                                    <div class="alert alert-success">
-                                        {{ session('msg-success') }}
-                                    </div>
-                                @endif
                             </div>
                         </div>
                         <hr>
@@ -49,28 +43,26 @@
                         <div class="row left-right">
                             <div class="col-lg-6 ">
 
-                                <form action="{{ url('user/register') }}" name='foo' method="POST" id="myForm"
-                                    enctype="multipart/form-data">
+                                <form action="" name='foo' method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group input">
-                                        <input type="hidden" name="type" id="form_type">
                                         <label>First name<span class="required">*</span></label>
                                         <input type="text" id="input-field" value="{{ old('first_name') }}"
                                             name="first_name" placeholder="First Name"
                                             class="form-control register-input">
-                                        @error('first_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-
+                                            @error('first_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
+                                                
                                     </div>
                                     <div class="form-group input">
                                         <label>Last name<span class="required">*</span></label>
                                         <input type="text" id="last-field" value="{{ old('last_name') }}"
                                             name="last_name" placeholder="Last Name"
                                             class="form-control register-input">
-                                        @error('last_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                            @error('last_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
 
                                     <div class="form-group input">
@@ -78,25 +70,25 @@
                                         <input type="text" id="phone-field" name="phone"
                                             value="{{ old('phone') }}" maxlength="15" placeholder="Phone number"
                                             class="form-control register-input">
-                                        @error('phone')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                            @error('phone')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
                                     <div class="form-group input">
                                         <label>Email<span class="required">*</span></label>
                                         <input type="email" name="email" value="{{ old('email') }}"
                                             placeholder="Email address" class="form-control register-input">
-                                        @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                            @error('email')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
                                     <div class="form-group input">
                                         <label>Username<span class="required">*</span></label>
                                         <input type="text" name="user_name" value="{{ old('user_name') }}"
                                             minlength="4" placeholder="User Name" class="form-control register-input">
-                                        @error('user_name')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                            @error('user_name')
+                                            <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                     </div>
 
 
@@ -104,67 +96,59 @@
 
                             </div>
                             <div class="col-lg-6">
-
+                                
 
                                 <div class="form-group input">
                                     <label>Zip Code<span class="required">*</span></label>
                                     <input type="text" name="zip_code" value="{{ old('zip_code') }}" maxlength="6"
                                         placeholder="Zip Code" class="form-control register-input">
-                                    @error('zip_code')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                        @error('zip_code')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                                 <div class="form-group input">
                                     <label>Password<span class="required">*</span></label>
                                     <input type="password" name="password" placeholder="Password"
                                         class="form-control register-input">
-                                    @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                        @error('password')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                                 <div class="form-group input">
                                     <label>Confirm password<span class="required">*</span></label>
-                                    <input type="password" name="password_confirmation"
-                                        placeholder="Confirm password"
+                                    <input type="password" name="password_confirmation" placeholder="Confirm password"
                                         class="form-control register-input error-border">
-                                    @error('password_confirmation')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                        @error('password_confirmation')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                                 <div class="form-group input">
-                                    <label>Profile Picture</label>
+                                    <label>Profile Picture<span class="required">*</span></label>
                                     <input type="file" name="image"
                                         class="form-control register-input error-border">
-                                    @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                        @error('image')
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group input">
-                            <div class="row text-center">
-                                <div class="register-button "
-                                    style="margin-bottom: 5px;display: flex;flex-direction: column;justify-content: center;align-items: center">
-                                    <div class="" style="display: flex;align-items: center">
-                                        <input type="checkbox" class="m-0 p-0">
-                                        <span style="margin-left: 4px;padding: 0">I accept the <a
-                                                href="{{ url('/terms-condtions') }}">terms and conditions</a></span>
-
+                            <div class="form-group input">
+                                <div class="row text-center">
+                                    <div class="register-button" style="margin-bottom: 5px">
+                                        <input type="submit" name="register-submit" tabindex="4"
+                                            class="form-control btn btn-register" value="Register">
                                     </div>
-                                    <input type="submit" onclick="register()" name="register-submit" tabindex="4"
-                                        class="form-control btn btn-register" value="Register">
+                                    <a href="{{ url('/login') }}" class="mt-2">
+                                        Already have an account?
+                                    </a>
+                                    |
+                                    <a href="{{ url('/business/register') }}" class="mt-2">
+                                        Register your business.
+                                    </a>
                                 </div>
-                                <a href="{{ url('/login') }}" class="mt-2">
-                                    Already have an account?
-                                </a>
-                                |
-                                <a href="{{ url('/business/register') }}" class="mt-2">
-                                    Register your business.
-                                </a>
                             </div>
-                        </div>
 
-                        </form>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -177,54 +161,11 @@
 
         </div>
     </section>
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                {{-- <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Are you a business owner?</h4>
-                </div> --}}
-                <div class="modal-body">
-                    <h3>Are you a business owner?</h3>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="resgiterMain('yes')" class="btn btn-success">Yes</button>
-                    <button type="button" onclick="resgiterMain('no')" class="btn btn-primary">No</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-    <!-- jQuery (Bootstrap requires jQuery) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <script>
-        let businessRegistered = @json(session('msg-success'));
-
-        function register() {
-            if (businessRegistered) {
-                const form = document.getElementById('myForm');
-                form.submit();
-
-            } else {
-                event.preventDefault();
-                $("#myModal").modal("show");
-            }
-        }
 
 
 
-        function resgiterMain(type) {
-            $('#form_type').val(type)
-            const form = document.getElementById('myForm');
-            form.submit();
-        }
-    </script>
+
+
 
 </body>
 

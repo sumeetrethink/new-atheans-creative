@@ -84,14 +84,7 @@ class LoginController extends Controller
         $result = $user->save();
         if ($result) {
             session()->put('user', $user);
-            if($req->type=='yes')
-            {
-                return redirect('/business/register')->with(['msg-success' => 'You have registered as creator']);
-            }
-            else
-            {
-                return redirect('/home')->with(['msg-success' => 'You have registered as creator']);
-            }
+            return redirect('/home');
         } else {
             return redirect('user/register')->with(['msg-errror' => 'Something went wrong please try again']);
         }
