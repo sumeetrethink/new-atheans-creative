@@ -49,6 +49,8 @@ Route::get('/live', [LoginController::class, 'nacLive'])->name('nacLive')->middl
 Route::get('/redicrectToWatch', [LoginController::class, 'redicrectToWatch'])->name('redicrectToWatch')->middleware('CheckUser');
 //                                  DISCOVER
 Route::get('/universe', [DiscoverController::class, 'view'])->name('view');
+Route::get('/business/view-all', [DiscoverController::class, 'getAllBusiness'])->name('getAllBusiness');
+Route::get('properties/view-all', [DiscoverController::class, 'allProperties'])->name('allProperties');
 //get all busienss coordinates in discover page
 
 Route::get('/getBusinessCoords', [BusinessController::class, 'getBusiness'])->name('getBusiness')->middleware('CheckUser');
@@ -118,6 +120,9 @@ Route::post('/admin/video/update/button', [VideoController::class, 'updateButton
 
 
 
+Route::get('/terms-condtions', function () {
+    return view('comingsoon');
+});
 Route::get('/coming-soon', function () {
     return view('comingsoon');
 });

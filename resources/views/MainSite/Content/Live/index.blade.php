@@ -1,8 +1,6 @@
 @extends('MainSite.Content.index')
 @section('content')
     <style>
-       
-
         .embed-responsive {
             height: 500px;
             /* set the height to match the height of the iframe */
@@ -70,7 +68,7 @@
             border-radius: 50%
         }
     </style>
-    
+
     {{-- nac live  --}}
     <section id="" class="home-upper-section p-4">
         <div class="row">
@@ -147,10 +145,11 @@
                                 class="btn btn-secondary btn-xs"
                                 href="{{ url('/universe?locate=' . $oneVideo->id) }}">Locate
                                 on Map </a>
-                                @if($oneVideo->ads_button_link)
-                            <a data-toggle="tooltip" data-placement="bottom" title="{{$oneVideo->ads_button_text}}"
-                                class="btn btn-success btn-xs ads" target="__blank" href="{{$oneVideo->ads_button_link}}">{{$oneVideo->ads_button_text}}</a>
-                                @endif
+                            @if ($oneVideo->ads_button_link)
+                                <a data-toggle="tooltip" data-placement="bottom" title="{{ $oneVideo->ads_button_text }}"
+                                    class="btn btn-success btn-xs ads" target="__blank"
+                                    href="{{ $oneVideo->ads_button_link }}">{{ $oneVideo->ads_button_text }}</a>
+                            @endif
                         </div>
 
                     </div>
